@@ -66,16 +66,16 @@ html > body[data-scroll-locked] { margin-right: 0 !important; --removed-body-scr
 ::selection { background: var(--space-yellow); color: #17131a; }
 
 /* Navigation */
-#nd-nav { height: 4.7rem; color: var(--space-ink); }
-#nd-nav > nav { min-height: 4.7rem; border-bottom: 1px solid var(--space-line); background: var(--nav-bg); color: var(--space-ink); backdrop-filter: blur(18px); }
-#nd-nav > nav > ul { height: 4.7rem; max-width: 94rem; padding-inline: clamp(1rem, 3vw, 3rem); }
+#nd-nav { height: 4.35rem; color: var(--space-ink); }
+#nd-nav > nav { min-height: 4.35rem; border-bottom: 1px solid var(--space-line); background: var(--nav-bg); color: var(--space-ink); backdrop-filter: blur(18px); }
+#nd-nav > nav > ul { height: 4.35rem; max-width: 88rem; padding-inline: clamp(1rem, 3vw, 2.5rem); }
 #nd-nav a { color: inherit; }
 #nd-nav > nav > ul > ul a { color: var(--space-muted); font-size: 0.82rem; font-weight: 680; }
 #nd-nav > nav > ul > ul a:hover { color: var(--space-violet); }
 #nd-nav [data-search-full], #nd-nav [data-theme-toggle] { border-color: var(--space-line); border-radius: 999px; background: color-mix(in srgb, var(--space-panel) 72%, transparent); color: var(--space-muted); }
 #nd-nav [data-search-full]:hover { background: var(--space-panel); color: var(--space-ink); }
 .brand-doc-cta { display: inline-flex; min-height: 2.45rem; align-items: center; padding: 0.55rem 0.9rem; border-radius: 999px; background: var(--space-ink); color: var(--space-bg) !important; font-size: 0.76rem !important; text-decoration: none; }
-.brand-nav-title { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.94rem; letter-spacing: -0.02em; }
+.brand-nav-title { display: inline-flex; align-items: center; gap: 0.68rem; font-size: 0.9rem; font-weight: 760; letter-spacing: -0.025em; }
 .brand-nav-mark { display: inline-grid; width: 2.2rem; height: 2.2rem; place-items: center; border-radius: 50%; background: var(--space-violet); color: #fff; font-size: 0.72rem; font-weight: 900; }
 
 /* Cinematic homepage */
@@ -221,20 +221,20 @@ html[data-motion='disabled'] .cinematic-home :where(*) { animation-play-state: p
 .dark .universe-home { --u-bg: #0b0c12; --u-surface: #14151e; --u-ink: #f1efe9; --u-muted: #a1a1ac; --u-line: #30313c; --u-night: #07080d; --u-night-2: #11121a; }
 .universe-home :where(h1,h2,h3,p) { margin-top: 0; }
 
-.universe-hero { position: relative; isolation: isolate; min-height: calc(100svh - 4.7rem); overflow: hidden; background: var(--u-bg); }
-.universe-hero::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, color-mix(in srgb, var(--u-bg) 100%, transparent) 0 32%, color-mix(in srgb, var(--u-bg) 75%, transparent) 48%, transparent 72%); }
+.universe-hero { position: relative; isolation: isolate; min-height: min(52rem, calc(100svh - 4.35rem)); overflow: hidden; background: var(--u-bg); }
+.universe-hero::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, var(--u-bg) 0 38%, color-mix(in srgb, var(--u-bg) 92%, transparent) 52%, color-mix(in srgb, var(--u-bg) 28%, transparent) 72%, transparent 100%); }
 .universe-aurora { position: absolute; z-index: -3; top: -25%; right: -9%; width: 78vw; height: 110%; border-radius: 50%; background: conic-gradient(from 210deg, rgb(104 119 255 / 9%), rgb(255 113 133 / 18%), rgb(203 255 71 / 8%), rgb(68 221 208 / 16%), rgb(104 119 255 / 18%)); filter: blur(75px); animation: universe-aurora 14s ease-in-out infinite alternate; }
 .universe-grid { position: absolute; z-index: -2; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--u-line) 48%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--u-line) 48%, transparent) 1px, transparent 1px); background-size: 5.5rem 5.5rem; mask-image: linear-gradient(90deg,#000,transparent 78%); animation: grid-drift 24s linear infinite; }
-.universe-hero .spatial-hero-scene { top: -3%; right: -4%; width: min(69vw, 72rem); height: 108%; opacity: 0.96; }
-.universe-hero .spatial-scene-label { top: 2.2rem; right: 2.6rem; }
-.universe-hero-inner { position: relative; z-index: 2; display: grid; min-height: calc(100svh - 4.7rem); grid-template-rows: auto 1fr auto; max-width: 94rem; margin: 0 auto; padding: clamp(1.5rem, 3vw, 3rem); }
+.universe-hero .spatial-hero-scene { top: 2%; right: 0; width: min(55vw, 56rem); height: 96%; opacity: 0.88; }
+.universe-hero .spatial-scene-label { display: none; }
+.universe-hero-inner { position: relative; z-index: 2; display: grid; min-height: min(52rem, calc(100svh - 4.35rem)); grid-template-rows: auto 1fr auto; max-width: 88rem; margin: 0 auto; padding: clamp(1.5rem, 3vw, 2.5rem); }
 .universe-hero-meta { display: flex; justify-content: space-between; color: var(--u-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.58rem; letter-spacing: 0.12em; }
-.universe-copy { align-self: center; width: min(50rem, 58vw); padding-block: 3rem; }
+.universe-copy { align-self: center; width: min(42rem, 49vw); padding-block: 2.5rem; }
 .universe-eyebrow { display: inline-flex; align-items: center; gap: 0.55rem; margin-bottom: 1.8rem; color: var(--u-muted); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; }
 .universe-eyebrow i { width: 0.48rem; height: 0.48rem; border-radius: 50%; background: var(--u-lime); box-shadow: 0 0 1.2rem var(--u-lime); animation: cursor-pulse 1.6s ease-in-out infinite; }
-.universe-copy h1 { max-width: 8.6ch; margin: 0; font-size: clamp(5.2rem, 9.6vw, 10.2rem); font-weight: 820; letter-spacing: -0.095em; line-height: 0.82; }
-.universe-copy h1 em { color: transparent; font-style: normal; -webkit-text-stroke: 1.5px var(--u-ink); }
-.universe-lead { max-width: 37rem; margin: 2rem 0 0; color: var(--u-muted); font-size: clamp(1rem, 1.35vw, 1.16rem); line-height: 1.8; }
+.universe-copy h1 { max-width: 9.5ch; margin: 0; font-size: clamp(4.35rem, 6.2vw, 6.45rem); font-weight: 820; letter-spacing: -0.082em; line-height: 0.9; }
+.universe-copy h1 em { color: var(--u-blue); font-style: normal; }
+.universe-lead { max-width: 35rem; margin: 1.7rem 0 0; color: var(--u-muted); font-size: clamp(1rem, 1.2vw, 1.08rem); line-height: 1.75; }
 .universe-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
 .universe-actions a { display: inline-flex; min-height: 3.3rem; align-items: center; gap: 0.65rem; padding: 0.85rem 1.2rem; border-radius: 999px; font-size: 0.84rem; font-weight: 760; text-decoration: none; }
 .universe-primary { background: var(--u-ink); color: var(--u-bg); }
@@ -336,14 +336,14 @@ html[data-motion='disabled'] .cinematic-home :where(*) { animation-play-state: p
 .universe-home { --u-bg: var(--brand-bg); --u-surface: var(--brand-surface); --u-ink: var(--brand-ink); --u-muted: var(--brand-muted); --u-line: var(--brand-line); --u-blue: var(--brand-violet); --u-lime: var(--brand-lime); --u-rose: var(--brand-rose); --u-cyan: var(--brand-cyan); }
 .universe-home :where(a, button):focus-visible,
 #nd-nav :where(a, button):focus-visible { outline: 2px solid var(--brand-focus); outline-offset: 3px; }
-.goal-entry, .featured-content, .universe-index, .method-journey, .field-notes { max-width: 94rem; margin: 0 auto; padding: clamp(6.5rem, 10vw, 9rem) clamp(1.25rem, 4vw, 3rem); content-visibility: auto; contain-intrinsic-size: auto 52rem; }
+.goal-entry, .featured-content, .universe-index, .method-journey, .field-notes { max-width: 88rem; margin: 0 auto; padding: clamp(5.5rem, 8vw, 7.5rem) clamp(1.25rem, 4vw, 2.5rem); content-visibility: auto; contain-intrinsic-size: auto 48rem; }
 .universe-home .author-contact-card { content-visibility: auto; contain-intrinsic-size: auto 38rem; }
 .goal-entry > header, .universe-section-head { display: grid; grid-template-columns: 0.32fr 1fr 0.48fr; gap: 3rem; align-items: end; margin-bottom: 3rem; }
 .goal-entry > header > p, .featured-content > header > p, .universe-section-head > p, .method-copy > p, .field-notes header > p { align-self: start; color: var(--u-muted); font: 700 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.12em; }
 .goal-entry > header h2, .universe-section-head h2, .method-copy h2 { margin: 0; font-size: clamp(3.25rem, 5.6vw, 6.2rem); letter-spacing: -0.082em; line-height: 0.93; }
 .goal-entry > header > span, .universe-section-head > span, .method-copy > span { max-width: 27rem; color: var(--u-muted); line-height: 1.75; }
 .goal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; }
-.goal-grid > a { display: grid; min-height: 15rem; grid-template-columns: 1fr auto; align-content: space-between; gap: 2rem; padding: 1.35rem; border: 1px solid var(--u-line); border-radius: 1.4rem; background: var(--u-surface); color: var(--u-ink); text-decoration: none; transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+.goal-grid > a { display: grid; min-height: 13rem; grid-template-columns: 1fr auto; align-content: space-between; gap: 1.5rem; padding: 1.35rem; border: 1px solid var(--u-line); border-radius: 1.25rem; background: var(--u-surface); color: var(--u-ink); text-decoration: none; transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
 .goal-grid > a:hover { border-color: var(--u-blue); box-shadow: 0 1.2rem 3rem rgb(104 119 255 / 12%); transform: translateY(-6px); }
 .goal-grid > a > svg:first-child { color: var(--u-blue); }.goal-grid > a > div { grid-column: 1 / -1; align-self: end; }.goal-grid h3 { margin: 0; font-size: clamp(1.7rem, 2.4vw, 2.7rem); letter-spacing: -0.055em; }.goal-grid p { margin: 0.55rem 0 0; color: var(--u-muted); line-height: 1.6; }
 .featured-content { padding-top: 0; }

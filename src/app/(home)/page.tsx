@@ -57,17 +57,16 @@ export default function HomePage() {
         <div className="universe-grid" aria-hidden="true" />
         <KineticKnowledgeScene />
         <div className="universe-hero-inner">
-          <div className="universe-hero-meta"><span>AI KNOWLEDGE UNIVERSE</span><span>OPEN / EVOLVING / PRACTICAL</span></div>
+          <div className="universe-hero-meta"><span>AI KNOWLEDGE UNIVERSE</span></div>
           <div className="universe-copy">
             <p className="universe-eyebrow"><i /> 一个持续生长的中文 AI 世界</p>
-            <h1 id="universe-title">探索 AI。<br /><em>建立能力。</em></h1>
-            <p className="universe-lead">从模型、智能体和创作工具，到真正改变工作方式的系统方法。找到适合自己的入口，然后完成一个真实任务。</p>
+            <h1 id="universe-title">探索 AI，<br /><em>建立真实能力。</em></h1>
+            <p className="universe-lead">从模型、智能体和创作工具，到真正改变工作方式的系统方法。选一个真实任务开始，把零散技巧沉淀成自己的工作系统。</p>
             <div className="universe-actions">
               <Link href="/docs/start-here" prefetch={false} className="universe-primary" data-magnetic>开始学习 <ArrowRight size={18} /></Link>
               <Link href="/docs" prefetch={false} className="universe-secondary">浏览全部内容 <Orbit size={17} /></Link>
             </div>
           </div>
-          <div className="universe-orbit-copy" aria-hidden="true"><span>MODELS</span><span>AGENTS</span><span>CREATIVE AI</span><span>WORKFLOWS</span></div>
           <div className="universe-scroll-cue"><i /><span>向下探索</span></div>
         </div>
       </section>

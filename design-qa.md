@@ -1,40 +1,71 @@
-# Design QA — Homepage Product Optimization
+# Design QA — AI knowledge workbench
 
-## 当前交付
+## Scope
 
-- 静态预览：`http://localhost:3002/?v=19`
-- 方向：AI Knowledge Universe / 产品化知识入口
-- 覆盖：1280px 桌面、窄屏、深浅主题、动效控制、文档入口
+- Homepage navigation and hero hierarchy
+- Docs portal information architecture
+- Desktop docs sidebar
+- Article header, table of contents, and reading width
+- Mobile docs navigation and article reading shell
+- Chinese search and light/dark theme compatibility
 
-## 已验证体验
+## Reference inputs
 
-- 首页先回答“今天想完成什么”，再提供精选内容、能力地图和方法路径。
-- 首屏只启动一个 Three.js 品牌场景，首页其余区域不再创建额外画布。
-- 动效开关状态可持久化；首次访问尊重 `prefers-reduced-motion`，页面可进入 `ready` 或 `disabled` 状态。
-- 页面失焦后 Three.js 暂停绘制，恢复可见后继续。
-- 深浅主题会同步更新首页和导航。
-- 1280px 与 375px 均无横向溢出；移动端目标与能力卡片采用双列，精选内容使用横向吸附浏览。
-- 首页全新会话控制台无 error 或 warning。
-- 文档页保留 Fumadocs 阅读结构，并使用同一品牌紫色、导航标识和主题变量。
+- Option 2: `C:\Users\Administrator\.codex\generated_images\019f644c-cc70-7d80-81e7-eb2110af2765\exec-26bd40f6-d687-4594-a5d7-3895cdb4c457.png`
+- Option 3: `C:\Users\Administrator\.codex\generated_images\019f644c-cc70-7d80-81e7-eb2110af2765\exec-fc10a790-6446-4ec6-b3fd-809eaf1b4e82.png`
+- Both reference images: 1487 × 1058.
 
-## 设计取舍
+## Implementation screenshots
 
-- 删除首页默认展示的 ECharts 与 Matter.js 实验，降低页面长度与首屏认知负担。
-- 将六个能力领域压缩为索引，不再让每张卡片承担主视觉角色。
-- 把作者与开源信任信息移到精选内容之后，并在后段保留完整联系方式。
-- 删除缺少内容价值的 `OPTIONAL LAB`，让能力地图直接过渡到方法路径。
-- 移除 Spline、Rive、MapLibre 组件、样式与依赖，减少 35 个安装包。
+- Homepage, desktop top: `homepage-final-top.png` — 1487 × 1058
+- Homepage, desktop content: `homepage-final-mid.png` — 1487 × 1058
+- Docs portal, desktop: `portal-final-desktop.png` — 1487 × 1058
+- Article, desktop: `article-final-desktop-2.png` — 1487 × 1058
+- Docs portal, mobile: `portal-final-mobile.png` — 390 × 844
+- Docs navigation, mobile: `portal-final-mobile-nav.png` — 390 × 844
+- Article, mobile: `article-final-mobile.png` — 390 × 844
 
-## 验证结果
+All screenshots are stored in:
 
-- [x] `npm run lint`
-- [x] `npm run types:check`
-- [x] `npm run build`
-- [x] 静态导出成功
-- [x] 首页仅保留 1 个首屏画布
-- [x] `OPTIONAL LAB` 与实验组件不存在
-- [x] 深浅主题切换生效
-- [x] 桌面与手机无横向溢出
-- [x] 控制台无错误和警告
+`C:\Users\Administrator\.codex\visualizations\2026\07\15\019f644c-cc70-7d80-81e7-eb2110af2765\docs-workbench-qa`
+
+## Same-input comparisons
+
+1. Full portal comparison, reference option 2 and implementation at 1487 × 1058:
+   `comparison-reference2-portal-full.png`
+2. Focused top-of-page comparison, reference option 3 and implementation at 1487 × 650:
+   `comparison-reference3-portal-focus.png`
+3. Homepage before/after comparison at 1487 × 1058:
+   `comparison-home-before-after.png`
+
+## Comparison history
+
+### Pass 1
+
+- Homepage hero object overwhelmed the message and the second title line wrapped awkwardly.
+- Docs sidebar repeated the same four category links above the page tree.
+- Folder index pages repeated their group labels.
+- Docs portal repeated navigation, recent updates, and page context in a low-value right rail.
+- Article header split actions away from metadata and duplicated too many navigation layers on mobile.
+
+### Pass 2
+
+- Reduced homepage hero title and 3D scene scale, removed competing orbit labels, and simplified the global navigation.
+- Removed duplicate docs marketing links and redundant sidebar footer actions.
+- Removed repeated category index entries from the docs tree while preserving their routes.
+- Rebuilt the portal as a focused one-column workbench with a readable 2 × 2 destination grid.
+- Consolidated article title, description, metadata, and actions into one clear header.
+- Renamed the mobile progress trigger to “本页目录”.
+
+### Final visual review
+
+- Homepage message and 3D visual are balanced, with no title wrap or overlay collision.
+- Docs portal follows the reference density and editorial hierarchy without fake progress or invented content.
+- Sidebar exposes one navigation model, with no duplicate quick-link block.
+- Article page keeps a readable central measure and a persistent desktop table of contents.
+- Mobile sidebar and article page are usable at 390 × 844.
+- Desktop and mobile checks report no horizontal overflow.
+- Mandarin search returns “搭建个人 AI 知识库” and related results.
+- Fresh browser console verification reports zero warnings and errors.
 
 final result: passed

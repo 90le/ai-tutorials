@@ -18,11 +18,10 @@ export function baseOptions(): BaseLayoutProps {
       transparentMode: 'top',
     },
     links: [
-      { type: 'custom', children: <Link href="/docs/start-here/" prefetch={false}>快速开始</Link> },
-      { type: 'custom', children: <Link href="/docs/tools/" prefetch={false}>工具库</Link> },
-      { type: 'custom', children: <Link href="/docs/series/" prefetch={false}>系列课程</Link> },
-      { type: 'custom', children: <Link href="/docs/playbooks/" prefetch={false}>场景打法</Link> },
-      { type: 'custom', secondary: true, children: <Link className="brand-doc-cta" href="/docs/" prefetch={false}>进入文档</Link> },
+      { type: 'custom', children: <Link href="/docs/" prefetch={false}>文档首页</Link> },
+      { type: 'custom', children: <Link href="/docs/tools/" prefetch={false}>工具与模型</Link> },
+      { type: 'custom', children: <Link href="/docs/playbooks/" prefetch={false}>工作流</Link> },
+      { type: 'custom', secondary: true, children: <Link className="brand-doc-cta" href="/docs/start-here/" prefetch={false}>开始学习</Link> },
     ],
     githubUrl,
   };
@@ -37,6 +36,9 @@ export function docsOptions(): BaseLayoutProps {
       ...options.nav,
       transparentMode: 'none',
     },
-    links: options.links?.filter((link) => !(link.type === 'custom' && link.secondary)),
+    // The docs tree already contains every content destination. Repeating the
+    // marketing navigation above it made the desktop sidebar longer and harder
+    // to scan, so the reading shell deliberately keeps a single navigation model.
+    links: [],
   };
 }
