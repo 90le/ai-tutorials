@@ -5,8 +5,23 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Lenis from 'lenis';
 
+const MOTION_KEY = 'ai-tutorials:motion:v1';
+
 export function HomeMotionController() {
-  const [motionEnabled, setMotionEnabled] = useState(true);
+  const [motionEnabled, setMotionEnabled] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    const saved = window.localStorage.getItem(MOTION_KEY);
+    if (saved) return saved === 'on';
+    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+
+  const toggleMotion = () => {
+    setMotionEnabled((current) => {
+      const next = !current;
+      window.localStorage.setItem(MOTION_KEY, next ? 'on' : 'off');
+      return next;
+    });
+  };
 
   useEffect(() => {
     const root = document.documentElement;
@@ -96,8 +111,8 @@ export function HomeMotionController() {
     <>
       <div className="motion-progress" aria-hidden="true"><i /></div>
       <div className="motion-cursor" aria-hidden="true"><i /></div>
-      <button className="motion-toggle" type="button" onClick={() => setMotionEnabled((value) => !value)} aria-pressed={motionEnabled}>
-        <i /> MOTION {motionEnabled ? 'ON' : 'OFF'}
+      <button className="motion-toggle" type="button" onClick={toggleMotion} aria-pressed={motionEnabled}>
+        <i /> 动态 {motionEnabled ? '开启' : '暂停'}
       </button>
     </>
   );

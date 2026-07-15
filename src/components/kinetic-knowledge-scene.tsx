@@ -20,6 +20,7 @@ export function KineticKnowledgeScene() {
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       const world = new THREE.Group();
       const pointer = { x: 0, y: 0 };
+      let pageVisible = !document.hidden;
 
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setClearColor(0x000000, 0);
@@ -104,6 +105,8 @@ export function KineticKnowledgeScene() {
       const themeObserver = new MutationObserver(syncTheme);
       themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
       host.addEventListener('pointermove', onPointerMove, { passive: true });
+      const onVisibilityChange = () => { pageVisible = !document.hidden; };
+      document.addEventListener('visibilitychange', onVisibilityChange);
       resize();
       syncTheme();
 
@@ -122,7 +125,7 @@ export function KineticKnowledgeScene() {
           particles.rotation.y = -time * 0.08;
           world.position.y = Math.sin(time * 0.8) * 0.12;
         }
-        renderer.render(scene, camera);
+        if (pageVisible) renderer.render(scene, camera);
         frame = window.requestAnimationFrame(render);
       };
       render();
@@ -132,6 +135,7 @@ export function KineticKnowledgeScene() {
         resizeObserver.disconnect();
         themeObserver.disconnect();
         host.removeEventListener('pointermove', onPointerMove);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
         knotGeometry.dispose();
         knotMaterial.dispose();
         wireMaterial.dispose();
