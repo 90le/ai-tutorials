@@ -1,6 +1,7 @@
 {
   "name": "ai-tutorials",
   "version": "0.0.5",
+  "description": "面向中文读者的开源 AI 学习与实践教程知识库。",
   "private": true,
   "license": "MIT",
   "homepage": "https://90le.github.io/ai-tutorials",

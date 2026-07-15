@@ -1,6 +1,8 @@
 # 贡献指南
 
-感谢你帮助完善 AI 使用教程。
+感谢你帮助完善 [AI 使用教程](https://90le.github.io/ai-tutorials/)。在线站点是读者入口，仓库用于追踪内容、讨论改进并发布新版本。
+
+发现错误、希望补充主题或不确定内容放在哪里时，欢迎先提交 [Issue](https://github.com/90le/ai-tutorials/issues)。
 
 ## 内容贡献
 
