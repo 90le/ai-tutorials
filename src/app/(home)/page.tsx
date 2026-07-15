@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpenText, Lightbulb, Workflow } from 'lucide-react';
 import { AuthorContactCard } from '@/components/author-contact-card';
 import { LearningEntryCard } from '@/components/learning-entry-card';
 
@@ -58,6 +58,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="tutorial-practice-section" aria-labelledby="practice-title">
+        <div className="tutorial-practice-heading">
+          <p className="eyebrow">不是收藏，而是完成</p>
+          <h2 id="practice-title">每次学习，都留下能继续使用的东西。</h2>
+          <p>从一个小任务开始，逐步形成自己的工具选择、工作流和参考资料。</p>
+        </div>
+        <ol className="tutorial-practice-steps">
+          <li><span>01</span><BookOpenText size={22} /><strong>读一篇能解决问题的教程</strong><p>先理解一个清晰、可重复的操作。</p></li>
+          <li><span>02</span><Workflow size={22} /><strong>在真实场景里做一遍</strong><p>把工具能力变成自己的工作步骤。</p></li>
+          <li><span>03</span><Lightbulb size={22} /><strong>沉淀提示词与复盘</strong><p>下次遇到相似问题时，从已有方法继续。</p></li>
+        </ol>
+      </section>
+
       <section className="tutorial-home-section" aria-labelledby="explore-routes-title">
         <div className="tutorial-section-heading">
           <p className="eyebrow">继续探索</p>
@@ -67,6 +80,16 @@ export default function HomePage() {
           <LearningEntryCard title="系列课程" description="围绕一个目标连续学习的完整教程合集。" href="/docs/series" />
           <LearningEntryCard title="灵感与实验" description="短技巧、实验与值得留存的实践观察。" href="/docs/notes" />
           <LearningEntryCard title="参考资料" description="提示词、模板、术语与常见问题。" href="/docs/reference" />
+        </div>
+      </section>
+
+      <section className="tutorial-topic-strip" aria-label="探索主题">
+        <p>从你此刻最关心的方向开始</p>
+        <div>
+          <Link href="/docs/tools">工具选择</Link>
+          <Link href="/docs/playbooks">工作流</Link>
+          <Link href="/docs/reference">提示词与模板</Link>
+          <Link href="/docs/series">连续课程</Link>
         </div>
       </section>
 

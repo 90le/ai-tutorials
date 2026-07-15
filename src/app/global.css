@@ -142,6 +142,23 @@ html > body[data-scroll-locked] {
 .learning-entry-card-title { font-size: 1.15rem; font-weight: 760; }
 .learning-entry-card-description { color: var(--tutorial-muted); font-size: 0.9rem; line-height: 1.65; }
 
+.tutorial-practice-section { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; margin-top: clamp(5rem, 10vw, 8rem); padding: clamp(2rem, 5vw, 4rem); border-radius: 2rem; background: #f0eaff; }
+.tutorial-practice-heading h2 { max-width: 11ch; margin: 0.7rem 0 1rem; color: var(--tutorial-ink); font-size: clamp(2rem, 4.5vw, 3.6rem); letter-spacing: -0.06em; line-height: 1.08; }
+.tutorial-practice-heading > p:last-child { max-width: 30rem; color: var(--tutorial-muted); line-height: 1.7; }
+.tutorial-practice-steps { display: grid; gap: 0.8rem; padding: 0; margin: 0; list-style: none; }
+.tutorial-practice-steps li { display: grid; grid-template-columns: auto auto 1fr; column-gap: 0.85rem; align-items: center; padding: 1.15rem; border: 1px solid rgb(109 40 217 / 14%); border-radius: 1.1rem; background: var(--tutorial-surface); transition: transform 180ms ease, box-shadow 180ms ease; }
+.tutorial-practice-steps li:hover { transform: translateX(6px); box-shadow: 0 13px 28px rgb(64 33 110 / 11%); }
+.tutorial-practice-steps span { color: var(--tutorial-accent); font-size: 0.75rem; font-weight: 800; }
+.tutorial-practice-steps svg { color: var(--tutorial-accent); }
+.tutorial-practice-steps strong { color: var(--tutorial-ink); }
+.tutorial-practice-steps p { grid-column: 3; margin: 0.3rem 0 0; color: var(--tutorial-muted); font-size: 0.86rem; line-height: 1.55; }
+
+.tutorial-topic-strip { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: clamp(4rem, 9vw, 7rem); padding: 1.4rem 0; border-top: 1px solid var(--tutorial-border); border-bottom: 1px solid var(--tutorial-border); }
+.tutorial-topic-strip p { margin: 0; color: var(--tutorial-muted); }
+.tutorial-topic-strip div { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.tutorial-topic-strip a { padding: 0.5rem 0.8rem; border-radius: 999px; background: var(--tutorial-accent-soft); color: var(--tutorial-accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: transform 160ms ease, background-color 160ms ease; }
+.tutorial-topic-strip a:hover { transform: translateY(-2px); background: #e5d9ff; }
+
 .author-contact-card { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr); gap: clamp(2rem, 5vw, 4.5rem); margin-top: clamp(4rem, 9vw, 7rem); padding: clamp(1.5rem, 4vw, 3.5rem); border: 1px solid var(--tutorial-border); border-radius: 1.75rem; background: var(--tutorial-surface); }
 .author-contact-intro h2 { max-width: 12ch; margin: 0.7rem 0 0; color: var(--tutorial-ink); font-size: clamp(1.85rem, 4vw, 3rem); letter-spacing: -0.055em; line-height: 1.08; }
 .author-contact-intro > p:last-child { max-width: 38rem; margin: 1.25rem 0 0; color: var(--tutorial-muted); line-height: 1.7; }
@@ -177,6 +194,8 @@ html > body[data-scroll-locked] {
   .tutorial-hero { border-radius: 1.5rem; }
   .tutorial-hero { grid-template-columns: 1fr; }
   .tutorial-learning-stage { min-height: 20rem; margin-top: -0.75rem; }
+  .tutorial-practice-section { grid-template-columns: 1fr; border-radius: 1.5rem; }
+  .tutorial-topic-strip { align-items: flex-start; flex-direction: column; }
   .learning-entry-grid, .author-contact-card { grid-template-columns: 1fr; }
   .learning-entry-card { min-height: auto; }
   .author-contact-card { border-radius: 1.5rem; }
