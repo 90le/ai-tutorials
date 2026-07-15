@@ -29,7 +29,11 @@ difficulty: 入门 # 可选：入门、进阶、专家
 ---
 ```
 
-默认使用 GitHub Flavored Markdown。只有确实需要 Fumadocs 卡片、标签页或交互组件时才使用 MDX；不要在普通文章中嵌入 JavaScript、密钥或远程追踪脚本。
+默认使用 GitHub Flavored Markdown；当页面表现力受益时，可自由使用 MDX、Fumadocs 组件和项目内 React 组件。这里不设组件白名单，也不把 MDX 限制为纯排版语言。
+
+需要新组件时，优先在 `src/components/` 中实现为可复用、可组合的组件，并通过 `src/components/mdx.tsx` 注册或在页面中明确导入。不要把复杂逻辑、密钥、远程追踪脚本或不可审阅的第三方代码直接塞进文章正文。
+
+所有页面必须兼容静态导出：运行时不得依赖私有服务、Cookie、登录态或服务器 API。需要实时数据、登录或在线 AI 问答时，先单独设计可部署的后端方案。
 
 ## 写作标准
 
@@ -37,14 +41,18 @@ difficulty: 入门 # 可选：入门、进阶、专家
 - 操作步骤使用有序列表；命令必须放进带语言标记的代码块。
 - 说明模型、工具或价格等易变信息时，写明核验日期并链接到一手来源。
 - 使用相对 Markdown 链接或以 `/docs/` 开头的站内链接；不要硬编码 GitHub Pages 域名。
-- 图片放进 `public/` 的主题目录，并写出有意义的替代文本。
+- 图片放进 `public/images/<topic>/`，并写出有意义的替代文本。需要新的位图封面、插图、概念图或图片编辑时，使用 ImageGen；不要引用 Codex 临时生成目录。
+- 优先延续现有 Fumadocs 设计语言和相邻页面的视觉模式。用户要求视觉探索、重设计或体验审查时，使用 Product Design 工作流；需要新体验时先做出可审阅的方向，再实现为站点组件。
+- Dashi PPT 用于长教程的配套演示，而不是替代文档站。发布的静态 HTML deck 放在 `public/decks/<deck-slug>/`，并从对应文档页链接；只有用户明确要求时才同时保存或交付 PPTX/PDF。
 
 ## 验证
 
-每次内容修改后，在项目根目录执行：
+每次内容、MDX 或组件修改后，在项目根目录执行：
 
 ```bash
+npm run lint
+npm run types:check
 npm run build
 ```
 
-构建失败时，先修正 Markdown、链接或 frontmatter，再继续处理其他内容。
+构建失败时，先修正 Markdown、MDX、链接、frontmatter 或组件问题，再继续处理其他内容。发布前检查 Git diff；提交和推送使用已连接的 GitHub 工作流。
