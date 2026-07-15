@@ -58,6 +58,10 @@ function isCategoryLanding(page: DocPageInput) {
   return page.slugs.length <= 1;
 }
 
+function withTrailingSlash(url: string) {
+  return url.endsWith('/') ? url : `${url}/`;
+}
+
 export function normalizeDocPage(page: DocPageInput): DocSummary {
   if (!isValidPublishedDate(page.data.published)) {
     throw new Error(`Invalid published date for ${page.path}: ${page.data.published}`);
@@ -69,7 +73,7 @@ export function normalizeDocPage(page: DocPageInput): DocSummary {
   return {
     title: page.data.title,
     description: page.data.description ?? '',
-    url: page.url,
+    url: withTrailingSlash(page.url),
     path: page.path,
     slugs: page.slugs,
     category,

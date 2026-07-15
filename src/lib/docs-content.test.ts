@@ -3,7 +3,7 @@ import { buildDocsIndex, normalizeDocPage, type DocPageInput } from './docs-cont
 
 function page(overrides: Partial<DocPageInput> = {}): DocPageInput {
   return {
-    url: '/docs/notes/example/',
+    url: '/docs/notes/example',
     path: 'notes/example.mdx',
     slugs: ['notes', 'example'],
     data: {
@@ -27,6 +27,7 @@ describe('normalizeDocPage', () => {
       categoryLabel: '单篇笔记',
       dateLabel: '2026.07.10',
       difficulty: '入门',
+      url: '/docs/notes/example/',
     });
   });
 
