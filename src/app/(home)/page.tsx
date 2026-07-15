@@ -1,124 +1,137 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpenText, Lightbulb, Workflow } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bot,
+  Braces,
+  Boxes,
+  BrainCircuit,
+  Clapperboard,
+  FlaskConical,
+  Orbit,
+  Sparkles,
+  Workflow,
+} from 'lucide-react';
+import { AiEngineShowcase } from '@/components/ai-engine-showcase';
 import { AuthorContactCard } from '@/components/author-contact-card';
-import { LearningEntryCard } from '@/components/learning-entry-card';
+import { HomeMotionController } from '@/components/home-motion-controller';
+import { KnowledgeMapChart } from '@/components/knowledge-map-chart';
+import { KineticKnowledgeScene } from '@/components/kinetic-knowledge-scene';
+import { PhysicsKnowledgeField } from '@/components/physics-knowledge-field';
+
+const universe = [
+  { no: '01', title: '模型与能力', text: '理解模型边界、推理能力与选择方法。', icon: BrainCircuit, href: '/docs/tools', tone: 'blue' },
+  { no: '02', title: '智能体', text: '从一次问答，走向可持续执行的 Agent。', icon: Bot, href: '/docs/series', tone: 'lime' },
+  { no: '03', title: 'AI 创作', text: '图像、视频、声音与新叙事的实践现场。', icon: Clapperboard, href: '/docs/notes', tone: 'rose' },
+  { no: '04', title: 'AI 开发', text: '把编程助手变成可靠的工程协作者。', icon: Braces, href: '/docs/tools', tone: 'violet' },
+  { no: '05', title: '研究与实验', text: '追踪前沿，也沉淀可以复现的实验。', icon: FlaskConical, href: '/docs/notes', tone: 'cyan' },
+  { no: '06', title: '自动化工作流', text: '连接工具、数据与判断，持续完成任务。', icon: Workflow, href: '/docs/playbooks', tone: 'amber' },
+] as const;
+
+const fieldNotes = [
+  ['FIELD NOTE 001', '把 Codex 变成项目里的长期协作者', '/docs/tools'],
+  ['FIELD NOTE 002', '从需求到交付：一次完整的 AI 工作流', '/docs/playbooks'],
+  ['FIELD NOTE 003', '值得反复使用的提示词与检查清单', '/docs/reference'],
+] as const;
 
 export default function HomePage() {
   return (
-    <div className="tutorial-home">
-      <div className="tutorial-home-atmosphere" aria-hidden="true">
-        <span className="tutorial-ambient-orb tutorial-ambient-orb-one" />
-        <span className="tutorial-ambient-orb tutorial-ambient-orb-two" />
-        <span className="tutorial-ambient-orb tutorial-ambient-orb-three" />
-        <span className="tutorial-ambient-grid" />
+    <main className="universe-home">
+      <HomeMotionController />
+
+      <section className="universe-hero" aria-labelledby="universe-title">
+        <div className="universe-aurora" aria-hidden="true" />
+        <div className="universe-grid" aria-hidden="true" />
+        <KineticKnowledgeScene />
+        <div className="universe-hero-inner">
+          <div className="universe-hero-meta"><span>AI KNOWLEDGE UNIVERSE</span><span>OPEN / EVOLVING / PRACTICAL</span></div>
+          <div className="universe-copy">
+            <p className="universe-eyebrow"><i /> 一个持续生长的中文 AI 世界</p>
+            <h1 id="universe-title">探索 AI。<br /><em>建立能力。</em></h1>
+            <p className="universe-lead">从模型、智能体和创作工具，到真正改变工作方式的系统方法。这里记录 AI 的现在，也为下一步留出空间。</p>
+            <div className="universe-actions">
+              <Link href="/docs/start-here" prefetch={false} className="universe-primary" data-magnetic>开始探索 <ArrowRight size={18} /></Link>
+              <Link href="/docs" prefetch={false} className="universe-secondary">查看知识地图 <Orbit size={17} /></Link>
+            </div>
+          </div>
+          <div className="universe-orbit-copy" aria-hidden="true"><span>MODELS</span><span>AGENTS</span><span>CREATIVE AI</span><span>WORKFLOWS</span></div>
+          <div className="universe-scroll-cue"><i /><span>SCROLL TO ENTER</span></div>
+        </div>
+      </section>
+
+      <div className="signal-ribbon" aria-hidden="true">
+        <div><span>MODELS</span><i /> <span>AGENTS</span><i /> <span>CREATIVE AI</span><i /> <span>CODING</span><i /> <span>RESEARCH</span><i /> <span>AUTOMATION</span><i /> <span>MODELS</span><i /> <span>AGENTS</span><i /> <span>CREATIVE AI</span><i /> <span>CODING</span><i /></div>
       </div>
 
-      <section className="tutorial-hero">
-        <div className="tutorial-hero-copy">
-          <p className="eyebrow">公开 AI 知识库</p>
-          <h1>把 AI 用到<br />真实工作里。</h1>
-          <p className="tutorial-hero-summary">
-            系统学习 AI 工具、工作流与实践方法。每一篇教程都可独立阅读，也能沿着合集逐步完成学习。
-          </p>
-          <div className="tutorial-hero-actions">
-            <Link href="/docs/start-here" className="tutorial-primary-action">
-              从这里开始 <ArrowRight size={18} />
-            </Link>
-            <Link href="/docs" className="tutorial-secondary-action">浏览全部文档</Link>
-          </div>
-        </div>
-        <div className="tutorial-learning-stage" aria-label="学习路径预览">
-          <p className="tutorial-stage-label">你的学习路径</p>
-          <div className="tutorial-stage-track" aria-hidden="true" />
-          <Link href="/docs/start-here" className="tutorial-stage-card tutorial-stage-card-start">
-            <span>01 · 起步</span>
-            <strong>选一个真实任务</strong>
-            <small>从这里开始</small>
-          </Link>
-          <Link href="/docs/tools" className="tutorial-stage-card tutorial-stage-card-tool">
-            <span>02 · 工具</span>
-            <strong>找到顺手的能力</strong>
-            <small>工具教程</small>
-          </Link>
-          <Link href="/docs/playbooks" className="tutorial-stage-card tutorial-stage-card-playbook">
-            <span>03 · 实践</span>
-            <strong>完成一次工作流</strong>
-            <small>场景打法</small>
-          </Link>
-          <Link href="/docs/reference" className="tutorial-stage-card tutorial-stage-card-reference">
-            <span>04 · 沉淀</span>
-            <strong>留下可复用的方法</strong>
-            <small>参考资料</small>
-          </Link>
+      <section className="universe-index" aria-labelledby="universe-index-title">
+        <header className="universe-section-head">
+          <p>01 / THE UNIVERSE</p>
+          <h2 id="universe-index-title">不只是一套教程。<br />是一张 AI 能力地图。</h2>
+          <span>从你正在解决的问题进入，在连接中建立属于自己的方法。</span>
+        </header>
+        <div className="universe-bento">
+          {universe.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link href={item.href} prefetch={false} className={`universe-node node-${item.tone}`} key={item.title}>
+                <span>{item.no}</span><Icon /><ArrowUpRight className="node-arrow" />
+                <div><h3>{item.title}</h3><p>{item.text}</p></div>
+                <i className="node-scan" aria-hidden="true" />
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      <section className="tutorial-home-section tutorial-home-section-primary" aria-labelledby="primary-routes-title">
-        <div className="tutorial-section-heading">
-          <p className="eyebrow">学习入口</p>
-          <h2 id="primary-routes-title">从一个明确的问题开始。</h2>
+      <section className="engine-theatre" aria-labelledby="engine-theatre-title">
+        <header className="engine-theatre-head">
+          <p>02 / LIVE INTERFACE</p>
+          <h2 id="engine-theatre-title">阅读之外，<br />直接进入现场。</h2>
+          <span>三个实时引擎，三种探索方式。拖动、切换、缩放，每一个动作都会得到回应。</span>
+        </header>
+        <AiEngineShowcase />
+      </section>
+
+      <section className="method-journey" aria-labelledby="method-journey-title">
+        <div className="method-copy">
+          <p>03 / FROM SIGNAL TO SYSTEM</p>
+          <h2 id="method-journey-title">把新鲜感，<br />变成生产力。</h2>
+          <span>我们关心的不是工具列表，而是一个人如何从理解、实践到形成稳定系统。</span>
         </div>
-        <div className="learning-entry-grid learning-entry-grid-primary">
-          <LearningEntryCard title="从这里开始" description="为新读者规划第一条可完成的学习路线。" href="/docs/start-here" priority />
-          <LearningEntryCard title="工具教程" description="理解 Codex、Claude、Cursor 等工具如何真正帮上忙。" href="/docs/tools" priority />
-          <LearningEntryCard title="场景打法" description="把写作、开发、研究与自动化拆成可复用的步骤。" href="/docs/playbooks" priority />
+        <div className="method-track">
+          <div><small>01 / DISCOVER</small><Boxes /><h3>看见可能</h3><p>从真实问题出发，理解 AI 能在哪些环节提供杠杆。</p></div>
+          <div><small>02 / PRACTICE</small><Sparkles /><h3>完成一次</h3><p>跟随可执行步骤，在自己的任务里做出真实结果。</p></div>
+          <div><small>03 / SYSTEMIZE</small><Workflow /><h3>形成系统</h3><p>留下模板、检查点和复盘，让经验可以持续复用。</p></div>
         </div>
       </section>
 
-      <div className="tutorial-flow-bridge" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-
-      <section className="tutorial-practice-section" aria-labelledby="practice-title">
-        <div className="tutorial-practice-heading">
-          <p className="eyebrow">不是收藏，而是完成</p>
-          <h2 id="practice-title">每次学习，都留下能继续使用的东西。</h2>
-          <p>从一个小任务开始，逐步形成自己的工具选择、工作流和参考资料。</p>
-        </div>
-        <ol className="tutorial-practice-steps">
-          <li><span>01</span><BookOpenText size={22} /><strong>读一篇能解决问题的教程</strong><p>先理解一个清晰、可重复的操作。</p></li>
-          <li><span>02</span><Workflow size={22} /><strong>在真实场景里做一遍</strong><p>把工具能力变成自己的工作步骤。</p></li>
-          <li><span>03</span><Lightbulb size={22} /><strong>沉淀提示词与复盘</strong><p>下次遇到相似问题时，从已有方法继续。</p></li>
-        </ol>
-      </section>
-
-      <section className="tutorial-home-section tutorial-home-section-explore" aria-labelledby="explore-routes-title">
-        <div className="tutorial-section-heading">
-          <p className="eyebrow">继续探索</p>
-          <h2 id="explore-routes-title">把适合自己的方法留下来。</h2>
-        </div>
-        <div className="learning-entry-grid">
-          <LearningEntryCard title="系列课程" description="围绕一个目标连续学习的完整教程合集。" href="/docs/series" />
-          <LearningEntryCard title="灵感与实验" description="短技巧、实验与值得留存的实践观察。" href="/docs/notes" />
-          <LearningEntryCard title="参考资料" description="提示词、模板、术语与常见问题。" href="/docs/reference" />
+      <section className="signal-laboratory" aria-labelledby="signal-lab-title">
+        <header>
+          <p>04 / LIVING KNOWLEDGE</p>
+          <h2 id="signal-lab-title">知识不是目录。<br />它是一张活的网络。</h2>
+        </header>
+        <div className="signal-stage">
+          <div className="signal-graph"><span>DRAG THE NETWORK</span><KnowledgeMapChart /></div>
+          <div className="signal-physics"><span>PUSH THE IDEAS</span><PhysicsKnowledgeField /></div>
         </div>
       </section>
 
-      <section className="tutorial-topic-marquee" aria-label="探索主题">
-        <p>从你此刻最关心的方向开始</p>
-        <div className="tutorial-topic-marquee-window">
-          <div className="tutorial-topic-marquee-track">
-            {[0, 1].map((copy) => (
-              <div className="tutorial-topic-marquee-group" aria-hidden={copy === 1} key={copy}>
-                <Link href="/docs/tools" tabIndex={copy === 1 ? -1 : undefined}>工具选择</Link>
-                <span>✦</span>
-                <Link href="/docs/playbooks" tabIndex={copy === 1 ? -1 : undefined}>真实工作流</Link>
-                <span>✦</span>
-                <Link href="/docs/reference" tabIndex={copy === 1 ? -1 : undefined}>提示词与模板</Link>
-                <span>✦</span>
-                <Link href="/docs/series" tabIndex={copy === 1 ? -1 : undefined}>连续课程</Link>
-                <span>✦</span>
-                <Link href="/docs/notes" tabIndex={copy === 1 ? -1 : undefined}>实验与复盘</Link>
-                <span>✦</span>
-              </div>
-            ))}
-          </div>
+      <section className="field-notes" aria-labelledby="field-notes-title">
+        <header><p>05 / FIELD NOTES</p><h2 id="field-notes-title">正在发生</h2><Link href="/docs" prefetch={false}>浏览全部 <ArrowRight size={16} /></Link></header>
+        <div>
+          {fieldNotes.map(([meta, title, href]) => (
+            <Link href={href} prefetch={false} key={meta}><small>{meta}</small><h3>{title}</h3><ArrowUpRight /></Link>
+          ))}
         </div>
       </section>
 
       <AuthorContactCard />
-    </div>
+
+      <footer className="universe-footer">
+        <div><p>THE NEXT STEP IS YOURS.</p><h2>进入 AI 世界，<br />从一个真实任务开始。</h2><Link href="/docs/start-here" prefetch={false} data-magnetic>开始探索 <ArrowRight /></Link></div>
+        <nav><Link href="/docs/tools" prefetch={false}>工具与模型</Link><Link href="/docs/series" prefetch={false}>系列课程</Link><Link href="/docs/playbooks" prefetch={false}>工作流</Link><Link href="/docs/reference" prefetch={false}>参考资料</Link></nav>
+        <div className="universe-footer-meta"><span>AI 使用教程 · 丘彬彬</span><span>OPEN SOURCE / 2026</span><a href="https://github.com/90le/ai-tutorials">GITHUB ↗</a></div>
+      </footer>
+    </main>
   );
 }
