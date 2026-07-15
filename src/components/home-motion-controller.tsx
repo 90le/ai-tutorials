@@ -8,16 +8,19 @@ import Lenis from 'lenis';
 const MOTION_KEY = 'ai-tutorials:motion:v1';
 
 export function HomeMotionController() {
-  const [motionEnabled, setMotionEnabled] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    const saved = window.localStorage.getItem(MOTION_KEY);
-    if (saved) return saved === 'on';
-    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  });
+  const [motionEnabled, setMotionEnabled] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const saved = window.localStorage.getItem(MOTION_KEY);
+      setMotionEnabled(saved ? saved === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   const toggleMotion = () => {
     setMotionEnabled((current) => {
-      const next = !current;
+      const next = current === null ? true : !current;
       window.localStorage.setItem(MOTION_KEY, next ? 'on' : 'off');
       return next;
     });
@@ -25,6 +28,10 @@ export function HomeMotionController() {
 
   useEffect(() => {
     const root = document.documentElement;
+    if (motionEnabled === null) {
+      root.dataset.motion = 'pending';
+      return () => delete root.dataset.motion;
+    }
     const cursor = document.querySelector<HTMLElement>('.motion-cursor');
     const progress = document.querySelector<HTMLElement>('.motion-progress > i');
     const onPointerMove = (event: PointerEvent) => {
@@ -111,8 +118,8 @@ export function HomeMotionController() {
     <>
       <div className="motion-progress" aria-hidden="true"><i /></div>
       <div className="motion-cursor" aria-hidden="true"><i /></div>
-      <button className="motion-toggle" type="button" onClick={toggleMotion} aria-pressed={motionEnabled}>
-        <i /> 动态 {motionEnabled ? '开启' : '暂停'}
+      <button className="motion-toggle" type="button" onClick={toggleMotion} aria-pressed={motionEnabled === true}>
+        <i /> 动态 {motionEnabled === null ? '准备' : motionEnabled ? '开启' : '暂停'}
       </button>
     </>
   );

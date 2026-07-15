@@ -1,7 +1,6 @@
 'use client';
 
-import { Component, type ErrorInfo, type ReactNode, useState } from 'react';
-import dynamic from 'next/dynamic';
+import { Component, lazy, Suspense, type ErrorInfo, type ReactNode, useState } from 'react';
 import { Box, Radio, Route, type LucideIcon } from 'lucide-react';
 
 type EngineMode = 'space' | 'state' | 'atlas';
@@ -16,9 +15,9 @@ const EngineLoading = () => (
   <div className="engine-loading" role="status"><i /><span>正在启动实时引擎…</span></div>
 );
 
-const SplineStage = dynamic(() => import('./engine-stages/spline-stage'), { ssr: false, loading: EngineLoading });
-const RiveStage = dynamic(() => import('./engine-stages/rive-stage'), { ssr: false, loading: EngineLoading });
-const EcosystemAtlas = dynamic(() => import('./engine-stages/ecosystem-atlas'), { ssr: false, loading: EngineLoading });
+const SplineStage = lazy(() => import('./engine-stages/spline-stage'));
+const RiveStage = lazy(() => import('./engine-stages/rive-stage'));
+const EcosystemAtlas = lazy(() => import('./engine-stages/ecosystem-atlas'));
 
 class EngineErrorBoundary extends Component<{
   children: ReactNode;
@@ -84,9 +83,11 @@ export function AiEngineShowcase() {
         ) : (
           <EngineErrorBoundary key={resetKey} resetKey={resetKey} onRetry={() => setRestart((value) => value + 1)}>
             <div className="engine-mode-context"><span>{selected?.engine}</span><p>{selected?.description}</p></div>
-            {active === 'space' ? <SplineStage /> : null}
-            {active === 'state' ? <RiveStage /> : null}
-            {active === 'atlas' ? <EcosystemAtlas /> : null}
+            <Suspense fallback={<EngineLoading />}>
+              {active === 'space' ? <SplineStage /> : null}
+              {active === 'state' ? <RiveStage /> : null}
+              {active === 'atlas' ? <EcosystemAtlas /> : null}
+            </Suspense>
           </EngineErrorBoundary>
         )}
       </div>
