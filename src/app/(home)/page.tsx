@@ -6,6 +6,13 @@ import { LearningEntryCard } from '@/components/learning-entry-card';
 export default function HomePage() {
   return (
     <div className="tutorial-home">
+      <div className="tutorial-home-atmosphere" aria-hidden="true">
+        <span className="tutorial-ambient-orb tutorial-ambient-orb-one" />
+        <span className="tutorial-ambient-orb tutorial-ambient-orb-two" />
+        <span className="tutorial-ambient-orb tutorial-ambient-orb-three" />
+        <span className="tutorial-ambient-grid" />
+      </div>
+
       <section className="tutorial-hero">
         <div className="tutorial-hero-copy">
           <p className="eyebrow">公开 AI 知识库</p>
@@ -46,7 +53,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="tutorial-home-section" aria-labelledby="primary-routes-title">
+      <section className="tutorial-home-section tutorial-home-section-primary" aria-labelledby="primary-routes-title">
         <div className="tutorial-section-heading">
           <p className="eyebrow">学习入口</p>
           <h2 id="primary-routes-title">从一个明确的问题开始。</h2>
@@ -57,6 +64,12 @@ export default function HomePage() {
           <LearningEntryCard title="场景打法" description="把写作、开发、研究与自动化拆成可复用的步骤。" href="/docs/playbooks" priority />
         </div>
       </section>
+
+      <div className="tutorial-flow-bridge" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
 
       <section className="tutorial-practice-section" aria-labelledby="practice-title">
         <div className="tutorial-practice-heading">
@@ -71,7 +84,7 @@ export default function HomePage() {
         </ol>
       </section>
 
-      <section className="tutorial-home-section" aria-labelledby="explore-routes-title">
+      <section className="tutorial-home-section tutorial-home-section-explore" aria-labelledby="explore-routes-title">
         <div className="tutorial-section-heading">
           <p className="eyebrow">继续探索</p>
           <h2 id="explore-routes-title">把适合自己的方法留下来。</h2>
@@ -83,13 +96,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="tutorial-topic-strip" aria-label="探索主题">
+      <section className="tutorial-topic-marquee" aria-label="探索主题">
         <p>从你此刻最关心的方向开始</p>
-        <div>
-          <Link href="/docs/tools">工具选择</Link>
-          <Link href="/docs/playbooks">工作流</Link>
-          <Link href="/docs/reference">提示词与模板</Link>
-          <Link href="/docs/series">连续课程</Link>
+        <div className="tutorial-topic-marquee-window">
+          <div className="tutorial-topic-marquee-track">
+            {[0, 1].map((copy) => (
+              <div className="tutorial-topic-marquee-group" aria-hidden={copy === 1} key={copy}>
+                <Link href="/docs/tools" tabIndex={copy === 1 ? -1 : undefined}>工具选择</Link>
+                <span>✦</span>
+                <Link href="/docs/playbooks" tabIndex={copy === 1 ? -1 : undefined}>真实工作流</Link>
+                <span>✦</span>
+                <Link href="/docs/reference" tabIndex={copy === 1 ? -1 : undefined}>提示词与模板</Link>
+                <span>✦</span>
+                <Link href="/docs/series" tabIndex={copy === 1 ? -1 : undefined}>连续课程</Link>
+                <span>✦</span>
+                <Link href="/docs/notes" tabIndex={copy === 1 ? -1 : undefined}>实验与复盘</Link>
+                <span>✦</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
