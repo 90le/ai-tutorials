@@ -280,17 +280,6 @@ html[data-motion='disabled'] .cinematic-home :where(*) { animation-play-state: p
 @keyframes scan-line{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @keyframes ribbon-flow{to{transform:translateX(-50%)}}
 
-/* Docs */
-.docs-page-header { max-width: 48rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--tutorial-border); border-radius: 1.5rem; background: var(--tutorial-surface); box-shadow: 0.7rem 0.7rem 0 var(--tutorial-accent-soft); }
-.docs-page-header h1 { color: var(--tutorial-ink); font-size: clamp(2.2rem, 5vw, 3.75rem); letter-spacing: -0.065em; line-height: 1.04; }
-.docs-page-header p { max-width: 42rem; color: var(--tutorial-muted); font-size: 1.05rem; line-height: 1.7; }
-.docs-page-actions { margin-top: 1.75rem; border-color: var(--tutorial-border); }
-.docs-page-content { max-width: 46rem; padding-top: 1rem; }
-.docs-page-content :where(h2, h3, h4) { color: var(--tutorial-ink); letter-spacing: -0.03em; scroll-margin-top: 6rem; }
-.docs-page-content :where(a) { color: var(--tutorial-accent); text-decoration-thickness: 1.5px; text-underline-offset: 0.18em; }
-.docs-page-content :where(blockquote) { border-color: var(--tutorial-accent); color: var(--tutorial-muted); }
-.docs-page-content :where(pre) { border: 1px solid var(--tutorial-border); border-radius: 1rem; }
-
 @media (max-width: 64rem) {
   #nd-nav > nav > ul > ul { display: none; }
   .spatial-hero { min-height: auto; }

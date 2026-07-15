@@ -27,3 +27,16 @@ export function baseOptions(): BaseLayoutProps {
     githubUrl,
   };
 }
+
+export function docsOptions(): BaseLayoutProps {
+  const options = baseOptions();
+
+  return {
+    ...options,
+    nav: {
+      ...options.nav,
+      transparentMode: 'none',
+    },
+    links: options.links?.filter((link) => !(link.type === 'custom' && link.secondary)),
+  };
+}
