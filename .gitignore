@@ -11,6 +11,8 @@
 /build
 /output
 /.worktrees/
+/.codex/*.log
+/design-evidence/
 /.superpowers/
 *.tsbuildinfo
 
