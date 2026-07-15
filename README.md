@@ -12,7 +12,7 @@
 - `content/docs/reference/`：提示词、模板、术语与 FAQ。
 - `content/drafts/`：未发布草稿，不参与站点构建。
 
-为 AI 编写工具准备的内容规范在 [AGENTS.md](AGENTS.md)，Codex 可复用提示词在 [`.codex/prompts/`](.codex/prompts/)。
+为 AI 编写工具准备的内容规范在 [AGENTS.md](AGENTS.md)，按任务主动读取的 Codex 工作流在 [`.codex/workflows/`](.codex/workflows/)。Dashi 默认用于形成可审阅的视觉与叙事方向，最终以原生 Fumadocs 页面实现；只有明确需要演示成品时才发布独立 deck。
 
 ## 本地开发
 

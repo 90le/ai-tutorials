@@ -35,6 +35,17 @@ difficulty: 入门 # 可选：入门、进阶、专家
 
 所有页面必须兼容静态导出：运行时不得依赖私有服务、Cookie、登录态或服务器 API。需要实时数据、登录或在线 AI 问答时，先单独设计可部署的后端方案。
 
+## Agent 工作流
+
+任务级指南位于 `.codex/workflows/`。开始工作时按需要读取相应文件：
+
+- 新文章：`new-tutorial.md`
+- 页面结构、交互或视觉增强：`enhance-document-page.md`
+- 位图封面、插图或图片编辑：`generate-visual-asset.md`
+- 用 Dashi 探索演示叙事与视觉方向，或明确交付独立 deck：`explore-presentation-direction.md`
+
+这些文件是项目内的可共享工作流，不是自动注册的 Codex Slash Command；它们补充本文件，不替代本文件。
+
 ## 写作标准
 
 - 开头说明适合谁、前置条件和完成后的成果。
@@ -43,7 +54,7 @@ difficulty: 入门 # 可选：入门、进阶、专家
 - 使用相对 Markdown 链接或以 `/docs/` 开头的站内链接；不要硬编码 GitHub Pages 域名。
 - 图片放进 `public/images/<topic>/`，并写出有意义的替代文本。需要新的位图封面、插图、概念图或图片编辑时，使用 ImageGen；不要引用 Codex 临时生成目录。
 - 优先延续现有 Fumadocs 设计语言和相邻页面的视觉模式。用户要求视觉探索、重设计或体验审查时，使用 Product Design 工作流；需要新体验时先做出可审阅的方向，再实现为站点组件。
-- Dashi PPT 用于长教程的配套演示，而不是替代文档站。发布的静态 HTML deck 放在 `public/decks/<deck-slug>/`，并从对应文档页链接；只有用户明确要求时才同时保存或交付 PPTX/PDF。
+- Dashi PPT 默认用于探索教程的叙事节奏、信息密度与视觉方向；将提炼出的规则实现为原生 Fumadocs/React 页面，不要复制 Dashi HTML/CSS，也不要用 iframe 把 deck 嵌入文档站。只有用户明确需要演示交付时，才把独立静态 HTML deck 发布到 `public/decks/<deck-slug>/` 并从文档页链接；PPTX/PDF 同样需要用户明确要求。
 
 ## 验证
 
