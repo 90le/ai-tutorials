@@ -7,16 +7,42 @@ export default function HomePage() {
   return (
     <div className="tutorial-home">
       <section className="tutorial-hero">
-        <p className="eyebrow">公开 AI 知识库</p>
-        <h1>把 AI 用到<br />真实工作里。</h1>
-        <p className="tutorial-hero-summary">
-          系统学习 AI 工具、工作流与实践方法。每一篇教程都可独立阅读，也能沿着合集逐步完成学习。
-        </p>
-        <div className="tutorial-hero-actions">
-          <Link href="/docs/start-here" className="tutorial-primary-action">
-            从这里开始 <ArrowRight size={18} />
+        <div className="tutorial-hero-copy">
+          <p className="eyebrow">公开 AI 知识库</p>
+          <h1>把 AI 用到<br />真实工作里。</h1>
+          <p className="tutorial-hero-summary">
+            系统学习 AI 工具、工作流与实践方法。每一篇教程都可独立阅读，也能沿着合集逐步完成学习。
+          </p>
+          <div className="tutorial-hero-actions">
+            <Link href="/docs/start-here" className="tutorial-primary-action">
+              从这里开始 <ArrowRight size={18} />
+            </Link>
+            <Link href="/docs" className="tutorial-secondary-action">浏览全部文档</Link>
+          </div>
+        </div>
+        <div className="tutorial-learning-stage" aria-label="学习路径预览">
+          <p className="tutorial-stage-label">你的学习路径</p>
+          <div className="tutorial-stage-track" aria-hidden="true" />
+          <Link href="/docs/start-here" className="tutorial-stage-card tutorial-stage-card-start">
+            <span>01 · 起步</span>
+            <strong>选一个真实任务</strong>
+            <small>从这里开始</small>
           </Link>
-          <Link href="/docs" className="tutorial-secondary-action">浏览全部文档</Link>
+          <Link href="/docs/tools" className="tutorial-stage-card tutorial-stage-card-tool">
+            <span>02 · 工具</span>
+            <strong>找到顺手的能力</strong>
+            <small>工具教程</small>
+          </Link>
+          <Link href="/docs/playbooks" className="tutorial-stage-card tutorial-stage-card-playbook">
+            <span>03 · 实践</span>
+            <strong>完成一次工作流</strong>
+            <small>场景打法</small>
+          </Link>
+          <Link href="/docs/reference" className="tutorial-stage-card tutorial-stage-card-reference">
+            <span>04 · 沉淀</span>
+            <strong>留下可复用的方法</strong>
+            <small>参考资料</small>
+          </Link>
         </div>
       </section>
 
