@@ -15,7 +15,6 @@ import {
   Workflow,
   Wrench,
 } from 'lucide-react';
-import { AiEngineShowcase } from '@/components/ai-engine-showcase';
 import { AuthorContactCard } from '@/components/author-contact-card';
 import { HomeMotionController } from '@/components/home-motion-controller';
 import { KineticKnowledgeScene } from '@/components/kinetic-knowledge-scene';
@@ -116,13 +115,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="engine-theatre" aria-labelledby="engine-theatre-title">
-        <header className="engine-theatre-head"><p>04 / OPTIONAL LAB</p><h2 id="engine-theatre-title">需要时，<br />再启动实时实验。</h2><span>选择一种方式后才加载对应引擎。未选择时，页面保持轻量。</span></header>
-        <AiEngineShowcase />
-      </section>
-
       <section className="method-journey" aria-labelledby="method-journey-title">
-        <div className="method-copy"><p>05 / FROM SIGNAL TO SYSTEM</p><h2 id="method-journey-title">把新鲜感，<br />变成生产力。</h2><span>从理解、实践到形成稳定系统。</span></div>
+        <div className="method-copy"><p>04 / FROM SIGNAL TO SYSTEM</p><h2 id="method-journey-title">把新鲜感，<br />变成生产力。</h2><span>从理解、实践到形成稳定系统。</span></div>
         <div className="method-track">
           <div><small>01 / DISCOVER</small><BrainCircuit /><h3>看见可能</h3><p>理解 AI 能在哪些环节提供杠杆。</p></div>
           <div><small>02 / PRACTICE</small><Sparkles /><h3>完成一次</h3><p>在真实任务里做出可以使用的结果。</p></div>
@@ -133,7 +127,7 @@ export default function HomePage() {
       <AuthorContactCard />
 
       <section className="field-notes" aria-labelledby="field-notes-title">
-        <header><p>06 / FIELD NOTES</p><h2 id="field-notes-title">正在发生</h2><Link href="/docs" prefetch={false}>浏览全部 <ArrowRight size={16} /></Link></header>
+        <header><p>05 / FIELD NOTES</p><h2 id="field-notes-title">正在发生</h2><Link href="/docs" prefetch={false}>浏览全部 <ArrowRight size={16} /></Link></header>
         <div>{fieldNotes.map(([meta, title, href]) => <Link href={href} prefetch={false} key={meta}><small>{meta}</small><h3>{title}</h3><ArrowUpRight /></Link>)}</div>
       </section>
 
