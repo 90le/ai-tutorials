@@ -11,6 +11,7 @@
 /build
 /output
 /.worktrees/
+/.superpowers/
 *.tsbuildinfo
 
 # misc
