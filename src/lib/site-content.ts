@@ -3,7 +3,7 @@ export const authorContacts = [
     id: 'wechat',
     label: '添加微信',
     handle: 'binStudy',
-    imageSrc: '/images/site/wechat-bin-study.jpg',
+    imageSrc: '/images/site/wechat-bin-study.png',
     imageAlt: '丘彬彬的微信二维码，微信号 binStudy',
   },
   {
