@@ -11,6 +11,9 @@ difficulty: 进阶
 contentType: reference
 ---
 
+import { showcaseColumns, showcaseRows, showcaseScenarios } from '@/components/docs/experience-lab/showcase-data';
+import { taskContractType } from '@/components/docs/experience-lab/showcase-types';
+
 这座展厅用“把零散 AI 调研材料变成可复核交付”作为统一示例。它同时是作者参考、读者示范和站点视觉回归页。
 
 <KeyTakeaways title="先理解三条使用原则">
@@ -95,12 +98,7 @@ status: ready
   </CodeBlockTab>
 </CodeBlockTabs>
 
-<TypeTable type={{
-  goal: { description: '最终要交付的结果', type: 'string', required: true },
-  audience: { description: '结果的实际使用者', type: 'string', required: true },
-  evidence: { description: '允许引用的事实边界', type: 'string[]', required: true },
-  constraints: { description: '不可执行或不可推断的事项', type: 'string[]' },
-}} />
+<TypeTable type={taskContractType} />
 
 ## 任务与判断组件
 
@@ -113,11 +111,7 @@ status: ready
 
 <ScenarioTabs
   label="材料转化阶段"
-  items={[
-    { label: '原始材料', title: '保留上下文', content: '记录原句、来源与时间，不提前合并冲突。' },
-    { label: '证据卡', title: '主张与依据对应', content: '为每个主张保留证据、限制和可信状态。' },
-    { label: '交付稿', title: '面向真实读者', content: '按决策顺序组织内容，同时留下回查入口。' },
-  ]}
+  items={showcaseScenarios}
 />
 
 <MediaFrame
@@ -162,15 +156,8 @@ $$Q = 0.5R + 0.3C + 0.2F$$
   description="教学示意数据，可全屏查看并下载 CSV"
   status="illustrative"
   source={{ label: '实验室教学设计 · 2026-07-16' }}
-  columns={[
-    { key: 'claim', label: '主张' },
-    { key: 'evidence', label: '证据' },
-    { key: 'status', label: '状态' },
-  ]}
-  rows={[
-    { claim: '保留原始上下文', evidence: '材料卡与原文位置', status: '已核验' },
-    { claim: '标记推断', evidence: '证据矩阵状态列', status: '待复核' },
-  ]}
+  columns={showcaseColumns}
+  rows={showcaseRows}
 />
 
 <DownloadCard
