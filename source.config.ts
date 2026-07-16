@@ -1,6 +1,8 @@
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
 import { z } from 'zod';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const publishedDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'published 必须使用 YYYY-MM-DD 格式');
 
@@ -27,6 +29,7 @@ export const docs = defineDocs({
 
 export default defineConfig({
   mdxOptions: {
-    // MDX options
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
   },
 });

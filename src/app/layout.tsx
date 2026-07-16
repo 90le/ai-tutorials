@@ -3,6 +3,7 @@ import { Provider } from '@/components/provider';
 import { siteConfig } from '@/config/site';
 import type { Metadata } from 'next';
 import './global.css';
+import 'katex/dist/katex.min.css';
 
 const inter = Inter({
   subsets: ['latin'],

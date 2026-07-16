@@ -881,6 +881,58 @@ html:has(.docs-shell) {
   .docs-lightbox { display: none !important; }
 }
 
+/* Video, formulas, tables and downloadable resources */
+.docs-article-video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #0d0b11; object-fit: contain; }
+.docs-video-fallback { display: flex; flex-wrap: wrap; gap: 0.65rem 1rem; align-items: center; padding: 0.75rem 1rem; border-top: 1px solid var(--brand-line); color: var(--brand-muted); font-size: 0.68rem; }
+.docs-video-fallback a { color: var(--brand-violet); font-weight: 750; text-underline-offset: 0.2rem; }
+
+.docs-formula-block { margin-block: 2.5rem; border: 1px solid var(--brand-line); border-radius: 0.9rem; background: color-mix(in srgb, var(--brand-surface) 95%, var(--brand-bg)); overflow: hidden; }
+.docs-formula-block > figcaption { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 0.85rem 0.75rem 1rem; border-bottom: 1px solid var(--brand-line); }
+.docs-formula-block > figcaption strong { font-size: 0.8rem; }
+.docs-formula-content { padding: 1.5rem; overflow-x: auto; color: var(--brand-ink); text-align: center; }
+.docs-formula-content .katex-display { margin: 0; }
+.docs-formula-block dl { display: grid; margin: 0; padding: 0.8rem 1rem; border-top: 1px solid var(--brand-line); }
+.docs-formula-block dl > div { display: grid; grid-template-columns: minmax(3rem, auto) 1fr; gap: 0.75rem; padding-block: 0.35rem; }
+.docs-formula-block dt { color: var(--brand-violet); font: 750 0.75rem/1.5 ui-monospace, monospace; }
+.docs-formula-block dd { margin: 0; color: var(--brand-muted); font-size: 0.72rem; line-height: 1.5; }
+
+.docs-data-table-scroll { max-width: 100%; overflow: auto; outline: none; scrollbar-gutter: stable; }
+.docs-data-table-scroll:focus-visible { box-shadow: inset 0 0 0 2px var(--brand-focus); }
+.docs-data-table table { width: 100%; min-width: 36rem; margin: 0; border: 0; border-collapse: separate; border-spacing: 0; border-radius: 0; background: transparent; }
+.docs-data-table caption { padding: 0.6rem 1rem; color: var(--brand-muted); font-size: 0.65rem; text-align: left; }
+.docs-data-table th { position: sticky; z-index: 1; top: 0; background: color-mix(in srgb, var(--brand-violet) 8%, var(--brand-surface)); }
+.docs-data-table :is(th, td)[data-align='number'] { font-variant-numeric: tabular-nums; text-align: right; }
+.docs-data-table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--brand-bg) 45%, transparent); }
+.docs-data-table-dialog { width: min(86vw, 76rem); padding: 1rem; }
+.docs-data-table-dialog .docs-data-table-scroll { max-height: 72vh; }
+
+.docs-download-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem; align-items: center; margin-block: 2rem; padding: 1rem; border: 1px solid var(--brand-line); border-radius: 0.9rem; background: linear-gradient(135deg, color-mix(in srgb, var(--brand-violet) 6%, var(--brand-surface)), var(--brand-surface)); }
+.docs-download-card > svg { width: 1.4rem; height: 1.4rem; color: var(--brand-violet); }
+.docs-download-card > div { display: grid; min-width: 0; gap: 0.25rem; }
+.docs-download-card strong { font-size: 0.82rem; }
+.docs-download-card p { margin: 0; color: var(--brand-muted); font-size: 0.72rem; line-height: 1.55; }
+.docs-download-card span { color: var(--brand-muted); font: 650 0.58rem/1.4 ui-monospace, monospace; }
+.docs-download-card > a { padding: 0.58rem 0.75rem; border: 1px solid var(--brand-violet); border-radius: 0.55rem; color: var(--brand-violet); font-size: 0.68rem; font-weight: 750; text-decoration: none; }
+.docs-download-card > a:hover,
+.docs-download-card > a:focus-visible { background: var(--brand-violet); color: #fff; }
+
+@media (max-width: 42rem) {
+  .docs-video-fallback { align-items: flex-start; flex-direction: column; }
+  .docs-formula-content { padding: 1rem; text-align: left; }
+  .docs-download-card { grid-template-columns: auto minmax(0, 1fr); }
+  .docs-download-card > a { grid-column: 1 / -1; text-align: center; }
+}
+
+@media print {
+  .docs-article-video video { display: none; }
+  .docs-video-fallback { display: block; }
+  .docs-formula-block,
+  .docs-data-table,
+  .docs-download-card { break-inside: avoid; box-shadow: none; }
+  .docs-data-table-scroll { overflow: visible; }
+  .docs-data-table table { min-width: 0; }
+}
+
 /* Diagram viewer and code display controls */
 .docs-mermaid-tools { display: inline-flex; align-items: center; gap: 0.5rem; }
 .docs-viewer-trigger,

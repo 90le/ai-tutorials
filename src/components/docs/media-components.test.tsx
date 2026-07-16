@@ -4,6 +4,10 @@ import { ArticleImage } from './article-image';
 import { ImageCompare } from './image-compare';
 import { ImageGallery } from './image-gallery';
 import { MediaFrame } from './media-frame';
+import { ArticleVideo } from './article-video';
+import { DataTable } from './data-table';
+import { DownloadCard } from './download-card';
+import { FormulaBlock } from './formula-block';
 
 const images = [
   { src: '/images/example-one.png', alt: '任务拆解前的界面', width: 1200, height: 800, caption: '拆解前' },
@@ -59,5 +63,60 @@ describe('article media components', () => {
     expect(html).toContain('aria-label="调整优化前后对比位置"');
     expect(html).toContain('任务拆解前的界面');
     expect(html).toContain('任务拆解后的界面');
+  });
+
+  it('renders video with poster, captions and transcript without autoplay', () => {
+    const html = renderToStaticMarkup(
+      <ArticleVideo
+        title="研究流程演示"
+        src="/videos/research.mp4"
+        poster="/images/research-poster.jpg"
+        transcriptHref="/transcripts/research.txt"
+        tracks={[{ src: '/captions/research-zh.vtt', srcLang: 'zh-CN', label: '中文字幕' }]}
+      />,
+    );
+
+    expect(html).toContain('<video');
+    expect(html).toContain('poster="/images/research-poster.jpg"');
+    expect(html).toContain('<track');
+    expect(html).toContain('文字稿');
+    expect(html).not.toContain('autoplay');
+  });
+
+  it('renders copyable formula source and variable explanations', () => {
+    const html = renderToStaticMarkup(
+      <FormulaBlock title="效率增益" latex="G=(T_b-T_a)/T_b" variables={[{ symbol: 'G', meaning: '效率增益' }]}>
+        <span>G = (T before - T after) / T before</span>
+      </FormulaBlock>,
+    );
+
+    expect(html).toContain('data-latex="G=(T_b-T_a)/T_b"');
+    expect(html).toContain('aria-label="复制 LaTeX"');
+    expect(html).toContain('效率增益');
+  });
+
+  it('renders table headers, caption and an accessible data fallback', () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        title="来源对比"
+        columns={[{ key: 'source', label: '来源' }, { key: 'score', label: '评分', align: 'number' }]}
+        rows={[{ source: '官方文档', score: 95 }]}
+      />,
+    );
+
+    expect(html).toContain('<caption>来源对比</caption>');
+    expect(html).toContain('scope="col"');
+    expect(html).toContain('data-align="number"');
+  });
+
+  it('renders static attachment metadata and a direct download link', () => {
+    const html = renderToStaticMarkup(
+      <DownloadCard title="研究简报模板" href="/downloads/research-brief.md" format="Markdown" size="12 KB" updated="2026-07-16" />,
+    );
+
+    expect(html).toContain('download=""');
+    expect(html).toContain('Markdown');
+    expect(html).toContain('12 KB');
+    expect(html).toContain('2026-07-16');
   });
 });

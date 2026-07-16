@@ -10,6 +10,10 @@ import { ArticleImage } from '@/components/docs/article-image';
 import { ImageGallery } from '@/components/docs/image-gallery';
 import { ImageCompare } from '@/components/docs/image-compare';
 import { MediaFrame } from '@/components/docs/media-frame';
+import { ArticleVideo } from '@/components/docs/article-video';
+import { DataTable } from '@/components/docs/data-table';
+import { DownloadCard } from '@/components/docs/download-card';
+import { FormulaBlock } from '@/components/docs/formula-block';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -24,6 +28,10 @@ export function getMDXComponents(components?: MDXComponents) {
     ArticleImage,
     ImageGallery,
     ImageCompare,
+    ArticleVideo,
+    FormulaBlock,
+    DataTable,
+    DownloadCard,
     ...components,
   } satisfies MDXComponents;
 }
