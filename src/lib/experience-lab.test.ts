@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -72,5 +72,21 @@ describe('rendering and interaction lab', () => {
     for (const file of imageFiles) {
       expect(existsSync(join(root, 'public/images/experience-lab', file)), file).toBe(true);
     }
+  });
+
+  it('publishes an accessible, lightweight local video package', () => {
+    const videoDir = join(root, 'public/videos/experience-lab');
+    const videoPath = join(videoDir, 'knowledge-flow.mp4');
+    const posterPath = join(videoDir, 'knowledge-flow-poster.jpg');
+    const vttPath = join(videoDir, 'knowledge-flow.zh-CN.vtt');
+    const transcriptPath = join(root, 'public/downloads/experience-lab/knowledge-flow-transcript.md');
+
+    for (const path of [videoPath, posterPath, vttPath, transcriptPath]) {
+      expect(existsSync(path), path).toBe(true);
+    }
+
+    if (!existsSync(videoPath) || !existsSync(vttPath)) return;
+    expect(statSync(videoPath).size).toBeLessThan(3 * 1024 * 1024);
+    expect(readFileSync(vttPath, 'utf8')).toMatch(/^WEBVTT/);
   });
 });
