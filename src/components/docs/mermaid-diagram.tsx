@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
+import { DiagramViewer } from './diagram-viewer';
 
 interface MermaidDiagramProps {
   title: string;
@@ -13,6 +14,7 @@ export function MermaidDiagram({ title, description, chart }: MermaidDiagramProp
   const diagramId = `docs-mermaid-${reactId.replaceAll(':', '')}`;
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState(false);
+  const [svgMarkup, setSvgMarkup] = useState('');
 
   useEffect(() => {
     const container = containerRef.current;
@@ -51,14 +53,16 @@ export function MermaidDiagram({ title, description, chart }: MermaidDiagramProp
         const responsiveChart = narrowScreen.matches
           ? chart.replace('flowchart LR', 'flowchart TD').replaceAll('direction TB', 'direction LR')
           : chart;
-        const { svg, bindFunctions } = await mermaid.render(`${diagramId}-${version}`, responsiveChart);
+        const { svg } = await mermaid.render(`${diagramId}-${version}`, responsiveChart);
         if (disposed || version !== renderVersion) return;
 
-        container.innerHTML = svg;
-        bindFunctions?.(container);
+        setSvgMarkup(svg);
         setError(false);
       } catch {
-        if (!disposed && version === renderVersion) setError(true);
+        if (!disposed && version === renderVersion) {
+          setSvgMarkup('');
+          setError(true);
+        }
       }
     };
 
@@ -79,13 +83,30 @@ export function MermaidDiagram({ title, description, chart }: MermaidDiagramProp
     <figure className="docs-mermaid">
       <figcaption>
         <span><strong>{title}</strong>{description ? <small>{description}</small> : null}</span>
-        <span>MERMAID / LIVE DIAGRAM</span>
-      </figcaption>
-      <div className="docs-mermaid-canvas" ref={containerRef} role="img" aria-label={`${title}：${description ?? '流程图'}`}>
-        <span className="docs-mermaid-loading" aria-live="polite">
-          {error ? '图示暂时无法绘制，请查看下方源码。' : '正在绘制图示…'}
+        <span className="docs-mermaid-tools">
+          <span>MERMAID / LIVE DIAGRAM</span>
+          {svgMarkup ? (
+            <DiagramViewer title={title}>
+              <div className="docs-viewer-svg" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
+            </DiagramViewer>
+          ) : null}
         </span>
-      </div>
+      </figcaption>
+      {svgMarkup ? (
+        <div
+          className="docs-mermaid-canvas"
+          ref={containerRef}
+          role="img"
+          aria-label={`${title}：${description ?? '流程图'}`}
+          dangerouslySetInnerHTML={{ __html: svgMarkup }}
+        />
+      ) : (
+        <div className="docs-mermaid-canvas" ref={containerRef} role="img" aria-label={`${title}：${description ?? '流程图'}`}>
+          <span className="docs-mermaid-loading" aria-live="polite">
+            {error ? '图示暂时无法绘制，请查看下方源码。' : '正在绘制图示…'}
+          </span>
+        </div>
+      )}
       <details className="docs-mermaid-source">
         <summary>查看图示源码</summary>
         <pre><code>{chart}</code></pre>

@@ -755,6 +755,80 @@ html:has(.docs-shell) {
   .docs-source-mix-values li { grid-template-columns: 1fr auto; border-top: 1px solid var(--brand-line); border-left: 0; }
 }
 
+/* Diagram viewer and code display controls */
+.docs-mermaid-tools { display: inline-flex; align-items: center; gap: 0.5rem; }
+.docs-viewer-trigger,
+.docs-viewer-toolbar button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--brand-line);
+  border-radius: 0.5rem;
+  background: var(--brand-surface);
+  color: var(--brand-muted);
+  cursor: pointer;
+}
+.docs-viewer-trigger:hover,
+.docs-viewer-trigger:focus-visible,
+.docs-viewer-toolbar button:hover,
+.docs-viewer-toolbar button:focus-visible { border-color: var(--brand-violet); color: var(--brand-violet); }
+.docs-viewer-trigger svg,
+.docs-viewer-toolbar svg { width: 0.9rem; height: 0.9rem; }
+.docs-viewer-dialog {
+  width: min(96vw, 88rem);
+  height: min(94vh, 62rem);
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 1px solid var(--brand-line);
+  border-radius: 1rem;
+  background: var(--brand-surface);
+  color: var(--brand-ink);
+  box-shadow: 0 2rem 7rem rgb(10 8 15 / 35%);
+}
+.docs-viewer-dialog::backdrop { background: rgb(10 8 15 / 70%); backdrop-filter: blur(8px); }
+.docs-viewer-panel { display: grid; height: 100%; grid-template-rows: auto minmax(0, 1fr); }
+.docs-viewer-panel > header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--brand-line); }
+.docs-viewer-panel > header > strong { overflow: hidden; font-size: 0.8rem; text-overflow: ellipsis; white-space: nowrap; }
+.docs-viewer-toolbar { display: inline-flex; align-items: center; gap: 0.35rem; }
+.docs-viewer-toolbar > span { min-width: 3rem; color: var(--brand-muted); font: 700 0.62rem/1 ui-monospace, monospace; text-align: center; }
+.docs-viewer-stage { min-width: 0; min-height: 0; padding: 1.5rem; overflow: auto; background: color-mix(in srgb, var(--brand-bg) 92%, var(--brand-surface)); }
+.docs-viewer-content { display: grid; min-width: max-content; min-height: 100%; place-items: center; transform-origin: center; transition: transform 120ms ease; }
+.docs-viewer-svg { display: grid; min-width: min(70rem, 85vw); place-items: center; }
+.docs-viewer-svg svg { display: block; width: 100%; height: auto; max-height: 76vh; }
+
+.docs-code-status { position: fixed; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.docs-code-tools { position: absolute; top: 0.35rem; right: 3.25rem; display: inline-flex; gap: 0.3rem; }
+.docs-page-content figure.shiki { position: relative; }
+.docs-code-tools button {
+  min-height: 2rem;
+  padding-inline: 0.55rem;
+  border: 1px solid var(--brand-line);
+  border-radius: 0.48rem;
+  background: color-mix(in srgb, var(--brand-surface) 92%, var(--brand-bg));
+  color: var(--brand-muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.docs-code-tools button:hover,
+.docs-code-tools button:focus-visible,
+.docs-code-tools button[aria-pressed='true'] { border-color: var(--brand-violet); color: var(--brand-violet); }
+.docs-page-content figure.shiki:not([data-expanded='true']) [role='region'] { max-height: 28rem; overflow: auto; }
+.docs-page-content figure.shiki [role='region'][data-wrap='true'] pre,
+.docs-page-content figure.shiki [role='region'][data-wrap='true'] code { white-space: pre-wrap !important; overflow-wrap: anywhere; }
+
+@media (max-width: 42rem) {
+  .docs-code-tools { position: static; width: 100%; padding: 0.5rem 0.75rem; border-top: 1px solid var(--brand-line); }
+  .docs-code-tools button { flex: 1; }
+  .docs-viewer-dialog { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
+  .docs-viewer-panel > header { align-items: flex-start; }
+  .docs-viewer-panel > header > strong { padding-top: 0.55rem; }
+  .docs-viewer-toolbar { flex-wrap: wrap; justify-content: flex-end; }
+  .docs-viewer-stage { padding: 0.75rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .docs-shell *, .docs-shell *::before, .docs-shell *::after { scroll-behavior: auto !important; transition-duration: 1ms !important; }
 }

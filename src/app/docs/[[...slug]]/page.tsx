@@ -16,6 +16,7 @@ import { getKnowledgeTrail } from '@/lib/docs-navigation';
 import { getArticleNeighbors } from '@/lib/docs-navigation';
 import { DocsReadingControls } from '@/components/docs/docs-reading-controls';
 import { ArticlePager } from '@/components/docs/article-pager';
+import { CodeBlockEnhancer } from '@/components/docs/code-block-enhancer';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -41,6 +42,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       tableOfContent={{ header: <DocsTocHeader /> }}
     >
       <DocsReadingControls />
+      <CodeBlockEnhancer />
       <DocsArticleHeader
         title={page.data.title}
         description={page.data.description}
