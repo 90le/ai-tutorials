@@ -8,6 +8,9 @@ const showcasePath = join(root, 'content/docs/reference/experience-lab/complete-
 const referenceMetaPath = join(root, 'content/docs/reference/meta.json');
 const labMetaPath = join(root, 'content/docs/reference/experience-lab/meta.json');
 const matrixPath = join(root, 'docs/rendering-capability-matrix.md');
+const workbenchesPath = join(root, 'content/docs/reference/experience-lab/ai-workbenches.mdx');
+const canvasPath = join(root, 'content/docs/reference/experience-lab/infinite-canvas.mdx');
+const qualityPath = join(root, 'content/docs/reference/experience-lab/quality-matrix.mdx');
 
 const requiredMarkers = [
   '<Callout',
@@ -38,6 +41,9 @@ describe('rendering and interaction lab', () => {
     expect(existsSync(showcasePath)).toBe(true);
     expect(existsSync(labMetaPath)).toBe(true);
     expect(existsSync(matrixPath)).toBe(true);
+    expect(existsSync(workbenchesPath)).toBe(true);
+    expect(existsSync(canvasPath)).toBe(true);
+    expect(existsSync(qualityPath)).toBe(true);
 
     const referenceMeta = JSON.parse(readFileSync(referenceMetaPath, 'utf8')) as { pages: string[] };
     const labMeta = JSON.parse(readFileSync(labMetaPath, 'utf8')) as { title: string; pages: string[] };
@@ -45,8 +51,18 @@ describe('rendering and interaction lab', () => {
     expect(referenceMeta.pages).toContain('experience-lab');
     expect(labMeta).toEqual({
       title: '渲染与交互实验室',
-      pages: ['index', 'complete-showcase'],
+      pages: ['index', 'complete-showcase', 'ai-workbenches', 'infinite-canvas', 'quality-matrix'],
     });
+  });
+
+  it('publishes all twelve original AI workbench components', () => {
+    const workbenches = readFileSync(workbenchesPath, 'utf8');
+    const components = [
+      'AgentFlowStudio', 'PromptDiffLab', 'ContextBudgetComposer', 'RetrievalExplorer',
+      'ToolCallTrace', 'MultiAgentOrchestration', 'ModelTradeoffMatrix', 'CostLatencySimulator',
+      'EvidenceNetwork', 'SemanticSpace3D', 'StreamingResponseTimeline', 'FailureStateGallery',
+    ];
+    for (const component of components) expect(workbenches).toContain(`<${component} />`);
   });
 
   it('keeps every supported rendering primitive visible in the showcase source', () => {

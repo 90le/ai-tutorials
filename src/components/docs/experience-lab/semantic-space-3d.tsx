@@ -14,7 +14,10 @@ export function SemanticSpace3D() {
     let disposed = false;
     let frame = 0;
     let teardown = () => {};
-    void import('three').then((THREE) => {
+    const intersection = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      intersection.disconnect();
+      void import('three').then((THREE) => {
       if (disposed) return;
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
@@ -37,9 +40,11 @@ export function SemanticSpace3D() {
       const observer = new ResizeObserver(resize); observer.observe(mount); resize();
       const animate = () => { if (document.documentElement.dataset.motionLevel !== 'off') group.rotation.y += 0.0025; renderer.render(scene, camera); frame = requestAnimationFrame(animate); };
       animate();
-      teardown = () => { cancelAnimationFrame(frame); observer.disconnect(); group.children.forEach((child) => { const mesh = child as Mesh; mesh.geometry.dispose(); (mesh.material as Material).dispose(); }); renderer.dispose(); };
-    });
-    return () => { disposed = true; teardown(); };
+        teardown = () => { cancelAnimationFrame(frame); observer.disconnect(); group.children.forEach((child) => { const mesh = child as Mesh; mesh.geometry.dispose(); (mesh.material as Material).dispose(); }); renderer.dispose(); };
+      });
+    }, { rootMargin: '180px' });
+    intersection.observe(mount);
+    return () => { disposed = true; intersection.disconnect(); teardown(); };
   }, []);
 
   return <LabShell number="10" title="语义空间 3D" description="拖动筛选语义簇，观察知识片段在向量空间中的邻近关系。"><SegmentedControl label="选择语义簇" options={['全部', '工具', '方法', '案例']} value={cluster} onChange={setCluster} /><div ref={mountRef} className="docs-semantic-space" role="img" aria-label={`${cluster}语义片段的三维空间示意`}><span>3D 语义空间接近视口后加载</span></div><p>当前视图：{cluster} · 42 个教学示意向量点</p></LabShell>;
