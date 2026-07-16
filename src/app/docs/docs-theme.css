@@ -473,11 +473,9 @@ html:has(.docs-shell) {
   box-shadow: 0 1rem 2.8rem rgb(23 19 26 / 7%);
 }
 .docs-page-content figure.shiki figcaption {
-  min-height: 2.7rem;
-  padding: 0.78rem 5.4rem 0.7rem 1rem;
-  border-bottom: 1px solid var(--brand-line);
+  min-width: 0;
+  padding: 0;
   color: var(--brand-muted);
-  background: color-mix(in srgb, var(--brand-ink) 3%, var(--brand-surface));
   font: 700 0.68rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: 0.02em;
 }
@@ -1183,30 +1181,32 @@ html:has(.docs-shell) {
 .docs-viewer-svg { display: grid; min-width: min(70rem, 85vw); place-items: center; }
 .docs-viewer-svg svg { display: block; width: 100%; height: auto; max-height: none; }
 
-.docs-code-status { position: fixed; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.docs-code-tools { position: absolute; top: 0.35rem; right: 3.25rem; display: inline-flex; gap: 0.3rem; }
 .docs-page-content figure.shiki { position: relative; }
-.docs-code-tools button {
-  min-height: 2rem;
-  padding-inline: 0.55rem;
-  border: 1px solid var(--brand-line);
-  border-radius: 0.48rem;
-  background: color-mix(in srgb, var(--brand-surface) 92%, var(--brand-bg));
+.docs-page-content figure.shiki > div:first-child:has(> figcaption) { min-height: 3rem; height: auto; padding: 0.42rem 0.55rem 0.42rem 0.9rem; }
+.docs-code-toolbar { display: inline-flex; flex: none; align-items: center; gap: 0.25rem; margin: 0; }
+.docs-code-toolbar button {
+  min-height: 1.9rem;
+  padding-inline: 0.52rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
   color: var(--brand-muted);
   font-size: 0.62rem;
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
 }
-.docs-code-tools button:hover,
-.docs-code-tools button:focus-visible,
-.docs-code-tools button[aria-pressed='true'] { border-color: var(--brand-violet); color: var(--brand-violet); }
+.docs-code-toolbar button:hover,
+.docs-code-toolbar button:focus-visible,
+.docs-code-toolbar button[aria-pressed='true'] { background: color-mix(in srgb, var(--brand-violet) 9%, transparent); color: var(--brand-violet); }
 .docs-page-content figure.shiki:not([data-expanded='true']) [role='region'] { max-height: 28rem; overflow: auto; }
 .docs-page-content figure.shiki [role='region'][data-wrap='true'] pre,
 .docs-page-content figure.shiki [role='region'][data-wrap='true'] code { white-space: pre-wrap !important; overflow-wrap: anywhere; }
 
 @media (max-width: 42rem) {
-  .docs-code-tools { position: static; width: 100%; padding: 0.5rem 0.75rem; border-top: 1px solid var(--brand-line); }
-  .docs-code-tools button { flex: 1; }
+  .docs-page-content figure.shiki > div:first-child:has(> figcaption) { align-items: flex-start; flex-direction: column; padding-block: 0.65rem; }
+  .docs-code-toolbar { width: 100%; overflow-x: auto; }
+  .docs-code-toolbar button { flex: 0 0 auto; }
   .docs-viewer-dialog { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
   .docs-viewer-panel > header { align-items: flex-start; }
   .docs-viewer-panel > header > strong { padding-top: 0.55rem; }

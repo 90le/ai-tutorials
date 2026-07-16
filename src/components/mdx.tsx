@@ -19,6 +19,7 @@ import { DataTable } from '@/components/docs/data-table';
 import { DownloadCard } from '@/components/docs/download-card';
 import { FormulaBlock } from '@/components/docs/formula-block';
 import { ChartFrame } from '@/components/docs/chart-frame';
+import { DocsCodeBlock } from '@/components/docs/docs-code-block';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -30,6 +31,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Accordions,
     Accordion,
     TypeTable,
+    pre: DocsCodeBlock,
     PromptCard,
     SourcesDisclosure,
     KeyTakeaways,

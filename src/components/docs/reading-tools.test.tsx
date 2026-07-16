@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CodeBlockEnhancer } from './code-block-enhancer';
+import { DocsCodeBlock } from './docs-code-block';
 import { DiagramViewer } from './diagram-viewer';
 
 describe('advanced reading tools', () => {
@@ -14,10 +14,13 @@ describe('advanced reading tools', () => {
     expect(html).toContain('aria-label="关闭全屏查看"');
   });
 
-  it('provides a polite status channel for enhanced code blocks', () => {
-    const html = renderToStaticMarkup(<CodeBlockEnhancer />);
+  it('renders code tools as React-owned accessible controls', () => {
+    const html = renderToStaticMarkup(<DocsCodeBlock title="demo.ts"><code>const demo = true;</code></DocsCodeBlock>);
 
-    expect(html).toContain('aria-live="polite"');
-    expect(html).toContain('class="docs-code-status"');
+    expect(html).toContain('aria-label="代码显示选项"');
+    expect(html).toContain('自动换行');
+    expect(html).toContain('显示行号');
+    expect(html).toContain('展开全部');
+    expect(html).toContain('demo.ts');
   });
 });
