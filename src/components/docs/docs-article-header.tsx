@@ -9,8 +9,7 @@ import type { DocDifficulty } from '@/lib/docs-content';
 interface DocsArticleHeaderProps {
   title: string;
   description?: string;
-  category: string;
-  categoryHref: string;
+  trail: Array<{ name: string; href?: string }>;
   published: string;
   difficulty?: DocDifficulty;
   tags: string[];
@@ -21,8 +20,7 @@ interface DocsArticleHeaderProps {
 export function DocsArticleHeader({
   title,
   description,
-  category,
-  categoryHref,
+  trail,
   published,
   difficulty,
   tags,
@@ -31,11 +29,19 @@ export function DocsArticleHeader({
 }: DocsArticleHeaderProps) {
   return (
     <header className="docs-article-header">
-      <div className="docs-article-breadcrumb">
+      <nav className="docs-article-breadcrumb" aria-label="面包屑">
         <Link href="/docs/" prefetch={false}>文档首页</Link>
-        <span>/</span>
-        <Link href={categoryHref} prefetch={false}>{category}</Link>
-      </div>
+        {trail.map((item, index) => (
+          <span className="docs-article-breadcrumb-segment" key={`${item.name}-${index}`}>
+            <span aria-hidden="true">/</span>
+            {item.href && index < trail.length - 1 ? (
+              <Link href={item.href} prefetch={false}>{item.name}</Link>
+            ) : (
+              <span aria-current={index === trail.length - 1 ? 'page' : undefined}>{item.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
       <div className="docs-article-heading">
         <h1>{title}</h1>
         {description ? <p>{description}</p> : null}

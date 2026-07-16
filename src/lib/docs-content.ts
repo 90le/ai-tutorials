@@ -3,7 +3,7 @@ export const DOC_CATEGORY_LABELS = {
   tools: '工具教程',
   series: '系列课程',
   playbooks: '场景打法',
-  notes: '单篇笔记',
+  notes: '实验与笔记',
   reference: '参考资料',
 } as const;
 
@@ -44,6 +44,7 @@ export interface DocsIndex {
   articles: DocSummary[];
   recent: DocSummary[];
   featured: DocSummary[];
+  featuredCount: number;
   totalArticles: number;
   categoryCounts: Record<string, number>;
 }
@@ -102,6 +103,7 @@ export function buildDocsIndex(pages: DocPageInput[]): DocsIndex {
     articles,
     recent: articles,
     featured: (selected.length > 0 ? selected : articles).slice(0, 3),
+    featuredCount: selected.length,
     totalArticles: articles.length,
     categoryCounts,
   };

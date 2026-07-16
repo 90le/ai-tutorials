@@ -11,7 +11,11 @@ import { gitConfig } from '@/lib/shared';
 import { DocsPortal } from '@/components/docs/docs-portal';
 import { buildDocsIndex, type DocPageInput } from '@/lib/docs-content';
 import { DocsArticleHeader } from '@/components/docs/docs-article-header';
-import { DOC_CATEGORY_LABELS } from '@/lib/docs-content';
+import { DocsTocHeader } from '@/components/docs/docs-toc-header';
+import { getKnowledgeTrail } from '@/lib/docs-navigation';
+import { getArticleNeighbors } from '@/lib/docs-navigation';
+import { DocsReadingControls } from '@/components/docs/docs-reading-controls';
+import { ArticlePager } from '@/components/docs/article-pager';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -25,17 +29,22 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 
   const MDX = page.data.body;
   const markdownUrl = getPageMarkdownUrl(page).url;
-  const categorySlug = page.slugs[0] ?? 'docs';
-  const category = DOC_CATEGORY_LABELS[categorySlug as keyof typeof DOC_CATEGORY_LABELS] ?? 'AI 知识库';
   const githubUrl = `https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/docs/${page.path}`;
+  const trail = getKnowledgeTrail(page.url);
+  const neighbors = getArticleNeighbors(page.url);
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full} breadcrumb={{ enabled: false }}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      breadcrumb={{ enabled: false }}
+      tableOfContent={{ header: <DocsTocHeader /> }}
+    >
+      <DocsReadingControls />
       <DocsArticleHeader
         title={page.data.title}
         description={page.data.description}
-        category={category}
-        categoryHref={`/docs/${categorySlug}/`}
+        trail={trail.length > 0 ? trail : [{ name: 'AI 知识库' }, { name: page.data.title }]}
         published={page.data.published}
         difficulty={page.data.difficulty}
         tags={page.data.tags}
@@ -50,6 +59,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           })}
         />
       </DocsBody>
+      <ArticlePager {...neighbors} />
     </DocsPage>
   );
 }

@@ -18,7 +18,7 @@ const destinations: Array<{
   {
     index: '01',
     title: '快速开始',
-    description: '从第一个真实任务开始，建立提问、验证与改写习惯。',
+    description: '从第一个真实任务开始，建立任务简报、证据边界与人工验收。',
     href: '/docs/start-here/',
     icon: Compass,
   },

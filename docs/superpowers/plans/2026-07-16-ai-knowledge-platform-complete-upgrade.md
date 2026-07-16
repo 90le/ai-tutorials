@@ -532,4 +532,3 @@ Run: `git diff --check`
 Review: `git status --short` and `git diff --stat`.
 
 Commit explicit QA/fix paths with: `test: verify platform upgrade`
-

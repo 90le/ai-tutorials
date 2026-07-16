@@ -14,9 +14,9 @@ export function DocsPortal({ index }: { index: DocsIndex }) {
           <p>面向创作者与实践者的 AI 工程知识库：从模型、工具到真实工作流，把零散技巧连接成可复用的方法。</p>
           <DocsPortalSearch />
           <div className="docs-portal-stats" aria-label="知识库当前状态">
-            <span><strong>{index.totalArticles}</strong> 篇实践文章</span>
+            <span><strong>{index.featuredCount}</strong> 篇旗舰教程</span>
+            <span><strong>{index.totalArticles}</strong> 个公开内容页</span>
             <span><strong>{Object.keys(index.categoryCounts).length}</strong> 个已有内容方向</span>
-            <span>持续更新 · 公开可访问</span>
           </div>
         </header>
         <LearningDestinations />

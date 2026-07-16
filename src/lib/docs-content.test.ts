@@ -24,7 +24,7 @@ describe('normalizeDocPage', () => {
 
     expect(result).toMatchObject({
       category: 'notes',
-      categoryLabel: '单篇笔记',
+      categoryLabel: '实验与笔记',
       dateLabel: '2026.07.10',
       difficulty: '入门',
       url: '/docs/notes/example/',
@@ -75,6 +75,27 @@ describe('buildDocsIndex', () => {
     ]);
 
     expect(result.featured.map((item) => item.title)).toEqual(['Newer', 'Older']);
+    expect(result.featuredCount).toBe(0);
+  });
+
+  it('counts every featured article while limiting the portal feed to three', () => {
+    const pages = Array.from({ length: 6 }, (_, index) =>
+      page({
+        url: `/docs/notes/featured-${index}/`,
+        path: `notes/featured-${index}.mdx`,
+        slugs: ['notes', `featured-${index}`],
+        data: {
+          title: `Featured ${index}`,
+          published: `2026-07-${String(index + 1).padStart(2, '0')}`,
+          featured: true,
+        },
+      }),
+    );
+
+    const result = buildDocsIndex(pages);
+
+    expect(result.featuredCount).toBe(6);
+    expect(result.featured).toHaveLength(3);
   });
 
   it('counts real articles by category and ignores category landing pages', () => {
