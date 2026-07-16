@@ -764,17 +764,35 @@ html:has(.docs-shell) {
   box-shadow: 0 1.2rem 3.5rem rgb(23 19 26 / 7%);
   overflow: hidden;
 }
-.docs-media-frame[data-width='wide'] {
-  width: min(62rem, calc(100% + 10rem));
-  max-width: calc(100vw - 34rem);
-  margin-left: 50%;
-  translate: -50% 0;
-}
+.docs-media-frame[data-width='wide'],
 .docs-media-frame[data-width='full'] {
-  width: min(76rem, calc(100% + 20rem));
-  max-width: calc(100vw - 20rem);
-  margin-left: 50%;
-  translate: -50% 0;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  translate: none;
+}
+.docs-media-body,
+.docs-mermaid-canvas { min-width: 0; }
+.docs-mermaid-canvas svg { max-inline-size: 100%; }
+
+@media (min-width: 90rem) {
+  .docs-media-frame[data-width='wide'] {
+    width: min(52rem, calc(100% + 4rem));
+    max-width: none;
+    margin-left: 50%;
+    translate: -50% 0;
+  }
+  .docs-media-frame[data-width='full'] {
+    width: min(56rem, calc(100% + 6rem));
+    max-width: none;
+    margin-left: 50%;
+    translate: -50% 0;
+  }
+}
+
+@media (min-width: 112rem) {
+  .docs-media-frame[data-width='wide'] { width: min(62rem, calc(100% + 10rem)); }
+  .docs-media-frame[data-width='full'] { width: min(68rem, calc(100% + 16rem)); }
 }
 .docs-media-frame > figcaption {
   display: flex;
