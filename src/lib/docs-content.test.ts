@@ -36,6 +36,20 @@ describe('normalizeDocPage', () => {
       normalizeDocPage(page({ data: { title: 'Bad date', published: '2026/07/10' } })),
     ).toThrow('Invalid published date');
   });
+
+  it('preserves one of the five supported content types', () => {
+    const result = normalizeDocPage(page({
+      data: { title: 'Explainer', published: '2026-07-10', contentType: 'explainer' },
+    }));
+
+    expect(result.contentType).toBe('explainer');
+  });
+
+  it('rejects an unknown content type at runtime', () => {
+    expect(() => normalizeDocPage(page({
+      data: { title: 'Unknown', published: '2026-07-10', contentType: 'memo' } as never,
+    }))).toThrow('Invalid content type');
+  });
 });
 
 describe('buildDocsIndex', () => {

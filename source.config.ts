@@ -17,6 +17,7 @@ export const docs = defineDocs({
       difficulty: z.enum(['入门', '进阶', '专家']).optional(),
       featured: z.boolean().default(false),
       status: z.enum(['published', 'planned']).default('published'),
+      contentType: z.enum(['tutorial', 'explainer', 'case-study', 'reference', 'experiment']).optional(),
     }),
     postprocess: {
       includeProcessedMarkdown: true,

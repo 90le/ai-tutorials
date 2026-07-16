@@ -1,0 +1,86 @@
+---
+title: 富媒体阅读系统内部预览
+description: 用于验证图片、图表、公式、表格和附件控件的内部页面
+tags:
+  - 设计系统
+published: 2026-07-16
+contentType: experiment
+---
+
+此文件位于 `content/drafts/`，不进入公开构建。两张二维码只作为现有本地图片夹具，用于验证尺寸、灯箱、图片组与对比控件，不表达内容差异。
+
+<ArticleImage
+  title="单图灯箱与缩放"
+  description="内部控件测试"
+  status="illustrative"
+  source={{ label: '项目现有测试资产' }}
+  image={{ src: '/images/site/wechat-bin-study.png', alt: '用于灯箱测试的微信二维码图片', width: 216, height: 216 }}
+/>
+
+<ImageGallery
+  title="图片组切换"
+  description="内部控件测试"
+  status="illustrative"
+  images={[
+    { src: '/images/site/wechat-bin-study.png', alt: '第一张灯箱测试图片', width: 216, height: 216, caption: '个人微信测试图' },
+    { src: '/images/site/wechat-official-binbinshuo.jpg', alt: '第二张灯箱测试图片', width: 216, height: 216, caption: '公众号测试图' },
+  ]}
+/>
+
+<ImageCompare
+  title="前后对比滑杆"
+  description="只验证交互，不表示真实前后差异"
+  before={{ src: '/images/site/wechat-bin-study.png', alt: '对比左侧测试图', width: 216, height: 216, caption: '左侧' }}
+  after={{ src: '/images/site/wechat-official-binbinshuo.jpg', alt: '对比右侧测试图', width: 216, height: 216, caption: '右侧' }}
+/>
+
+<MermaidDiagram
+  title="富媒体组件关系"
+  description="流程图全屏与源码降级"
+  chart={`flowchart LR
+    A[文章] --> B[MediaFrame]
+    B --> C[图片]
+    B --> D[图表]
+    B --> E[公式与表格]`}
+/>
+
+<SourceMixChart />
+
+<FormulaBlock
+  title="效率增益"
+  latex="G = (T_b - T_a) / T_b"
+  variables={[
+    { symbol: 'G', meaning: '效率增益' },
+    { symbol: 'T_b', meaning: '使用前耗时' },
+    { symbol: 'T_a', meaning: '使用后耗时' },
+  ]}
+>
+
+$$G = \frac{T_b - T_a}{T_b}$$
+
+</FormulaBlock>
+
+<DataTable
+  title="富媒体能力矩阵"
+  description="示意数据"
+  status="illustrative"
+  columns={[
+    { key: 'type', label: '内容类型' },
+    { key: 'fallback', label: '静态降级' },
+    { key: 'touch', label: '触摸支持' },
+  ]}
+  rows={[
+    { type: '图片', fallback: '原图与图注', touch: '双击、拖动' },
+    { type: '图表', fallback: '关键值与数据表', touch: '点击、全屏' },
+    { type: '公式', fallback: 'MathML 与解释', touch: '横向滚动' },
+  ]}
+/>
+
+<DownloadCard
+  title="测试图片资产"
+  description="验证静态附件下载信息"
+  href="/images/site/wechat-bin-study.png"
+  format="PNG"
+  size="588 KB"
+  updated="2026-07-16"
+/>

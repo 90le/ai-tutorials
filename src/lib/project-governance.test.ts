@@ -46,7 +46,7 @@ describe('project governance', () => {
   it('provides one aggregate quality command and archives dated QA', () => {
     const packageJson = JSON.parse(read('package.json')) as { scripts?: Record<string, string> };
 
-    expect(packageJson.scripts?.check).toBe('npm test && npm run lint && npm run types:check && npm run build');
+    expect(packageJson.scripts?.check).toBe('npm run verify:content && npm test && npm run lint && npm run types:check && npm run build && npm run verify:output');
     expect(existsSync(resolve(root, 'design-qa.md'))).toBe(false);
     expect(existsSync(resolve(root, 'docs/qa/archive/2026-07-15-design-qa.md'))).toBe(true);
   });

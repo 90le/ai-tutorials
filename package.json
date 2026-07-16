@@ -14,11 +14,13 @@
   },
   "scripts": {
     "build": "next build",
-    "check": "npm test && npm run lint && npm run types:check && npm run build",
+    "check": "npm run verify:content && npm test && npm run lint && npm run types:check && npm run build && npm run verify:output",
     "dev": "next dev",
     "test": "vitest run",
     "start": "serve out",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
+    "verify:content": "node scripts/verify-content.mjs",
+    "verify:output": "node scripts/verify-static-output.mjs",
     "postinstall": "fumadocs-mdx",
     "lint": "eslint"
   },

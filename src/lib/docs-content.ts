@@ -9,6 +9,9 @@ export const DOC_CATEGORY_LABELS = {
 
 export type DocDifficulty = '入门' | '进阶' | '专家';
 export type DocStatus = 'published' | 'planned';
+export type DocContentType = 'tutorial' | 'explainer' | 'case-study' | 'reference' | 'experiment';
+
+const DOC_CONTENT_TYPES = new Set<DocContentType>(['tutorial', 'explainer', 'case-study', 'reference', 'experiment']);
 
 export interface DocPageInput {
   url: string;
@@ -22,6 +25,7 @@ export interface DocPageInput {
     difficulty?: DocDifficulty;
     featured?: boolean;
     status?: DocStatus;
+    contentType?: DocContentType;
   };
 }
 
@@ -38,6 +42,7 @@ export interface DocSummary {
   dateLabel: string;
   difficulty?: DocDifficulty;
   featured: boolean;
+  contentType?: DocContentType;
 }
 
 export interface DocsIndex {
@@ -67,6 +72,9 @@ export function normalizeDocPage(page: DocPageInput): DocSummary {
   if (!isValidPublishedDate(page.data.published)) {
     throw new Error(`Invalid published date for ${page.path}: ${page.data.published}`);
   }
+  if (page.data.contentType && !DOC_CONTENT_TYPES.has(page.data.contentType)) {
+    throw new Error(`Invalid content type for ${page.path}: ${page.data.contentType}`);
+  }
 
   const category = page.slugs[0] ?? 'docs';
   const categoryLabel = DOC_CATEGORY_LABELS[category as keyof typeof DOC_CATEGORY_LABELS] ?? 'AI 知识库';
@@ -84,6 +92,7 @@ export function normalizeDocPage(page: DocPageInput): DocSummary {
     dateLabel: page.data.published.replaceAll('-', '.'),
     difficulty: page.data.difficulty,
     featured: page.data.featured ?? false,
+    contentType: page.data.contentType,
   };
 }
 
