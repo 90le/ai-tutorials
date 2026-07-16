@@ -18,6 +18,24 @@ const scenarios = {
 
 type ScenarioName = keyof typeof scenarios;
 
+export function getSourceMixSeries(data: readonly { name: string; value: number }[], isDark: boolean) {
+  return {
+    type: 'pie' as const,
+    radius: ['42%', '64%'],
+    center: ['50%', '50%'],
+    avoidLabelOverlap: true,
+    itemStyle: { borderWidth: 4, borderColor: isDark ? '#17161c' : '#fffdf9', borderRadius: 8 },
+    label: {
+      color: isDark ? '#f5f1ec' : '#211d29',
+      formatter: '{b}\n{c}%',
+      fontSize: 12,
+      fontWeight: 700,
+    },
+    labelLine: { length: 10, length2: 8, lineStyle: { color: isDark ? '#78717f' : '#aaa2b1' } },
+    data,
+  };
+}
+
 function SourceMixVisual({ scenario }: { scenario: ScenarioName }) {
   const chartRef = useRef<HTMLDivElement>(null);
 
@@ -42,21 +60,7 @@ function SourceMixVisual({ scenario }: { scenario: ScenarioName }) {
             tooltip: { trigger: 'item', formatter: '{b}：{c}%' },
             color: ['#7558e8', '#b4dc60', '#ef8e62'],
             textStyle: { fontFamily: 'Inter, PingFang SC, Microsoft YaHei, sans-serif' },
-            series: [{
-              type: 'pie',
-              radius: ['48%', '72%'],
-              center: ['50%', '50%'],
-              avoidLabelOverlap: true,
-              itemStyle: { borderWidth: 4, borderColor: isDark ? '#17161c' : '#fffdf9', borderRadius: 8 },
-              label: {
-                color: isDark ? '#f5f1ec' : '#211d29',
-                formatter: '{b}\n{c}%',
-                fontSize: 12,
-                fontWeight: 700,
-              },
-              labelLine: { lineStyle: { color: isDark ? '#78717f' : '#aaa2b1' } },
-              data: scenarios[scenario],
-            }],
+            series: [getSourceMixSeries(scenarios[scenario], isDark)],
           }, true);
         };
 

@@ -942,7 +942,7 @@ html:has(.docs-shell) {
 .docs-media-tools { display: inline-flex; gap: 0.35rem; }
 .docs-media-tools button,
 .docs-media-tools a { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--brand-line); border-radius: 0.5rem; background: var(--brand-surface); color: var(--brand-muted); cursor: pointer; }
-.docs-media-tools svg { width: 0.9rem; height: 0.9rem; }
+.docs-media-tools > :is(a, button) svg { width: 0.9rem; height: 0.9rem; }
 .docs-media-body { min-width: 0; }
 
 .docs-image-open { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
@@ -1411,3 +1411,75 @@ html:has(.docs-shell) {
   .docs-article-pager { grid-template-columns: 1fr; margin-top: 3.5rem; }
   .docs-article-pager > span[aria-hidden='true'] { display: none; }
 }
+
+/* Official guide primitives */
+.docs-guide-card {
+  --guide-accent: color-mix(in oklab, var(--color-fd-primary) 76%, #6f61ff);
+  margin-block: 1.5rem;
+  border: 1px solid color-mix(in oklab, var(--color-fd-border) 82%, var(--guide-accent));
+  border-radius: 1.15rem;
+  background: linear-gradient(145deg, color-mix(in oklab, var(--color-fd-card) 96%, var(--guide-accent)), var(--color-fd-card));
+  box-shadow: 0 18px 48px color-mix(in oklab, var(--color-fd-foreground) 7%, transparent);
+  overflow: hidden;
+}
+
+.docs-guide-card > h3,
+.docs-guide-card > header,
+.docs-guide-card > figcaption { margin: 0; padding: 1rem 1.1rem; border-bottom: 1px solid var(--color-fd-border); font-size: .95rem; font-weight: 750; letter-spacing: -.01em; }
+.docs-metric-board dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1px; margin: 0; background: var(--color-fd-border); }
+.docs-metric-board dl > div { padding: 1rem; background: var(--color-fd-card); }
+.docs-metric-board dt { color: var(--color-fd-muted-foreground); font-size: .78rem; }
+.docs-metric-board dd { margin: .3rem 0 0; }
+.docs-metric-board dd strong { font-size: clamp(1.3rem, 2vw, 2rem); line-height: 1; white-space: nowrap; }
+.docs-metric-board dd span { margin-left: .2rem; color: var(--color-fd-muted-foreground); }
+.docs-metric-board p, .docs-metric-board small { margin: .45rem 0 0; color: var(--color-fd-muted-foreground); font-size: .75rem; }
+
+.docs-narrative-timeline ol { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.docs-narrative-timeline li { display: grid; grid-template-columns: 3.2rem 1fr; gap: .8rem; padding: 1rem 1.1rem; border-top: 1px solid var(--color-fd-border); }
+.docs-narrative-timeline li:first-child { border-top: 0; }
+.docs-timeline-label { display: grid; place-items: center; align-self: start; min-height: 2rem; border-radius: 999px; background: color-mix(in oklab, var(--guide-accent) 13%, transparent); color: var(--guide-accent); font-size: .72rem; font-weight: 800; }
+.docs-narrative-timeline h4, .docs-narrative-timeline p { margin: 0; }
+.docs-narrative-timeline p, .docs-narrative-timeline small { color: var(--color-fd-muted-foreground); }
+
+.docs-comparison-matrix { overflow-x: auto; }
+.docs-comparison-matrix table { width: 100%; min-width: 34rem; border-collapse: collapse; }
+.docs-comparison-matrix caption { padding: 1rem 1.1rem; text-align: left; font-weight: 750; }
+.docs-comparison-matrix :is(th, td) { padding: .78rem 1rem; border-top: 1px solid var(--color-fd-border); text-align: left; }
+.docs-comparison-matrix thead th { color: var(--guide-accent); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+
+.docs-decision-tree { padding-bottom: 1rem; }
+.docs-decision-tree [role='group'], .docs-decision-tree output { display: block; margin: 1rem; padding: 1rem; border-radius: .85rem; background: color-mix(in oklab, var(--color-fd-muted) 78%, transparent); }
+.docs-decision-tree [role='group'] > p { margin: 0 0 .75rem; font-weight: 700; }
+.docs-choice-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.docs-choice-row button, .docs-sequence-controls button { border: 1px solid var(--color-fd-border); border-radius: 999px; padding: .5rem .8rem; background: var(--color-fd-card); font: inherit; cursor: pointer; }
+.docs-choice-row button[aria-pressed='true'] { border-color: var(--guide-accent); background: color-mix(in oklab, var(--guide-accent) 13%, var(--color-fd-card)); color: var(--guide-accent); }
+.docs-decision-tree output span { display: block; margin-top: .3rem; color: var(--color-fd-muted-foreground); }
+
+.docs-annotation-stage { position: relative; background: var(--color-fd-muted); }
+.docs-annotation-stage img { display: block; width: 100%; height: auto; }
+.docs-annotation-stage a { position: absolute; display: grid; place-items: center; width: 1.8rem; height: 1.8rem; translate: -50% -50%; border: 2px solid white; border-radius: 50%; background: var(--guide-accent); color: white; box-shadow: 0 5px 18px #0005; font-size: .72rem; font-weight: 800; text-decoration: none; }
+.docs-annotated-image > ol { display: grid; gap: .6rem; margin: 0; padding: 1rem 1rem 1rem 2.7rem; }
+.docs-annotated-image li span { display: block; color: var(--color-fd-muted-foreground); }
+
+.docs-glossary-grid dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; margin: 0; background: var(--color-fd-border); }
+.docs-glossary-grid dl > div { padding: 1rem; background: var(--color-fd-card); }
+.docs-glossary-grid dt { font-weight: 750; }
+.docs-glossary-grid dd { margin: .35rem 0 0; color: var(--color-fd-muted-foreground); }
+.docs-glossary-grid small { display: block; margin-top: .4rem; }
+
+.docs-citation-cluster ul { display: grid; gap: .7rem; margin: 0; padding: 1rem; list-style: none; }
+.docs-citation-cluster li { padding: .9rem; border: 1px solid var(--color-fd-border); border-radius: .8rem; background: var(--color-fd-card); }
+.docs-citation-cluster li > div { display: flex; justify-content: space-between; gap: 1rem; }
+.docs-citation-cluster [data-status] { flex: none; color: var(--guide-accent); font-size: .72rem; }
+.docs-citation-cluster p, .docs-citation-cluster small { margin: .35rem 0 0; color: var(--color-fd-muted-foreground); }
+
+.docs-reveal-sequence > header { display: flex; align-items: center; justify-content: space-between; }
+.docs-reveal-sequence ol { display: grid; gap: .6rem; margin: 0; padding: 1rem; list-style: none; }
+.docs-reveal-sequence li { border-left: 2px solid var(--color-fd-border); padding-left: .8rem; opacity: .62; transition: opacity .2s ease, border-color .2s ease; }
+.docs-reveal-sequence li[aria-current='step'] { border-color: var(--guide-accent); opacity: 1; }
+.docs-reveal-sequence li button { display: flex; gap: .65rem; width: 100%; border: 0; padding: 0; background: transparent; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+.docs-reveal-sequence li button span { color: var(--guide-accent); font-size: .72rem; }
+.docs-reveal-sequence li p { margin: .35rem 0 0; color: var(--color-fd-muted-foreground); }
+.docs-sequence-controls { display: flex; justify-content: flex-end; gap: .5rem; padding: 0 1rem 1rem; }
+
+@media (prefers-reduced-motion: reduce) { .docs-reveal-sequence li { transition: none; } }

@@ -1,0 +1,46 @@
+---
+title: 组件选型指南
+description: 从内容关系出发，在 Markdown、结构组件、媒体、图表和交互之间做选择。
+tags:
+  - 组件
+  - 内容设计
+published: 2026-07-16
+difficulty: 入门
+---
+
+适合写作开始前使用。先回答内容是什么关系，再选择最小、最清楚的表达；不要从“我想加一个炫酷组件”倒推内容。
+
+<DecisionTreeExplorer title="五秒选型" question="读者最需要看懂哪种关系？" options={[
+  { label: '连续论证', result: '正文 + 标题', description: '让段落保持主线，少用卡片切碎阅读。' },
+  { label: '先后步骤', result: 'Steps / Timeline', description: '展示顺序、中间状态和完成条件。' },
+  { label: '同维度比较', result: 'Table / Matrix', description: '列固定评价维度，避免卡片高度暗示权重。' },
+  { label: '流程或依赖', result: 'Mermaid', description: '图中展示关系，正文说明判断与限制。' },
+  { label: '可探索系统', result: '专用交互组件', description: '只有操作能显著帮助理解时才升级。' },
+]} />
+
+<ComparisonMatrix title="组件使用边界" columns={['推荐场景', '不要这样用']} rows={[
+  { dimension: 'Callout', values: ['背景、风险、完成条件', '每段都套提示框'] },
+  { dimension: 'Cards', values: ['入口与并列选择', '连续文章切成卡片墙'] },
+  { dimension: 'Tabs', values: ['互斥视角或平台', '隐藏唯一关键结论'] },
+  { dimension: 'Accordion', values: ['补充与排错', '折叠必要步骤'] },
+  { dimension: 'MetricBoard', values: ['少量关键指标', '没有口径的装饰数字'] },
+  { dimension: '3D / Canvas', values: ['空间关系确有意义', '替代可读的二维说明'] },
+]} />
+
+## 选择后补齐六项
+
+1. 清楚的标题和一句话用途。
+2. 键盘、触摸与可见焦点。
+3. 移动端安全边界。
+4. 浅色、深色与减少动态。
+5. 无 JavaScript、失败和打印回退。
+6. 来源、数据口径和内容维护责任。
+
+<GlossaryGrid title="组件层级" items={[
+  { term: '原生 Markdown', definition: '默认选择，适合大多数连续内容。' },
+  { term: '结构组件', definition: '明确步骤、比较、提示和折叠关系。' },
+  { term: '媒体组件', definition: '承载图片、视频、图表和来源。' },
+  { term: '领域交互', definition: '用操作解释 AI 系统、检索或模型权衡。' },
+]} />
+
+<Callout type="info" title="先查组件目录">已有能力见[组件目录](/docs/help/)和本专题的对应页面。只有跨文章复用、且现有组件无法表达时才新增组件。</Callout>

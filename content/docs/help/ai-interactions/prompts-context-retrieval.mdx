@@ -1,0 +1,31 @@
+---
+title: 提示词、上下文与检索
+description: 比较提示词版本、分配上下文预算并观察检索结果的来源与排序。
+tags:
+  - 提示词
+  - RAG
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合讲解生成质量为什么变化。三个组件把指令差异、上下文竞争和检索证据分别变成可操作对象。
+
+<PromptDiffLab />
+
+<ContextBudgetComposer />
+
+<RetrievalExplorer />
+
+<PromptCard title="带证据边界的研究任务" description="可直接复制并替换方括号内容">
+你是研究助理。请围绕 [问题] 比较三个方案。每个关键主张都要给出来源、日期和原文位置；把事实、推断、冲突与待确认信息分开。证据不足时明确写“无法确认”，不要补全。
+</PromptCard>
+
+<ComparisonMatrix title="三层输入的职责" columns={['负责', '常见错误']} rows={[
+  { dimension: '提示词', values: ['任务、格式与边界', '用形容词代替验收标准'] },
+  { dimension: '上下文', values: ['提供当前任务材料', '把所有文件无差别塞入'] },
+  { dimension: '检索', values: ['找到相关证据片段', '只看相似度不看来源'] },
+]} />
+
+<SourcesDisclosure>
+  本页交互数据为教学示意，用于展示组件状态，不代表真实模型基准或检索准确率。
+</SourcesDisclosure>

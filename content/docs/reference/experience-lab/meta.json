@@ -1,10 +1,4 @@
 {
-  "title": "渲染与交互实验室",
-  "pages": [
-    "index",
-    "complete-showcase",
-    "ai-workbenches",
-    "infinite-canvas",
-    "quality-matrix"
-  ]
+  "title": "旧版渲染实验室",
+  "pages": ["index"]
 }

@@ -1,0 +1,43 @@
+---
+title: 如何使用知识库
+description: 用左侧知识树、右侧章节导航和文章工具建立稳定的阅读路径。
+tags:
+  - 导航
+  - 阅读
+published: 2026-07-16
+difficulty: 入门
+---
+
+适合第一次进入站点、容易在文章间迷路的读者。完成后，你会知道三层导航分别负责什么，并能从主题入口持续读到具体实践。
+
+<KeyTakeaways title="先记住三层位置感">
+  <li>左侧是知识树：回答“我在哪个主题里”。</li>
+  <li>正文是任务路径：回答“这一页要完成什么”。</li>
+  <li>右侧是章节导航：回答“这一页读到哪里”。</li>
+</KeyTakeaways>
+
+<AnnotatedImage title="桌面阅读界面的三个区域" image={{ src: '/images/experience-lab/evidence-map.webp', alt: '知识库桌面阅读区域示意图', width: 1600, height: 894 }} annotations={[
+  { x: 14, y: 30, label: '知识树', description: '只展开当前主题，避免文章到处散落。' },
+  { x: 50, y: 42, label: '正文', description: '保持舒适行宽，媒体可以按需扩展。' },
+  { x: 86, y: 32, label: '本文导航', description: '跟随滚动高亮当前章节，也可以收起。' },
+]} />
+
+## 推荐用法
+
+<Steps>
+  <Step>从左侧一级主题进入，例如“AI 应用”或“官方指南”。</Step>
+  <Step>展开当前二级分组，只浏览与任务相关的页面。</Step>
+  <Step>进入文章后使用右侧目录跳转；阅读完通过页尾上一篇、下一篇继续。</Step>
+</Steps>
+
+<ComparisonMatrix title="三类导航的职责" columns={['适合回答', '不应承担']} rows={[
+  { dimension: '左侧知识树', values: ['主题与课程位置', '单页全部小标题'] },
+  { dimension: '右侧章节导航', values: ['当前文章进度', '跨主题跳转'] },
+  { dimension: '页内链接', values: ['上下文相关延伸', '替代主导航'] },
+]} />
+
+## 移动端有什么不同
+
+移动端不会同时挤入两条侧栏。知识树和本文导航变成明确的触发入口，正文保持第一优先级。关闭抽屉后，焦点会回到触发按钮。
+
+<Callout type="warn" title="不要用浏览器返回键代替知识结构">返回键只记录访问历史；左侧知识树才表达内容归属。跨主题阅读后，优先用知识树重新定位。</Callout>

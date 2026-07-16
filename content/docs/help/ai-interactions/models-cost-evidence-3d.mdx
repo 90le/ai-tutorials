@@ -1,0 +1,35 @@
+---
+title: 模型、成本、证据网络与 3D
+description: 用权衡矩阵、成本模拟、关系网络和三维语义空间解释复杂 AI 系统。
+tags:
+  - 模型
+  - 成本
+  - 3D
+published: 2026-07-16
+difficulty: 专家
+---
+
+适合模型选型、知识关系和运行状态说明。所有数字均为教学示意；生产决策应使用核验日期明确的官方价格与基准。
+
+<ModelTradeoffMatrix />
+
+<CostLatencySimulator />
+
+<EvidenceNetwork />
+
+<SemanticSpace3D />
+
+<StreamingResponseTimeline />
+
+<FailureStateGallery />
+
+## 为什么同时保留 2D 与 3D
+
+<ComparisonMatrix title="复杂关系的表达选择" columns={['适合', '回退']} rows={[
+  { dimension: '矩阵', values: ['同维度精确比较', '原生表格'] },
+  { dimension: '关系网络', values: ['主张与来源连接', '分组列表'] },
+  { dimension: '三维空间', values: ['探索聚类与距离', '二维投影与文字结论'] },
+  { dimension: '流式时间线', values: ['过程与延迟', '顺序日志'] },
+]} />
+
+<Callout type="info" title="性能边界">三维场景按需动态加载，页面最多运行一个 WebGL 场景；离开视口或卸载时清理帧循环。减少动态时停用自动旋转。</Callout>

@@ -11,6 +11,8 @@ const urls = {
   visual: '/docs/playbooks/ai-visual-production/',
   codex: '/docs/tools/codex/agentic-repository-delivery/',
   toolkit: '/docs/reference/agent-ready-toolkit/',
+  help: '/docs/help/',
+  helpReading: '/docs/help/reading-navigation/using-the-knowledge-base/',
 } as const;
 
 function item(name: string, url: string): PageTree.Item {
@@ -40,6 +42,12 @@ function fixture(excluded: string[] = []): PageTree.Root {
         name: '旧文件结构',
         children: pages.slice(1),
       },
+      {
+        type: 'folder',
+        name: '官方指南',
+        index: item('指南首页', urls.help),
+        children: [{ type: 'folder', name: '阅读与导航', children: [item('如何使用知识库', urls.helpReading)] }],
+      },
     ],
   };
 }
@@ -47,7 +55,7 @@ function fixture(excluded: string[] = []): PageTree.Root {
 function collectUrls(nodes: PageTree.Node[]): string[] {
   return nodes.flatMap((node) => {
     if (node.type === 'page') return [node.url];
-    if (node.type === 'folder') return collectUrls(node.children);
+    if (node.type === 'folder') return [...(node.index ? [node.index.url] : []), ...collectUrls(node.children)];
     return [];
   });
 }
@@ -63,12 +71,15 @@ describe('buildKnowledgePageTree', () => {
 
     expect(tree.children.map((node) => String(node.name))).toEqual([
       '知识库首页',
+      '官方指南',
       '开始',
       'AI 应用',
       'Agent 工程',
     ]);
 
     expect(tree.children.flatMap(folderNames)).toEqual([
+      '官方指南',
+      '阅读与导航',
       '开始',
       '使用方法',
       '学习路线',
@@ -83,6 +94,8 @@ describe('buildKnowledgePageTree', () => {
     const allUrls = collectUrls(tree.children);
     expect(allUrls).toEqual([
       urls.home,
+      urls.help,
+      urls.helpReading,
       urls.taskSystem,
       urls.learningPath,
       urls.research,
@@ -106,9 +119,10 @@ describe('buildKnowledgePageTree', () => {
 
     expect(tree.children.map((node) => String(node.name))).toEqual([
       '知识库首页',
+      '官方指南',
       '开始',
     ]);
-    expect(collectUrls(tree.children)).toEqual([urls.home, urls.taskSystem]);
+    expect(collectUrls(tree.children)).toEqual([urls.home, urls.help, urls.helpReading, urls.taskSystem]);
   });
 
   it('returns the same reader-facing hierarchy for article breadcrumbs', () => {
@@ -123,8 +137,14 @@ describe('buildKnowledgePageTree', () => {
 
   it('returns previous and next articles in knowledge-tree order', () => {
     expect(getArticleNeighbors(urls.taskSystem)).toEqual({
+      previous: { group: '官方指南', section: '设计与质量', name: '完整回归检查', url: '/docs/help/design-quality/complete-regression-check/' },
       next: { group: '开始', section: '学习路线', name: 'AI 能力操作系统', url: urls.learningPath },
     });
+    expect(getKnowledgeTrail(urls.helpReading)).toEqual([
+      { name: '官方指南' },
+      { name: '阅读与导航' },
+      { name: '如何使用知识库', href: urls.helpReading },
+    ]);
     expect(getArticleNeighbors(urls.research)).toEqual({
       previous: { group: '开始', section: '学习路线', name: 'AI 能力操作系统', url: urls.learningPath },
       next: { group: 'AI 应用', section: '研究与知识', name: 'AI 第二大脑', url: urls.secondBrain },

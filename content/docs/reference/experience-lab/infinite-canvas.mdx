@@ -1,67 +1,10 @@
 ---
-title: 无限画布与媒体查看
-description: 验证图示、图表与图片在全屏模式中的居中适配、拖动、滚轮缩放和键盘控制。
+title: 无限画布指南已迁移
+description: 图示、图表与媒体查看能力已进入官方指南。
 tags:
-  - Mermaid
-  - 灯箱
-  - 无限画布
+  - 迁移
 published: 2026-07-16
-difficulty: 进阶
-contentType: reference
+difficulty: 入门
 ---
 
-媒体全屏不再是“把元素放大”。它使用统一画布坐标系：首次打开居中适应窗口，随后可以围绕指针缩放并自由平移。
-
-<KeyTakeaways title="画布操作">
-  <li>鼠标或触屏拖动：平移画布。</li>
-  <li>滚轮或双指：围绕当前位置缩放，范围为 10% 到 800%。</li>
-  <li>方向键：平移；加减号：缩放；数字 0：重新适应窗口；数字 1：恢复 100%。</li>
-</KeyTakeaways>
-
-## 宽幅 Mermaid
-
-<MermaidDiagram
-  title="Agent 研究系统的完整运行拓扑"
-  description="打开全屏后可拖动、滚轮缩放并重新适应窗口"
-  chart={`flowchart LR
-    U[任务合同] --> P[规划器]
-    P --> R1[官方资料检索]
-    P --> R2[案例与社区检索]
-    R1 --> E[证据归一化]
-    R2 --> E
-    E --> J{人工判断}
-    J -->|补充材料| P
-    J -->|通过| W[结构化写作]
-    W --> V[事实与链接复核]
-    V --> D[可复核交付]
-    D --> K[沉淀知识资产]`}
-/>
-
-## 图表全屏
-
-<SourceMixChart />
-
-## 图片灯箱
-
-<ImageGallery
-  title="采集、判断与交付"
-  description="从任意图片进入灯箱，切图后会重新居中适配"
-  status="generated"
-  source={{ label: '本站生成素材 · 2026-07-16' }}
-  images={[
-    { src: '/images/experience-lab/collect.webp', alt: '采集阶段保留原始材料与来源的概念场景', width: 1600, height: 894, caption: '01 · 采集' },
-    { src: '/images/experience-lab/judge.webp', alt: '判断阶段区分事实推断和冲突的概念场景', width: 1600, height: 894, caption: '02 · 判断' },
-    { src: '/images/experience-lab/deliver.webp', alt: '交付阶段把结论与证据一同交给读者的概念场景', width: 1600, height: 894, caption: '03 · 交付' },
-  ]}
-/>
-
-## 边界验收
-
-| 场景 | 期望行为 | 不允许 |
-| --- | --- | --- |
-| 首次打开 | 内容在可用画布内居中 | 受左侧导航偏移 |
-| 放大 | 指针所在内容保持在指针下 | 只能从中心机械放大 |
-| 超大内容 | 通过平移查看任意区域 | 页面本身出现横向滚动 |
-| 键盘 | 方向键、加减号、0、1 可用 | 只有鼠标路径 |
-| 关闭 | 焦点回到原触发按钮 | 焦点丢失到页面顶部 |
-
+请查看[Mermaid 与无限画布](/docs/help/visual-media/mermaid-infinite-canvas/)以及[数据图表与可视化](/docs/help/visual-media/data-charts-visualization/)。

@@ -1,0 +1,48 @@
+---
+title: 主题、动画与视觉效果
+description: 让深浅主题、状态动画和装饰效果服务于阅读，并尊重减少动态偏好。
+tags:
+  - 主题
+  - 动画
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合审查页面是否“好看且耐看”。视觉效果要帮助建立层级、反馈和空间关系，不能掩盖内容或把静态导出变成静止页面。
+
+<MetricBoard title="视觉系统的四个信号" metrics={[
+  { label: '纸张', value: '背景', description: '形成安静的阅读基底' },
+  { label: '墨色', value: '正文', description: '保证长文对比度' },
+  { label: '信号色', value: '状态', description: '用于焦点、链接和选择' },
+  { label: '运动', value: '反馈', description: '解释变化而非持续炫技' },
+]} />
+
+<RevealSequence title="动效应该回答什么" steps={[
+  { title: '它从哪里来', content: '抽屉、浮层和内容进入应保留空间来源。' },
+  { title: '什么发生了变化', content: '选择、加载和成功状态要有及时反馈。' },
+  { title: '下一步在哪里', content: '动效结束后，焦点与主要操作保持清楚。' },
+  { title: '能否安静下来', content: '减少动态时关闭自动运动，内容仍完整可用。' },
+]} />
+
+## 主题检查
+
+<ComparisonMatrix title="深浅主题不是颜色反转" columns={['浅色', '深色']} rows={[
+  { dimension: '背景层级', values: ['纸张与卡片轻微分离', '避免纯黑与高亮边框泛滥'] },
+  { dimension: '正文', values: ['接近墨色', '柔和高对比，不刺眼'] },
+  { dimension: '信号色', values: ['链接与焦点清晰', '降低发光面积'] },
+  { dimension: '图片', values: ['保持真实色彩', '必要时增加边界，不整体压暗'] },
+]} />
+
+## CSS 动效基线
+
+```css title="motion.css"
+.interactive-card {
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-card { transition: none; }
+}
+```
+
+<Callout type="warn" title="不要为了证明页面会动而持续运动">自动漂浮、无限粒子和滚动绑架会消耗注意力。首页可以有品牌场景，文档正文应以操作反馈和关系解释为主。</Callout>

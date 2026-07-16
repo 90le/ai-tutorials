@@ -39,4 +39,9 @@ describe('docs responsive controls', () => {
     expect(docsTheme).toContain("grid-column: full");
     expect(docsTheme).not.toContain("translate: -50% 0");
   });
+
+  it('does not shrink SVG charts rendered inside a media tool dialog', () => {
+    expect(docsTheme).not.toContain('.docs-media-tools svg {');
+    expect(docsTheme).toContain('.docs-media-tools > :is(a, button) svg');
+  });
 });

@@ -1,0 +1,4 @@
+{
+  "title": "AI 交互组件",
+  "pages": ["agents-tool-calls", "prompts-context-retrieval", "models-cost-evidence-3d"]
+}

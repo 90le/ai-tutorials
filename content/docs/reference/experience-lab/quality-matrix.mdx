@@ -1,67 +1,10 @@
 ---
-title: 质量与降级矩阵
-description: 用一页检查自适应版心、代码工具栏、主题、动效、无障碍、打印和静态导出。
+title: 质量矩阵已迁移
+description: 多状态验收与发布检查已进入官方指南。
 tags:
-  - 质量保证
-  - 无障碍
-  - 性能
+  - 迁移
 published: 2026-07-16
-difficulty: 进阶
-contentType: reference
+difficulty: 入门
 ---
 
-这页把“好看”拆成可以重复检查的工程条件。一次升级只有在桌面、移动端、深浅主题、键盘和静态构建中同时成立，才算真正完成。
-
-## 自适应阅读版心
-
-正文使用三条内容轨道：连续文字走 `prose`，图表和代码走 `wide`，明确标记的沉浸媒体可以走 `full`。左侧知识树或右侧本文目录收起后，对应宽度会归还给文章，而不是留下一块空白。
-
-| 左侧知识树 | 右侧目录 | 文章最大宽度 |
-| --- | --- | --- |
-| 展开 | 展开 | 60rem |
-| 任一收起 | 另一侧展开 | 68rem |
-| 收起 | 收起 | 76rem |
-
-## 代码工具栏
-
-```ts title="evidence-pipeline.ts" {3-7}
-type Evidence = { claim: string; source: string; verified: boolean };
-
-export function acceptEvidence(item: Evidence) {
-  if (!item.source) throw new Error('缺少来源');
-  if (!item.verified) return { state: 'needs-review', item };
-  return { state: 'accepted', item };
-}
-```
-
-工具栏由 React 直接渲染，和复制按钮位于同一标题行。它支持自动换行、显示行号、展开全部；窄屏时工具栏自身横向滚动，不覆盖标题或代码。
-
-## 主题与动态
-
-<Tabs items={['浅色', '深色', '减少动态']}>
-  <Tab value="浅色">检查纸张层级、墨色对比、紫色焦点和浅色边界。</Tab>
-  <Tab value="深色">检查图表标签、代码背景、浮层和状态色不发灰。</Tab>
-  <Tab value="减少动态">关闭持续旋转和非必要过渡，保留输入反馈与状态变化。</Tab>
-</Tabs>
-
-## 无障碍与降级
-
-<ul className="docs-experience-checklist">
-  <li><strong>键盘：</strong>跳转链接、按钮、滑块、折叠、画布和灯箱都有可见焦点。</li>
-  <li><strong>语义：</strong>图表有名称，图片有替代文本，表格有标题和表头。</li>
-  <li><strong>性能：</strong>ECharts 与 Three.js 接近视口后动态加载。</li>
-  <li><strong>减少动态：</strong>不依赖动画表达唯一信息。</li>
-  <li><strong>打印：</strong>隐藏浮层工具，保留正文、图注、表格与来源。</li>
-  <li><strong>静态导出：</strong>不依赖 Cookie、登录、私有 API 或服务器运行时。</li>
-</ul>
-
-## 发布门槛
-
-```bash title="完整发布验证"
-npm run lint
-npm run types:check
-npm run build
-```
-
-这三项通过后，还需要在本页检查 390px、桌面宽屏、左右栏收起、深浅主题、画布缩放和代码工具栏。
-
+请查看[移动端、无障碍与打印](/docs/help/design-quality/mobile-accessibility-print/)和[完整回归检查](/docs/help/design-quality/complete-regression-check/)。

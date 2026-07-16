@@ -2,7 +2,7 @@
 
 组件必须静态导出兼容、响应式、键盘可用，并在没有 JavaScript 时保留核心信息。
 
-公开示例与视觉回归入口：[/docs/reference/experience-lab/complete-showcase/](/docs/reference/experience-lab/complete-showcase/)。修改组件、主题或 MDX 注册表后，必须在该页面完成桌面、移动、深浅主题、键盘与打印检查。
+公开示例按任务拆分在[官方指南](/docs/help/)中；统一发布门位于[完整回归检查](/docs/help/design-quality/complete-regression-check/)。修改组件、主题或 MDX 注册表后，必须抽查对应专题页，并完成桌面、移动、深浅主题、键盘与打印检查。
 
 ## Fumadocs 基础组件
 
@@ -40,5 +40,37 @@
 | `FormulaBlock` | 公式、变量解释和 LaTeX 复制 | 公式截图 |
 | `DataTable` | 需要比较或下载的数据 | 用卡片破坏比较关系 |
 | `DownloadCard` | 静态公开附件 | 私有或运行时生成文件 |
+
+## AI 原创交互组件
+
+以下组件同样全局注册，并在“AI 交互组件”专题中提供可操作案例。
+
+| 组件 | 用途 | 主要输入或交互 |
+| --- | --- | --- |
+| `AgentFlowStudio` | 解释 Agent 执行阶段 | 点击节点、推进流程 |
+| `PromptDiffLab` | 对比提示词约束 | 切换原始版与改进版 |
+| `ContextBudgetComposer` | 分配上下文窗口 | 双滑块与超限反馈 |
+| `RetrievalExplorer` | 解释检索排序 | 切换查询与证据层级 |
+| `ToolCallTrace` | 检查工具调用链 | 逐步查看输入、耗时与返回 |
+| `MultiAgentOrchestration` | 展示多智能体交接 | 切换研究与开发编排 |
+| `ModelTradeoffMatrix` | 比较模型质量、速度与成本 | 场景切换与 ECharts 散点图 |
+| `CostLatencySimulator` | 估算调用成本与延迟 | 上下文、并发滑块 |
+| `EvidenceNetwork` | 展示主张与来源关系 | 可拖动缩放的 ECharts 网络 |
+| `SemanticSpace3D` | 展示向量语义邻近关系 | Three.js 三维空间与语义簇筛选 |
+| `StreamingResponseTimeline` | 解释流式响应阶段 | 时间进度滑块 |
+| `FailureStateGallery` | 展示失败与恢复路径 | 状态切换和人工接管提示 |
+
+## 官方指南通用表达组件
+
+| 组件 | 用途 | 不要用于 |
+| --- | --- | --- |
+| `MetricBoard` | 少量关键指标、口径与变化 | 没有来源的装饰数字 |
+| `NarrativeTimeline` | 带状态的阶段演进 | 没有先后关系的并列项 |
+| `ComparisonMatrix` | 多方案同维度比较 | 每列评价维度不同的内容 |
+| `DecisionTreeExplorer` | 通过选择解释推荐路径 | 替代高风险人工决策 |
+| `AnnotatedImage` | 在真实图片上定位讲解点 | 用 CSS 伪造界面截图 |
+| `GlossaryGrid` | 术语、定义与别名 | 连续正文分段 |
+| `CitationCluster` | 主张、来源、日期与限制 | 仅做链接收藏 |
+| `RevealSequence` | 逐步聚焦，同时保留全部文字 | 隐藏读者必须知道的内容 |
 
 所有真实数据标明来源、时间、单位和口径；示意或生成数据在标题、表格与导出中持续标注。固定控件桌面最多两个，移动端最多保留目录与返回顶部。

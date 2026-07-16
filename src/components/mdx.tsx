@@ -34,6 +34,14 @@ import {
   ToolCallTrace,
 } from '@/components/docs/experience-lab/workbench-components';
 import { SemanticSpace3D } from '@/components/docs/experience-lab/semantic-space-3d';
+import { AnnotatedImage } from '@/components/docs/guide/annotated-image';
+import { CitationCluster } from '@/components/docs/guide/citation-cluster';
+import { ComparisonMatrix } from '@/components/docs/guide/comparison-matrix';
+import { DecisionTreeExplorer } from '@/components/docs/guide/decision-tree-explorer';
+import { GlossaryGrid } from '@/components/docs/guide/glossary-grid';
+import { MetricBoard } from '@/components/docs/guide/metric-board';
+import { NarrativeTimeline } from '@/components/docs/guide/narrative-timeline';
+import { RevealSequence } from '@/components/docs/guide/reveal-sequence';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -73,6 +81,14 @@ export function getMDXComponents(components?: MDXComponents) {
     SemanticSpace3D,
     StreamingResponseTimeline,
     FailureStateGallery,
+    MetricBoard,
+    NarrativeTimeline,
+    ComparisonMatrix,
+    DecisionTreeExplorer,
+    AnnotatedImage,
+    GlossaryGrid,
+    CitationCluster,
+    RevealSequence,
     ...components,
   } satisfies MDXComponents;
 }

@@ -1,52 +1,17 @@
 ---
-title: 渲染与交互实验室
-description: 查看知识库支持的文章排版、富媒体、数据表达和阅读交互能力。
+title: 渲染实验室已迁移
+description: 旧版集中展厅已拆分为官方指南中的多个专题页面。
 tags:
-  - 设计系统
-  - MDX
-  - 富媒体
+  - 迁移
 published: 2026-07-16
-contentType: reference
+difficulty: 入门
 ---
 
-这里不是独立的组件文档应用，而是知识库真实文章能力的公开试验场。每个示例都沿用正式教程的主题、导航、静态导出与无障碍约束。
+为了让目录更清楚、示例更完整，渲染能力已经迁移到[官方指南](/docs/help/)。原地址暂时保留，避免旧链接失效。
 
 <Cards>
-  <Card title="完整渲染能力展厅" href="/docs/reference/experience-lab/complete-showcase/">
-    在一篇连续文章中操作 Markdown、Fumadocs、Mermaid、ECharts、图片灯箱、视频、公式、表格与下载组件。
-  </Card>
-  <Card title="AI 原创交互工作台" href="/docs/reference/experience-lab/ai-workbenches/">
-    操作 Agent、提示词、上下文、检索、多智能体、模型权衡、3D 语义空间等 12 个原创组件。
-  </Card>
-  <Card title="无限画布与媒体查看" href="/docs/reference/experience-lab/infinite-canvas/">
-    验证 Mermaid、图表和图片的居中适配、拖动、滚轮缩放、触屏手势与键盘操作。
-  </Card>
-  <Card title="质量与降级矩阵" href="/docs/reference/experience-lab/quality-matrix/">
-    集中检查边界、动效、无障碍、主题、打印、无 JavaScript 与静态导出。
-  </Card>
-  <Card title="组件使用目录" href="https://github.com/90le/ai-tutorials/blob/main/docs/component-catalog.md">
-    查看每个组件适合解决的问题，以及不应该使用的场景。
-  </Card>
+  <Card title="内容与排版" href="/docs/help/content-layout/markdown-complete-reference/">Markdown、结构组件、代码、公式、表格与附件。</Card>
+  <Card title="图示与富媒体" href="/docs/help/visual-media/mermaid-infinite-canvas/">Mermaid、无限画布、图表、图片、视频与标注。</Card>
+  <Card title="AI 交互组件" href="/docs/help/ai-interactions/agents-tool-calls/">Agent、检索、模型、成本、证据网络与 3D。</Card>
+  <Card title="完整回归检查" href="/docs/help/design-quality/complete-regression-check/">主题、移动端、无障碍、降级和发布门。</Card>
 </Cards>
-
-<Callout type="info" title="实验室也是回归页">
-  每次修改文档主题或阅读组件后，这里的桌面、移动端、深浅主题、键盘和打印状态都应重新检查。
-</Callout>
-
-## 覆盖范围
-
-| 能力层 | 展示内容 | 验收重点 |
-| --- | --- | --- |
-| 文章语言 | 标题、列表、引用、表格、代码、脚注 | 连续阅读与移动端边界 |
-| 结构表达 | 提示、步骤、页签、折叠、类型表 | 语义与键盘路径 |
-| 图示数据 | Mermaid、ECharts、公式、数据表、下载 | 来源、降级与全屏查看 |
-| 图片证据 | 单图、组图、前后对比、灯箱 | 替代文本、缩放与焦点恢复 |
-| 视频 | 本地 MP4、海报、字幕、文字稿 | 不自动播放与等价替代内容 |
-| 原创交互 | 12 个 AI 工作台、ECharts、Three.js、状态与模拟器 | 有真实输入、反馈与降级 |
-| 页面系统 | 自适应知识树、本文目录、进度、主题、打印 | 无溢出、无 404、无控制台错误 |
-
-### 怎么使用这座实验室
-
-读者可以把它当作阅读能力说明；作者可以在写 MDX 前确认组件边界；维护者则应在主题或组件变更后，用它完成视觉回归，而不是另外维护一套脱离真实文章的演示应用。
-
-所有示意数据都会明确标注，不把视觉完整度伪装成事实可信度。

@@ -1,0 +1,57 @@
+---
+title: 提示、步骤、页签与折叠
+description: 根据内容关系选择 Callout、Steps、Tabs、Accordion、Cards 和渐进讲解。
+tags:
+  - MDX
+  - 结构组件
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合需要超越纯文本、但又不想把文章写成“卡片集合”的作者。完成后，你可以根据关系而不是视觉冲动选择组件。
+
+<Callout type="info" title="信息">补充背景或使用范围。</Callout>
+<Callout type="warn" title="风险">提醒可恢复但需要注意的问题。</Callout>
+<Callout type="error" title="停止">指出继续操作会造成明显错误。</Callout>
+<Callout type="success" title="完成">说明可以客观验证的完成条件。</Callout>
+
+## 顺序任务用 Steps
+
+<Steps>
+  <Step>确认输入和最终交付。</Step>
+  <Step>保留来源并完成处理。</Step>
+  <Step>用检查清单复核结果。</Step>
+</Steps>
+
+## 互斥视角用 Tabs
+
+<Tabs items={['读者', '作者', '维护者']}>
+  <Tab value="读者">关注能否理解、定位和完成任务。</Tab>
+  <Tab value="作者">关注结构是否准确表达内容关系。</Tab>
+  <Tab value="维护者">关注复用、性能、降级和回归。</Tab>
+</Tabs>
+
+## 次要细节用 Accordion
+
+<Accordions>
+  <Accordion title="什么时候默认折叠？">当内容是补充、排错或高级细节，并且折叠后不损害主结论时。</Accordion>
+  <Accordion title="什么时候不能折叠？">风险、关键步骤、验收标准和无 JavaScript 仍需可读的核心信息。</Accordion>
+</Accordions>
+
+<DecisionTreeExplorer title="结构组件选择器" question="这段内容最重要的关系是什么？" options={[
+  { label: '有先后顺序', result: 'Steps', description: '每一步都应产生可观察的中间状态。' },
+  { label: '互斥场景', result: 'Tabs', description: '同一位置切换不同视角，核心结论不要只藏在页签里。' },
+  { label: '次要补充', result: 'Accordion', description: '默认收起，标题必须能预告内容。' },
+  { label: '入口集合', result: 'Cards', description: '用于导航，不承载连续论证。' },
+]} />
+
+```mdx title="structure-example.mdx"
+<Callout type="warn" title="发布前确认">
+  易变信息必须写明核验日期。
+</Callout>
+
+<Steps>
+  <Step>运行完整检查。</Step>
+  <Step>确认静态导出结果。</Step>
+</Steps>
+```

@@ -85,6 +85,37 @@ const KNOWLEDGE_GROUPS = [
   },
 ] as const;
 
+const OFFICIAL_GUIDE = {
+  index: { name: '指南首页', url: '/docs/help/' },
+  sections: [
+    { id: 'official-reading', name: '阅读与导航', pages: [
+      { name: '如何使用知识库', url: '/docs/help/reading-navigation/using-the-knowledge-base/' },
+      { name: '搜索、目录与阅读工具', url: '/docs/help/reading-navigation/search-toc-reading-tools/' },
+    ] },
+    { id: 'official-layout', name: '内容与排版', pages: [
+      { name: 'Markdown 完整样式', url: '/docs/help/content-layout/markdown-complete-reference/' },
+      { name: '提示、步骤、页签与折叠', url: '/docs/help/content-layout/structured-content-components/' },
+      { name: '代码、公式、表格与附件', url: '/docs/help/content-layout/code-formula-table-assets/' },
+    ] },
+    { id: 'official-media', name: '图示与富媒体', pages: [
+      { name: 'Mermaid 与无限画布', url: '/docs/help/visual-media/mermaid-infinite-canvas/' },
+      { name: '数据图表与可视化', url: '/docs/help/visual-media/data-charts-visualization/' },
+      { name: '图片、图库、视频与标注', url: '/docs/help/visual-media/images-gallery-video-annotation/' },
+    ] },
+    { id: 'official-ai', name: 'AI 交互组件', pages: [
+      { name: 'Agent 与工具调用', url: '/docs/help/ai-interactions/agents-tool-calls/' },
+      { name: '提示词、上下文与检索', url: '/docs/help/ai-interactions/prompts-context-retrieval/' },
+      { name: '模型、成本、证据网络与 3D', url: '/docs/help/ai-interactions/models-cost-evidence-3d/' },
+    ] },
+    { id: 'official-quality', name: '设计与质量', pages: [
+      { name: '主题、动画与视觉效果', url: '/docs/help/design-quality/themes-motion-effects/' },
+      { name: '移动端、无障碍与打印', url: '/docs/help/design-quality/mobile-accessibility-print/' },
+      { name: '组件选型指南', url: '/docs/help/design-quality/component-selection-guide/' },
+      { name: '完整回归检查', url: '/docs/help/design-quality/complete-regression-check/' },
+    ] },
+  ],
+} as const;
+
 export interface KnowledgePage {
   group: string;
   section: string;
@@ -112,6 +143,15 @@ function collectPages(nodes: PageTree.Node[], pages = new Map<string, PageTree.I
 export function getKnowledgeTrail(url: string) {
   const normalizedUrl = normalizeUrl(url);
 
+  if (normalizeUrl(OFFICIAL_GUIDE.index.url) === normalizedUrl) {
+    return [{ name: '官方指南' }, { name: OFFICIAL_GUIDE.index.name, href: OFFICIAL_GUIDE.index.url }];
+  }
+
+  for (const section of OFFICIAL_GUIDE.sections) {
+    const page = section.pages.find((candidate) => normalizeUrl(candidate.url) === normalizedUrl);
+    if (page) return [{ name: '官方指南' }, { name: section.name }, { name: page.name, href: page.url }];
+  }
+
   for (const group of KNOWLEDGE_GROUPS) {
     for (const section of group.sections) {
       const page = section.pages.find((candidate) => normalizeUrl(candidate.url) === normalizedUrl);
@@ -129,7 +169,12 @@ export function getKnowledgeTrail(url: string) {
 }
 
 function getKnowledgePages(): KnowledgePage[] {
-  return KNOWLEDGE_GROUPS.flatMap((group) =>
+  const officialPages: KnowledgePage[] = [
+    { group: '官方指南', section: '指南总览', ...OFFICIAL_GUIDE.index },
+    ...OFFICIAL_GUIDE.sections.flatMap((section) => section.pages.map((page) => ({ group: '官方指南', section: section.name, ...page }))),
+  ];
+
+  return [...officialPages, ...KNOWLEDGE_GROUPS.flatMap((group) =>
     group.sections.flatMap((section) =>
       section.pages.map((page) => ({
         group: group.name,
@@ -138,7 +183,7 @@ function getKnowledgePages(): KnowledgePage[] {
         url: page.url,
       })),
     ),
-  );
+  )];
 }
 
 export function getArticleNeighbors(url: string): {
@@ -162,6 +207,28 @@ export function buildKnowledgePageTree(root: PageTree.Root): PageTree.Root {
 
   if (home) {
     children.push({ ...home, name: '知识库首页' });
+  }
+
+  const guideIndex = pages.get(normalizeUrl(OFFICIAL_GUIDE.index.url));
+  const guideSections = OFFICIAL_GUIDE.sections.map((section) => ({
+    $id: section.id,
+    type: 'folder' as const,
+    name: section.name,
+    collapsible: true,
+    defaultOpen: false,
+    children: section.pages.map((page) => pages.get(normalizeUrl(page.url))).filter((page): page is PageTree.Item => page !== undefined),
+  })).filter((section) => section.children.length > 0);
+
+  if (guideIndex || guideSections.length > 0) {
+    children.push({
+      $id: 'official-guide',
+      type: 'folder',
+      name: '官方指南',
+      index: guideIndex,
+      collapsible: true,
+      defaultOpen: false,
+      children: guideSections,
+    });
   }
 
   for (const group of KNOWLEDGE_GROUPS) {

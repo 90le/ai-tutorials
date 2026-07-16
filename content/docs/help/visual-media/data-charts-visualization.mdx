@@ -1,0 +1,49 @@
+---
+title: 数据图表与可视化
+description: 使用图表、指标、表格与文字回退表达趋势、构成和比较。
+tags:
+  - 数据可视化
+  - ECharts
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合需要解释数据关系的文章。本页数字均为教学示意，不代表行业统计；真实数据必须同时标注来源、时间、单位和口径。
+
+<MetricBoard title="示意研究概览" metrics={[
+  { label: '一手来源', value: '12', change: '+3 本周', description: '官方文档与论文' },
+  { label: '待核主张', value: '4', description: '尚未进入最终结论' },
+  { label: '证据覆盖', value: '86', unit: '%', description: '教学示意口径' },
+  { label: '最后核验', value: '07.16', description: '2026 年' },
+]} />
+
+<SourceMixChart />
+
+<MediaFrame title="图表语义外壳" description="即使脚本尚未加载，标题、说明和状态也会先出现" status="illustrative" source={{ label: '教学示意数据' }}>
+  <p style={{ margin: 0, padding: '1rem' }}>媒体框负责标题、来源、状态和边界；具体图表负责数据表达。</p>
+</MediaFrame>
+
+## 图表必须和文字协作
+
+<DataTable title="来源构成的文字回退" columns={[
+  { key: 'source', label: '来源' },
+  { key: 'count', label: '数量', align: 'number' },
+  { key: 'share', label: '占比', align: 'number' },
+]} rows={[
+  { source: '官方文档', count: 12, share: '50%' },
+  { source: '研究论文', count: 8, share: '33%' },
+  { source: '人工访谈', count: 4, share: '17%' },
+]} />
+
+<ComparisonMatrix title="按关系选择图表" columns={['推荐', '谨慎使用']} rows={[
+  { dimension: '时间趋势', values: ['折线图', '面积过度堆叠'] },
+  { dimension: '类别比较', values: ['条形图', '3D 柱形图'] },
+  { dimension: '整体构成', values: ['环形图（少类别）', '多层饼图'] },
+  { dimension: '精确查数', values: ['表格', '只靠悬浮提示'] },
+]} />
+
+## 全屏与性能
+
+图表接近视口时再加载，展开后会重新测量容器；全屏 SVG 不继承工具按钮的图标尺寸。关闭时销毁监听器，并把焦点还给展开按钮。
+
+<Callout type="success" title="最低完整性">颜色之外还要有标签或数值；无 JavaScript 时仍显示标题、说明和数据表；减少动态时停止非必要过渡。</Callout>

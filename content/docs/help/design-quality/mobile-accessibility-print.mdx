@@ -1,0 +1,41 @@
+---
+title: 移动端、无障碍与打印
+description: 验证小屏布局、键盘焦点、语义替代、减少动态和打印降级。
+tags:
+  - 无障碍
+  - 移动端
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合发布前验收。目标不是让每个状态看起来完全相同，而是让内容、操作和位置感在不同能力条件下保持等价。
+
+<KeyTakeaways title="四条不可退让的基线">
+  <li>页面不能产生视口级横向滚动。</li>
+  <li>每个操作都能用键盘完成，并有可见焦点。</li>
+  <li>图片、图表、视频和交互都有文字语义或静态回退。</li>
+  <li>减少动态、无 JavaScript 和打印状态仍能获得关键内容。</li>
+</KeyTakeaways>
+
+<ComparisonMatrix title="多状态验收矩阵" columns={['检查', '通过标准']} rows={[
+  { dimension: '360px 移动端', values: ['导航变抽屉、表格局部滚动', '正文无截断和横向溢出'] },
+  { dimension: '键盘', values: ['Tab、Enter、方向键、Esc', '焦点顺序与视觉顺序一致'] },
+  { dimension: '读屏', values: ['标题、标签、状态、替代文本', '不依赖颜色和位置描述'] },
+  { dimension: '减少动态', values: ['关闭自动旋转与非必要过渡', '状态变化仍可理解'] },
+  { dimension: '打印', values: ['隐藏工具栏与浮层', '保留标题、图注、表格和来源'] },
+]} />
+
+<NarrativeTimeline title="一次移动端检查" items={[
+  { label: '01', title: '从顶部进入', description: '检查品牌、搜索和知识树触发器是否拥挤。' },
+  { label: '02', title: '读完整篇正文', description: '检查代码、表格、Mermaid 和媒体只在自身区域扩展。' },
+  { label: '03', title: '打开所有浮层', description: '确认居中、可关闭、焦点受控且背景不误触。' },
+  { label: '04', title: '切换系统偏好', description: '验证深色、减少动态和打印样式。' },
+]} />
+
+```html title="accessible-control.html"
+<button type="button" aria-expanded="false" aria-controls="chapter-navigation">
+  打开本文导航
+</button>
+```
+
+<Callout type="success" title="内容优先于交互成功">关键结论不得只在 hover、动画完成、Canvas 或 JavaScript 成功后出现。</Callout>

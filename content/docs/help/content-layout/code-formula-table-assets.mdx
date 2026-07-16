@@ -1,0 +1,81 @@
+---
+title: 代码、公式、表格与附件
+description: 展示可复制代码、公式变量、响应式表格和可下载附件的可靠写法。
+tags:
+  - 代码
+  - 公式
+  - 表格
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合技术教程、研究记录和需要交付模板的文章。所有示例都保留标题、语义和小屏滚动边界。
+
+## 代码块
+
+```ts title="task-contract.ts" {3-5}
+type TaskContract = {
+  input: string;
+  deliverable: string;
+  evidence: string[];
+  limitations: string[];
+};
+```
+
+代码工具栏提供语言、标题、复制和必要的展开入口；长行只在代码区域内部滚动，不推动整页横向溢出。
+
+<CodeBlockTabs defaultValue="json">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="json">JSON</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="yaml">YAML</CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+  <CodeBlockTab value="json">
+
+```json
+{"status":"verified","sources":3}
+```
+
+  </CodeBlockTab>
+  <CodeBlockTab value="yaml">
+
+```yaml
+status: verified
+sources: 3
+```
+
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+## 公式
+
+<FormulaBlock title="效率增益" latex="G=(T_b-T_a)/T_b" variables={[
+  { symbol: 'G', meaning: '效率增益比例' },
+  { symbol: 'T_b', meaning: '使用 AI 前耗时' },
+  { symbol: 'T_a', meaning: '使用 AI 后耗时' },
+]}>
+  <span>G = (T before − T after) / T before</span>
+</FormulaBlock>
+
+## 数据表
+
+<TypeTable type={{
+  title: { description: '代码、公式或附件的可搜索标题', type: 'string', required: true },
+  description: { description: '解释用途和数据口径', type: 'string' },
+  source: { description: '来源、日期与状态', type: 'Source' },
+}} />
+
+<DataTable title="组件能力比较" columns={[
+  { key: 'format', label: '格式' },
+  { key: 'best', label: '最适合' },
+  { key: 'fallback', label: '降级' },
+]} rows={[
+  { format: '代码', best: '可执行步骤', fallback: '纯文本源码' },
+  { format: '公式', best: '计算关系', fallback: '变量文字说明' },
+  { format: '表格', best: '同维度比较', fallback: '横向区域滚动' },
+]} />
+
+## 附件
+
+<DownloadCard title="研究简报模板" href="/downloads/research-brief.md" format="Markdown" size="1 KB" updated="2026-07-16" />
+
+<Callout type="info" title="附件不是正文替代品">页面中先说明附件用途、格式和更新时间；读者不下载也应理解关键结论。</Callout>

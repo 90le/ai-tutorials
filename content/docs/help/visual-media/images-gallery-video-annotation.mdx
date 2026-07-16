@@ -1,0 +1,32 @@
+---
+title: 图片、图库、视频与标注
+description: 展示单图灯箱、图库、前后对比、热点标注和带字幕视频。
+tags:
+  - 图片
+  - 视频
+  - 灯箱
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合界面教程、案例过程和视觉证据。素材必须有替代文本、尺寸、来源与授权状态；生成图要明确标注为生成素材。
+
+<ArticleImage title="知识信号进入工作系统" description="单图灯箱、图注和来源示例" status="generated" source={{ label: '本站生成素材 · 2026-07-16' }} width="wide" image={{ src: '/images/experience-lab/knowledge-signal.webp', alt: '知识信号从零散材料汇入结构化工作系统的概念场景', width: 1600, height: 894 }} />
+
+<ImageGallery title="采集、判断与交付" description="三张连续图片组成一个过程" status="generated" source={{ label: '本站生成素材 · 2026-07-16' }} images={[
+  { src: '/images/experience-lab/collect.webp', alt: '采集阶段保留原始材料与来源', width: 1600, height: 894, caption: '01 · 采集' },
+  { src: '/images/experience-lab/judge.webp', alt: '判断阶段区分事实推断和冲突', width: 1600, height: 894, caption: '02 · 判断' },
+  { src: '/images/experience-lab/deliver.webp', alt: '交付阶段把结论与证据一同交给读者', width: 1600, height: 894, caption: '03 · 交付' },
+]} />
+
+<ImageCompare title="从原始材料到证据地图" before={{ src: '/images/experience-lab/raw-materials.webp', alt: '散落且缺少关系的原始材料', width: 1600, height: 894, caption: '原始材料' }} after={{ src: '/images/experience-lab/evidence-map.webp', alt: '按主张来源和限制组织的证据地图', width: 1600, height: 894, caption: '证据地图' }} />
+
+<AnnotatedImage title="证据地图的阅读顺序" image={{ src: '/images/experience-lab/evidence-map.webp', alt: '带编号热点的证据地图', width: 1600, height: 894 }} annotations={[
+  { x: 23, y: 34, label: '主张', description: '先确认需要被证明的结论。' },
+  { x: 51, y: 58, label: '来源', description: '回到日期、作者和原始上下文。' },
+  { x: 78, y: 38, label: '限制', description: '明确证据不能支持什么。' },
+]} />
+
+<ArticleVideo title="从知识信号到可复核交付" description="带海报、字幕与文字稿的短片" src="/videos/experience-lab/knowledge-flow.mp4" poster="/videos/experience-lab/knowledge-flow-poster.jpg" tracks={[{ src: '/videos/experience-lab/knowledge-flow.zh-CN.vtt', srcLang: 'zh-CN', label: '简体中文', default: true }]} transcriptHref="/downloads/experience-lab/knowledge-flow-transcript.md" source={{ label: '本站生成素材 · 2026-07-16' }} status="generated" />
+
+<Callout type="info" title="交互不替代内容">灯箱关闭后焦点返回触发按钮；对比滑块支持方向键；视频不自动播放，媒体失败时仍能打开文字稿。</Callout>

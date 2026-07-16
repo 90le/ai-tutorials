@@ -1,0 +1,64 @@
+---
+title: 完整回归检查
+description: 用一张发布前清单覆盖内容、导航、组件、主题、性能、静态导出与部署。
+tags:
+  - QA
+  - 发布
+published: 2026-07-16
+difficulty: 进阶
+---
+
+这不是另一张“大而全”的组件展厅，而是官方指南的质量索引。每类能力的真实案例分布在对应专题页，这里负责串联自动检查与人工视觉回归。
+
+<MetricBoard title="发布门" metrics={[
+  { label: '类型', value: '0 错误', description: 'TypeScript 完整通过' },
+  { label: '测试', value: '全部通过', description: '组件与内容回归' },
+  { label: '构建', value: '静态导出', description: '公开路由可直接访问' },
+  { label: '视觉', value: '多状态', description: '桌面、移动、主题与动效' },
+]} />
+
+## 自动检查
+
+```bash title="release-check.ps1"
+npm run check
+git diff --check
+```
+
+<DataTable title="自动检查覆盖" columns={[
+  { key: 'gate', label: '检查门' },
+  { key: 'finds', label: '发现什么' },
+  { key: 'cannot', label: '不能替代' },
+]} rows={[
+  { gate: 'lint', finds: '代码规范与常见错误', cannot: '视觉层级判断' },
+  { gate: 'types:check', finds: '组件属性与数据契约', cannot: '交互手感' },
+  { gate: 'test', finds: '语义、回归和关键逻辑', cannot: '真实浏览器布局' },
+  { gate: 'build', finds: 'MDX、路由与静态导出', cannot: '所有视口状态' },
+]} />
+
+## 人工视觉回归
+
+<RevealSequence title="发布前最后一轮" steps={[
+  { title: '桌面双侧栏', content: '展开和收起左右侧栏，正文宽度连续自适应。' },
+  { title: '移动端', content: '检查知识树、本文导航、代码、表格和媒体不溢出。' },
+  { title: '深浅主题', content: '检查正文对比度、边框层级、图表标签和焦点。' },
+  { title: '减少动态', content: '确认核心内容立即可见，自动动画停止。' },
+  { title: '浮层与画布', content: '检查居中、拖动、滚轮缩放、Esc 和焦点返回。' },
+  { title: '控制台与网络', content: '没有运行时错误、404 资源或重复加载循环。' },
+]} />
+
+<CitationCluster title="内容证据抽查" claims={[
+  { claim: '易变事实写明核验日期', source: '项目写作规范', date: '2026-07-16', status: '必检' },
+  { claim: '图片记录来源与授权', source: '媒体治理规范', date: '2026-07-16', status: '必检' },
+  { claim: '示意数据明确标注', source: '数据可视化指南', date: '2026-07-16', status: '必检' },
+]} />
+
+## 按专题抽查
+
+- [Markdown 与排版](/docs/help/content-layout/markdown-complete-reference/)
+- [代码、公式、表格与附件](/docs/help/content-layout/code-formula-table-assets/)
+- [Mermaid 与无限画布](/docs/help/visual-media/mermaid-infinite-canvas/)
+- [数据图表](/docs/help/visual-media/data-charts-visualization/)
+- [图片、视频与标注](/docs/help/visual-media/images-gallery-video-annotation/)
+- [AI 交互组件](/docs/help/ai-interactions/agents-tool-calls/)
+
+<Callout type="success" title="发布完成条件">检查通过、浏览器无错误、静态路由可访问、提交范围明确、远程部署成功，才算完成。</Callout>

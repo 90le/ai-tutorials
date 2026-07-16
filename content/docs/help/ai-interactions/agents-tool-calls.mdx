@@ -1,0 +1,26 @@
+---
+title: Agent 与工具调用
+description: 交互查看 Agent 执行图、工具调用轨迹和多智能体编排边界。
+tags:
+  - Agent
+  - 工具调用
+published: 2026-07-16
+difficulty: 进阶
+---
+
+适合解释 AI 系统“如何行动”，而不只是展示聊天文本。示例强调状态、参数、人工确认和失败恢复。
+
+<AgentFlowStudio />
+
+<ToolCallTrace />
+
+<MultiAgentOrchestration />
+
+<NarrativeTimeline title="一次可审计执行" items={[
+  { label: '01', title: '接受任务合同', description: '读取输入、交付物、边界和验收标准。', status: '可见输入' },
+  { label: '02', title: '选择工具', description: '展示调用原因、参数和预期结果。', status: '可解释动作' },
+  { label: '03', title: '处理异常', description: '失败不静默，给出重试、降级或人工接管。', status: '恢复路径' },
+  { label: '04', title: '提交证据', description: '结果与来源、限制和运行状态一起交付。', status: '可复核输出' },
+]} />
+
+<Callout type="warn" title="高风险动作必须停下来">发布、付款、删除、医疗、法律和投资决策不能把“模型有把握”当作授权；组件应明确展示人工确认点。</Callout>
