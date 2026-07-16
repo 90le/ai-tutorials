@@ -6,6 +6,10 @@ import { KeyTakeaways } from '@/components/docs/key-takeaways';
 import { MermaidDiagram } from '@/components/docs/mermaid-diagram';
 import { ScenarioTabs } from '@/components/docs/scenario-tabs';
 import { SourceMixChart } from '@/components/docs/source-mix-chart';
+import { ArticleImage } from '@/components/docs/article-image';
+import { ImageGallery } from '@/components/docs/image-gallery';
+import { ImageCompare } from '@/components/docs/image-compare';
+import { MediaFrame } from '@/components/docs/media-frame';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -16,6 +20,10 @@ export function getMDXComponents(components?: MDXComponents) {
     MermaidDiagram,
     ScenarioTabs,
     SourceMixChart,
+    MediaFrame,
+    ArticleImage,
+    ImageGallery,
+    ImageCompare,
     ...components,
   } satisfies MDXComponents;
 }
