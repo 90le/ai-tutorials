@@ -58,4 +58,19 @@ describe('rendering and interaction lab', () => {
     expect(showcase).toContain('published: 2026-07-16');
     for (const marker of requiredMarkers) expect(showcase).toContain(marker);
   });
+
+  it('publishes the complete visual asset set locally', () => {
+    const imageFiles = [
+      'knowledge-signal.webp',
+      'collect.webp',
+      'judge.webp',
+      'deliver.webp',
+      'raw-materials.webp',
+      'evidence-map.webp',
+    ];
+
+    for (const file of imageFiles) {
+      expect(existsSync(join(root, 'public/images/experience-lab', file)), file).toBe(true);
+    }
+  });
 });
