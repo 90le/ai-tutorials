@@ -1,6 +1,6 @@
 # AI 使用教程
 
-面向中文读者的开源 AI 学习与实践知识库：从工具上手、工作流设计到可复用提示词，持续沉淀能够真正落地的教程。
+面向中文读者的开源 AI 知识与实践中心：覆盖模型、智能体、研究、创作、开发与自动化，持续沉淀能够真正落地的方法。
 
 **在线阅读：<https://90le.github.io/ai-tutorials/>**
 
@@ -59,7 +59,7 @@ npm run build
 
 ## 贡献
 
-欢迎通过 Issue、讨论或 Pull Request 改进教程内容。提交前请阅读 [AGENTS.md](AGENTS.md)，并运行 `npm run lint`、`npm run types:check` 和 `npm run build`。
+欢迎通过 Issue、讨论或 Pull Request 改进教程内容。提交前请阅读 [AGENTS.md](AGENTS.md)，并运行 `npm run check`。
 
 ## 许可证
 

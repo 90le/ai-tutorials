@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "next build",
+    "check": "npm test && npm run lint && npm run types:check && npm run build",
     "dev": "next dev",
     "test": "vitest run",
     "start": "serve out",

@@ -1,10 +1,14 @@
-# AI 教程知识库写作规则
+# AI 知识与实践中心协作规则
+
+## 产品定位
+
+公开品牌名为“AI 使用教程”，产品描述为“AI 知识与实践中心”。内容可以覆盖模型、智能体、研究、AI 创作、开发和自动化，不限于工具入门。
 
 ## 工作范围
 
-默认只创建或修改 `content/docs/` 中的公开教程。草稿放在 `content/drafts/`，不会被站点构建和发布。
+内容任务默认只创建或修改 `content/docs/`；草稿放在 `content/drafts/`，不会被站点构建和发布。页面、交互、性能、治理或发布任务可以按批准规格修改 `src/`、配置、`.codex/`、`docs/` 和依赖清单。
 
-除非任务明确要求，不要修改 `src/`、`next.config.mjs`、`source.config.ts`、`.github/` 或依赖清单；不要修改 `out/`、`.next/`、`.source/` 等生成目录。
+不要修改 `out/`、`.next/`、`.source/` 等生成目录。修改 `next.config.mjs`、`.github/`、依赖或发布流程前必须说明影响，并保持 GitHub Pages 静态导出兼容。
 
 ## 内容归属
 
@@ -43,6 +47,11 @@ difficulty: 入门 # 可选：入门、进阶、专家
 - 页面结构、交互或视觉增强：`enhance-document-page.md`
 - 位图封面、插图或图片编辑：`generate-visual-asset.md`
 - 用 Dashi 探索演示叙事与视觉方向，或明确交付独立 deck：`explore-presentation-direction.md`
+- 多来源研究并写作：`research-and-write-article.md`
+- 审查和重构内容：`review-and-refactor-content.md`
+- 阅读控件或富媒体组件：`enhance-reading-experience.md`
+- 首页性能与动效：`performance-and-motion-audit.md`
+- 验证、提交和发布：`release.md`
 
 这些文件是项目内的可共享工作流，不是自动注册的 Codex Slash Command；它们补充本文件，不替代本文件。
 
@@ -56,14 +65,26 @@ difficulty: 入门 # 可选：入门、进阶、专家
 - 优先延续现有 Fumadocs 设计语言和相邻页面的视觉模式。用户要求视觉探索、重设计或体验审查时，使用 Product Design 工作流；需要新体验时先做出可审阅的方向，再实现为站点组件。
 - Dashi PPT 默认用于探索教程的叙事节奏、信息密度与视觉方向；将提炼出的规则实现为原生 Fumadocs/React 页面，不要复制 Dashi HTML/CSS，也不要用 iframe 把 deck 嵌入文档站。只有用户明确需要演示交付时，才把独立静态 HTML deck 发布到 `public/decks/<deck-slug>/` 并从文档页链接；PPTX/PDF 同样需要用户明确要求。
 
+## 研究与来源
+
+- 易变事实优先引用官方文档、论文或产品公告，并写明核验日期。
+- 公众号、X、社区和热门文章可用于发现问题、案例与观点，不能替代关键事实的一手来源，也不能复刻其结构和独特表达。
+- 图片必须记录来源与授权状态；无法确认时使用自制图、代码生成图或 ImageGen 素材。
+- 真实数据必须说明来源、时间、单位和口径；示意或生成数据必须明确标注。
+
+## UI、交互与性能门
+
+- 先复用 `src/components/docs/` 和 `docs/component-catalog.md` 中的现有能力，不为单篇文章复制复杂交互。
+- 所有控件必须支持键盘、可见焦点、移动触摸和 `prefers-reduced-motion`。
+- 图片、视频、图表和公式必须有文字语义与静态降级；关键内容不得只在 hover、动画或 JavaScript 成功后出现。
+- 重型库必须动态加载并在卸载时清理实例、监听器和帧循环；首页最多一个自动 WebGL 场景。
+
 ## 验证
 
 每次内容、MDX 或组件修改后，在项目根目录执行：
 
 ```bash
-npm run lint
-npm run types:check
-npm run build
+npm run check
 ```
 
-构建失败时，先修正 Markdown、MDX、链接、frontmatter 或组件问题，再继续处理其他内容。发布前检查 Git diff；提交和推送使用已连接的 GitHub 工作流。
+开发时可以先运行聚焦测试；交付前必须运行完整 `npm run check`。发布前检查 `git diff --check`、暂存范围和浏览器桌面/移动、浅色/深色、reduced-motion 状态。当前工作区有用户改动时只按显式路径暂存，禁止无范围地提交。
