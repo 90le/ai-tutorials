@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { ArticleImage } from './article-image';
-import { ImageCompare } from './image-compare';
+import { getNextComparePosition, ImageCompare } from './image-compare';
 import { ImageGallery } from './image-gallery';
 import { MediaFrame } from './media-frame';
 import { ArticleVideo } from './article-video';
@@ -63,6 +63,10 @@ describe('article media components', () => {
     expect(html).toContain('aria-label="调整优化前后对比位置"');
     expect(html).toContain('任务拆解前的界面');
     expect(html).toContain('任务拆解后的界面');
+    expect(getNextComparePosition(50, 'ArrowRight')).toBe(51);
+    expect(getNextComparePosition(0, 'ArrowLeft')).toBe(0);
+    expect(getNextComparePosition(50, 'Home')).toBe(0);
+    expect(getNextComparePosition(50, 'End')).toBe(100);
   });
 
   it('renders video with poster, captions and transcript without autoplay', () => {

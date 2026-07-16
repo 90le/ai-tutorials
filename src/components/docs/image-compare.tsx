@@ -5,6 +5,14 @@ import { useState } from 'react';
 import type { ViewerImage } from './lightbox-viewer';
 import { MediaFrame, type MediaSource } from './media-frame';
 
+export function getNextComparePosition(position: number, key: string) {
+  if (key === 'Home') return 0;
+  if (key === 'End') return 100;
+  if (key === 'ArrowLeft' || key === 'ArrowDown') return Math.max(0, position - 1);
+  if (key === 'ArrowRight' || key === 'ArrowUp') return Math.min(100, position + 1);
+  return position;
+}
+
 export function ImageCompare({
   title,
   description,
@@ -45,6 +53,13 @@ export function ImageCompare({
           value={position}
           aria-label={`调整${title}对比位置`}
           onChange={(event) => setPosition(Number(event.target.value))}
+          onKeyDown={(event) => {
+            const nextPosition = getNextComparePosition(position, event.key);
+
+            if (nextPosition === position && !['Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            setPosition(nextPosition);
+          }}
         />
         <output>{position}%</output>
       </label>
