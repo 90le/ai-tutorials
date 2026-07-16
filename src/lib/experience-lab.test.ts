@@ -59,6 +59,24 @@ describe('rendering and interaction lab', () => {
     for (const marker of requiredMarkers) expect(showcase).toContain(marker);
   });
 
+  it('presents the showcase as a continuous, reviewable reference article', () => {
+    const showcase = readFileSync(showcasePath, 'utf8');
+    const requiredSections = [
+      '## 基础文章语言',
+      '## 结构化说明',
+      '## 图示与数据',
+      '## 图片与视觉证据',
+      '## 视频与替代内容',
+      '## 降级与验收',
+    ];
+
+    for (const section of requiredSections) expect(showcase).toContain(section);
+    expect(showcase.match(/检查什么：/g)?.length ?? 0).toBeGreaterThanOrEqual(7);
+    expect(showcase).toContain('docs-experience-status');
+    expect(showcase).toContain('docs-experience-checklist');
+    expect(showcase).not.toMatch(/lorem|placeholder|待补充内容/i);
+  });
+
   it('publishes the complete visual asset set locally', () => {
     const imageFiles = [
       'knowledge-signal.webp',
