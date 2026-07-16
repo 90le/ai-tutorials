@@ -71,7 +71,7 @@ export function DiagramViewer({ title, children }: { title: string; children: Re
           </header>
           <div className="docs-viewer-stage">
             <div className="docs-viewer-content" style={{ transform: `scale(${viewer.scale})` }}>
-              {children}
+              {open ? children : null}
             </div>
           </div>
         </div>

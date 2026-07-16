@@ -45,7 +45,8 @@ describe('docs reading primitives', () => {
       <MermaidDiagram title="交付闭环" description="从任务到验证" chart="flowchart LR\nA[任务] --> B[验证]" />,
     );
 
-    expect(html).toContain('<figure class="docs-mermaid"');
+    expect(html).toContain('<figure class="docs-media-frame docs-mermaid"');
+    expect(html).toContain('data-status="illustrative"');
     expect(html).toContain('交付闭环');
     expect(html).toContain('正在绘制图示');
     expect(html).toContain('flowchart LR');

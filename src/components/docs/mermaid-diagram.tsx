@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { DiagramViewer } from './diagram-viewer';
+import { MediaFrame } from './media-frame';
 
 interface MermaidDiagramProps {
   title: string;
@@ -80,18 +81,19 @@ export function MermaidDiagram({ title, description, chart }: MermaidDiagramProp
   }, [chart, diagramId]);
 
   return (
-    <figure className="docs-mermaid">
-      <figcaption>
-        <span><strong>{title}</strong>{description ? <small>{description}</small> : null}</span>
-        <span className="docs-mermaid-tools">
-          <span>MERMAID / LIVE DIAGRAM</span>
-          {svgMarkup ? (
-            <DiagramViewer title={title}>
-              <div className="docs-viewer-svg" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
-            </DiagramViewer>
-          ) : null}
-        </span>
-      </figcaption>
+    <MediaFrame
+      title={title}
+      description={description}
+      source={{ label: 'Mermaid · 页面内源码' }}
+      status="illustrative"
+      width="wide"
+      className="docs-mermaid"
+      tools={svgMarkup ? (
+        <DiagramViewer title={title}>
+          <div className="docs-viewer-svg" dangerouslySetInnerHTML={{ __html: svgMarkup }} />
+        </DiagramViewer>
+      ) : null}
+    >
       {svgMarkup ? (
         <div
           className="docs-mermaid-canvas"
@@ -111,6 +113,6 @@ export function MermaidDiagram({ title, description, chart }: MermaidDiagramProp
         <summary>查看图示源码</summary>
         <pre><code>{chart}</code></pre>
       </details>
-    </figure>
+    </MediaFrame>
   );
 }

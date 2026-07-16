@@ -14,6 +14,7 @@ import { ArticleVideo } from '@/components/docs/article-video';
 import { DataTable } from '@/components/docs/data-table';
 import { DownloadCard } from '@/components/docs/download-card';
 import { FormulaBlock } from '@/components/docs/formula-block';
+import { ChartFrame } from '@/components/docs/chart-frame';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -32,6 +33,7 @@ export function getMDXComponents(components?: MDXComponents) {
     FormulaBlock,
     DataTable,
     DownloadCard,
+    ChartFrame,
     ...components,
   } satisfies MDXComponents;
 }
