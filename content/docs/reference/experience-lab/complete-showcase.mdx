@@ -1,0 +1,240 @@
+---
+title: 完整渲染能力展厅
+description: 在一篇公开参考文章中查看并操作知识库支持的全部排版、富媒体和阅读交互能力。
+tags:
+  - MDX
+  - 设计系统
+  - 富媒体
+  - 交互
+published: 2026-07-16
+difficulty: 进阶
+contentType: reference
+---
+
+这座展厅用“把零散 AI 调研材料变成可复核交付”作为统一示例。它同时是作者参考、读者示范和站点视觉回归页。
+
+<KeyTakeaways title="先理解三条使用原则">
+  <li>先选择能够解释内容关系的组件，再考虑视觉丰富度。</li>
+  <li>关键事实必须在正文、表格或替代文本中可见，不能只存在于交互里。</li>
+  <li>所有图表、图片和视频都需要来源、状态与无 JavaScript 回退。</li>
+</KeyTakeaways>
+
+## 基础文章语言
+
+正文支持**粗体判断**、*语气强调*、~~被修正的旧结论~~、`inline code`、[站内链接](/docs/)和外部链接。按 <kbd>Ctrl</kbd> + <kbd>K</kbd> 可以打开搜索。
+
+- 无序列表用于并列信息。
+  - 嵌套列表补充从属关系。
+- [x] 已经核验来源。
+- [ ] 仍需人工确认日期。
+
+1. 先定义交付。
+2. 再整理证据。
+3. 最后统一表达。
+
+> “看起来完整”不是验收标准。读者必须能够回到原始材料重新判断。
+
+| 内容 | 最适合的表达 | 不应依赖 |
+| --- | --- | --- |
+| 顺序过程 | Steps 或有序列表 | 装饰箭头 |
+| 互斥场景 | Tabs | 隐藏核心结论 |
+| 可比较数据 | DataTable | 一组独立卡片 |
+
+```bash title="验证知识库"
+npm run check
+```
+
+## 结构化说明
+
+<Callout type="info" title="信息提示">适合提供背景和使用方法。</Callout>
+<Callout type="warn" title="风险提示">不要把生成内容当成已核验证据。</Callout>
+<Callout type="error" title="停止信号">无法判断结果对错时，不应继续自动化。</Callout>
+<Callout type="success" title="完成条件">核心主张已经能回到具体来源。</Callout>
+
+<Cards>
+  <Card title="开始学习" href="/docs/start-here/">从真实任务建立第一条路径。</Card>
+  <Card title="查看工作流" href="/docs/playbooks/">把一次成功沉淀为可重复流程。</Card>
+</Cards>
+
+<Steps>
+  <Step>采集原始材料，同时保留来源和时间。</Step>
+  <Step>区分事实、推断、冲突和待确认信息。</Step>
+  <Step>把结论、证据和限制一起交付。</Step>
+</Steps>
+
+<Tabs items={['原始材料', '证据卡', '交付稿']}>
+  <Tab value="原始材料">保留上下文，不急着压缩成结论。</Tab>
+  <Tab value="证据卡">一个主张对应来源、日期、摘要与限制。</Tab>
+  <Tab value="交付稿">面向实际读者组织结论，并保留回查入口。</Tab>
+</Tabs>
+
+<Accordions>
+  <Accordion title="为什么不用卡片代替所有内容？">卡片适合入口和并列选项，不适合连续论证。</Accordion>
+  <Accordion title="为什么实验室必须公开？">公开页面会经历与正式文章完全相同的构建、导航和主题约束。</Accordion>
+</Accordions>
+
+<CodeBlockTabs defaultValue="json">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="json">JSON</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="yaml">YAML</CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+  <CodeBlockTab value="json">
+
+```json
+{"goal":"形成可复核交付","status":"ready"}
+```
+
+  </CodeBlockTab>
+  <CodeBlockTab value="yaml">
+
+```yaml
+goal: 形成可复核交付
+status: ready
+```
+
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+<TypeTable type={{
+  goal: { description: '最终要交付的结果', type: 'string', required: true },
+  audience: { description: '结果的实际使用者', type: 'string', required: true },
+  evidence: { description: '允许引用的事实边界', type: 'string[]', required: true },
+  constraints: { description: '不可执行或不可推断的事项', type: 'string[]' },
+}} />
+
+## 任务与判断组件
+
+<PromptCard title="研究任务合同" description="复制后补齐方括号内容">
+研究目标：[需要支持的具体决策]
+读者：[谁将使用结果]
+证据边界：只使用提供的材料；缺失信息标记为“待确认”。
+输出：结论、依据、限制和下一步验证。
+</PromptCard>
+
+<ScenarioTabs
+  label="材料转化阶段"
+  items={[
+    { label: '原始材料', title: '保留上下文', content: '记录原句、来源与时间，不提前合并冲突。' },
+    { label: '证据卡', title: '主张与依据对应', content: '为每个主张保留证据、限制和可信状态。' },
+    { label: '交付稿', title: '面向真实读者', content: '按决策顺序组织内容，同时留下回查入口。' },
+  ]}
+/>
+
+<MediaFrame
+  title="媒体框状态与来源"
+  description="所有富媒体共享同一套标题、状态、来源和工具语义"
+  source={{ label: '实验室教学示例 · 2026-07-16' }}
+  status="illustrative"
+>
+  <p style={{ margin: 0, padding: '1rem' }}>MediaFrame 只负责语义外壳，不把每段正文卡片化。</p>
+</MediaFrame>
+
+## 图示与数据
+
+<MermaidDiagram
+  title="从材料到交付的证据闭环"
+  description="宽幅图示在页面内适配，复杂细节通过全屏查看"
+  chart={`flowchart LR
+    A[原始材料] --> B[证据卡]
+    B --> C{人工判断}
+    C -->|需要补充| A
+    C -->|通过| D[可复核交付]`}
+/>
+
+<SourceMixChart />
+
+<FormulaBlock
+  title="证据质量示意评分"
+  latex="Q = 0.5R + 0.3C + 0.2F"
+  variables={[
+    { symbol: 'R', meaning: '来源可靠性' },
+    { symbol: 'C', meaning: '主张与证据的一致性' },
+    { symbol: 'F', meaning: '信息新鲜度' },
+  ]}
+>
+
+$$Q = 0.5R + 0.3C + 0.2F$$
+
+</FormulaBlock>
+
+<DataTable
+  title="证据矩阵示例"
+  description="教学示意数据，可全屏查看并下载 CSV"
+  status="illustrative"
+  source={{ label: '实验室教学设计 · 2026-07-16' }}
+  columns={[
+    { key: 'claim', label: '主张' },
+    { key: 'evidence', label: '证据' },
+    { key: 'status', label: '状态' },
+  ]}
+  rows={[
+    { claim: '保留原始上下文', evidence: '材料卡与原文位置', status: '已核验' },
+    { claim: '标记推断', evidence: '证据矩阵状态列', status: '待复核' },
+  ]}
+/>
+
+<DownloadCard
+  title="任务合同示例"
+  description="用于验证静态附件与元信息展示"
+  href="/downloads/experience-lab/task-contract.json"
+  format="JSON"
+  size="1 KB"
+  updated="2026-07-16"
+  source="渲染与交互实验室"
+/>
+
+## 图片与视觉证据
+
+<ArticleImage
+  title="知识信号进入工作系统"
+  description="单图灯箱、来源和生成状态示例"
+  status="generated"
+  source={{ label: '本站生成素材 · 2026-07-16' }}
+  width="wide"
+  image={{ src: '/images/experience-lab/knowledge-signal.jpg', alt: '知识信号从零散材料汇入结构化工作系统的概念场景', width: 1600, height: 900 }}
+/>
+
+<ImageGallery
+  title="采集、判断与交付"
+  description="三张连续图片组成一个工作过程"
+  status="generated"
+  source={{ label: '本站生成素材 · 2026-07-16' }}
+  images={[
+    { src: '/images/experience-lab/collect.jpg', alt: '采集阶段保留原始材料与来源的概念场景', width: 1600, height: 900, caption: '01 · 采集' },
+    { src: '/images/experience-lab/judge.jpg', alt: '判断阶段区分事实推断和冲突的概念场景', width: 1600, height: 900, caption: '02 · 判断' },
+    { src: '/images/experience-lab/deliver.jpg', alt: '交付阶段把结论与证据一同交给读者的概念场景', width: 1600, height: 900, caption: '03 · 交付' },
+  ]}
+/>
+
+<ImageCompare
+  title="从零散材料到证据地图"
+  description="拖动滑块比较结构化之前与之后"
+  source={{ label: '本站生成素材 · 2026-07-16' }}
+  before={{ src: '/images/experience-lab/raw-materials.jpg', alt: '散落且缺少关系的原始材料', width: 1600, height: 900, caption: '原始材料' }}
+  after={{ src: '/images/experience-lab/evidence-map.jpg', alt: '按主张来源和限制组织的证据地图', width: 1600, height: 900, caption: '证据地图' }}
+/>
+
+## 视频与替代内容
+
+<ArticleVideo
+  title="从知识信号到可复核交付"
+  description="短片演示采集、判断与交付三个阶段"
+  src="/videos/experience-lab/knowledge-flow.mp4"
+  poster="/videos/experience-lab/knowledge-flow-poster.jpg"
+  tracks={[{ src: '/videos/experience-lab/knowledge-flow.zh-CN.vtt', srcLang: 'zh-CN', label: '简体中文', default: true }]}
+  transcriptHref="/downloads/experience-lab/knowledge-flow-transcript.md"
+  source={{ label: '本站生成素材 · 2026-07-16' }}
+  status="generated"
+/>
+
+## 降级与验收
+
+关闭 JavaScript 后，正文、表格、Mermaid 源码、视频文字稿和下载入口仍应存在。减少动态偏好会关闭非必要过渡；打印时隐藏灯箱和工具栏，保留图注、数据和来源。
+
+<SourcesDisclosure>
+  <ul>
+    <li>组件实现与使用边界：项目内组件目录。</li>
+    <li>示意图片和视频：本站生成素材，2026-07-16。</li>
+    <li>示意数据：仅用于解释渲染能力，不代表行业统计。</li>
+  </ul>
+</SourcesDisclosure>
