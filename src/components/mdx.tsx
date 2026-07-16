@@ -20,6 +20,20 @@ import { DownloadCard } from '@/components/docs/download-card';
 import { FormulaBlock } from '@/components/docs/formula-block';
 import { ChartFrame } from '@/components/docs/chart-frame';
 import { DocsCodeBlock } from '@/components/docs/docs-code-block';
+import {
+  AgentFlowStudio,
+  ContextBudgetComposer,
+  CostLatencySimulator,
+  EvidenceNetwork,
+  FailureStateGallery,
+  ModelTradeoffMatrix,
+  MultiAgentOrchestration,
+  PromptDiffLab,
+  RetrievalExplorer,
+  StreamingResponseTimeline,
+  ToolCallTrace,
+} from '@/components/docs/experience-lab/workbench-components';
+import { SemanticSpace3D } from '@/components/docs/experience-lab/semantic-space-3d';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -47,6 +61,18 @@ export function getMDXComponents(components?: MDXComponents) {
     DataTable,
     DownloadCard,
     ChartFrame,
+    AgentFlowStudio,
+    PromptDiffLab,
+    ContextBudgetComposer,
+    RetrievalExplorer,
+    ToolCallTrace,
+    MultiAgentOrchestration,
+    ModelTradeoffMatrix,
+    CostLatencySimulator,
+    EvidenceNetwork,
+    SemanticSpace3D,
+    StreamingResponseTimeline,
+    FailureStateGallery,
     ...components,
   } satisfies MDXComponents;
 }
