@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import { Provider } from '@/components/provider';
+import { siteConfig } from '@/config/site';
 import type { Metadata } from 'next';
-import { siteUrl } from '@/lib/shared';
 import './global.css';
 
 const inter = Inter({
@@ -9,12 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: 'AI 使用教程',
-    template: '%s | AI 使用教程',
+    default: siteConfig.brand.name,
+    template: `%s | ${siteConfig.brand.name}`,
   },
-  description: '面向创作者与开发者的公开 AI 工具、工作流与实践教程。',
+  description: siteConfig.brand.description,
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {

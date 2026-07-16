@@ -18,6 +18,7 @@ import {
 import { AuthorContactCard } from '@/components/author-contact-card';
 import { HomeMotionController } from '@/components/home-motion-controller';
 import { KineticKnowledgeScene } from '@/components/kinetic-knowledge-scene';
+import { siteConfig } from '@/config/site';
 
 const goals = [
   { title: '学习 AI', text: '从零建立清晰、持续的学习路径。', href: '/docs/start-here', icon: GraduationCap },
@@ -95,7 +96,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="trust-strip" aria-label="项目与作者信息">
-          <strong>丘彬彬创建</strong><span>GitHub 开源</span><span>持续更新</span><span>微信 binStudy</span><span>公众号 彬彬说</span>
+          <strong>{siteConfig.author.name}创建</strong><span>GitHub 开源</span><span>持续更新</span><span>微信 {siteConfig.author.wechat}</span><span>公众号 {siteConfig.author.officialAccount}</span>
         </div>
       </section>
 
@@ -132,8 +133,8 @@ export default function HomePage() {
 
       <footer className="universe-footer">
         <div><p>THE NEXT STEP IS YOURS.</p><h2>从一个真实任务开始。</h2><Link href="/docs/start-here" prefetch={false} data-magnetic>开始学习 <ArrowRight /></Link></div>
-        <nav><Link href="/docs/tools" prefetch={false}>工具与模型</Link><Link href="/docs/series" prefetch={false}>系列课程</Link><Link href="/docs/playbooks" prefetch={false}>工作流</Link><Link href="/docs/reference" prefetch={false}>参考资料</Link></nav>
-        <div className="universe-footer-meta"><span>AI 使用教程 · 丘彬彬</span><span>OPEN SOURCE / 2026</span><a href="https://github.com/90le/ai-tutorials">GITHUB ↗</a></div>
+        <nav>{siteConfig.footerNavigation.map((item) => <Link href={item.href} prefetch={false} key={item.href}>{item.label}</Link>)}</nav>
+        <div className="universe-footer-meta"><span>{siteConfig.brand.name} · {siteConfig.author.name}</span><span>OPEN SOURCE / 2026</span><a href={siteConfig.repository.url}>GITHUB ↗</a></div>
       </footer>
     </main>
   );

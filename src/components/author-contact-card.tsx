@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { MessageCircle, QrCode, X } from 'lucide-react';
 import { authorContacts, type AuthorContact } from '@/lib/site-content';
+import { siteConfig } from '@/config/site';
 
 function ContactPreview({ contact }: { contact: AuthorContact }) {
   return (
@@ -47,9 +48,9 @@ export function AuthorContactCard() {
     <section className="author-contact-card" aria-labelledby="author-contact-title">
       <div className="author-contact-intro">
         <p className="eyebrow">认识作者</p>
-        <h2 id="author-contact-title">和丘彬彬一起，把 AI 用进真实工作。</h2>
+        <h2 id="author-contact-title">和{siteConfig.author.name}一起，把 AI 用进真实工作。</h2>
         <p>
-          微信 <strong>binStudy</strong>，公众号 <strong>彬彬说</strong>。关注后可收到新教程与实践记录。
+          微信 <strong>{siteConfig.author.wechat}</strong>，公众号 <strong>{siteConfig.author.officialAccount}</strong>。关注后可收到新教程与实践记录。
         </p>
       </div>
 

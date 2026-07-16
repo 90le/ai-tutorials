@@ -1,29 +1,26 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Link from 'next/link';
-import { gitConfig } from './shared';
+import { siteConfig } from '@/config/site';
 
 export function baseOptions(): BaseLayoutProps {
-  const githubUrl = gitConfig.user && gitConfig.repo
-    ? `https://github.com/${gitConfig.user}/${gitConfig.repo}`
-    : undefined;
-
   return {
     nav: {
       title: (
         <span className="brand-nav-title">
           <span className="brand-nav-mark">AI</span>
-          <span>使用教程</span>
+          <span>{siteConfig.brand.name.replace(/^AI\s*/, '')}</span>
         </span>
       ),
       transparentMode: 'top',
     },
     links: [
-      { type: 'custom', children: <Link href="/docs/" prefetch={false}>文档首页</Link> },
-      { type: 'custom', children: <Link href="/docs/tools/" prefetch={false}>工具与模型</Link> },
-      { type: 'custom', children: <Link href="/docs/playbooks/" prefetch={false}>工作流</Link> },
-      { type: 'custom', secondary: true, children: <Link className="brand-doc-cta" href="/docs/start-here/" prefetch={false}>开始学习</Link> },
+      ...siteConfig.navigation.slice(0, -1).map((item) => ({
+        type: 'custom' as const,
+        children: <Link href={item.href} prefetch={false}>{item.label}</Link>,
+      })),
+      { type: 'custom', secondary: true, children: <Link className="brand-doc-cta" href={siteConfig.navigation.at(-1)!.href} prefetch={false}>{siteConfig.navigation.at(-1)!.label}</Link> },
     ],
-    githubUrl,
+    githubUrl: siteConfig.repository.url,
   };
 }
 
