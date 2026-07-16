@@ -975,9 +975,14 @@ html:has(.docs-shell) {
 .docs-viewer-toolbar a { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--brand-line); border-radius: 0.5rem; background: var(--brand-surface); color: var(--brand-muted); }
 .docs-viewer-toolbar a:hover,
 .docs-viewer-toolbar a:focus-visible { border-color: var(--brand-violet); color: var(--brand-violet); }
-.docs-lightbox-stage { position: relative; display: grid; min-width: 0; min-height: 0; place-items: center; overflow: auto; background: color-mix(in srgb, var(--brand-bg) 94%, #000); }
-.docs-lightbox-image { display: grid; min-width: min-content; place-items: center; transform-origin: center; transition: transform 120ms ease; }
-.docs-lightbox-image img { display: block; max-width: min(88vw, 92rem); max-height: 78vh; width: auto; height: auto; object-fit: contain; }
+.docs-lightbox-canvas { position: relative; min-width: 0; min-height: 0; }
+.docs-lightbox-image { display: grid; place-items: center; }
+.docs-lightbox-image img { display: block; width: auto; height: auto; max-width: none; max-height: none; object-fit: contain; }
+.docs-lightbox-header-actions { display: inline-flex; gap: 0.4rem; }
+.docs-lightbox-header-actions :is(a, button),
+.docs-viewer-close { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--brand-line); border-radius: 0.5rem; background: var(--brand-surface); color: var(--brand-muted); cursor: pointer; }
+.docs-lightbox-header-actions svg,
+.docs-viewer-close svg { width: 0.9rem; height: 0.9rem; }
 .docs-lightbox-previous,
 .docs-lightbox-next { position: sticky; z-index: 2; top: 50%; display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--brand-line); border-radius: 999px; background: color-mix(in srgb, var(--brand-surface) 88%, transparent); color: var(--brand-ink); cursor: pointer; }
 .docs-lightbox-previous { position: absolute; left: 0.8rem; }
@@ -1146,8 +1151,8 @@ html:has(.docs-shell) {
 .docs-viewer-trigger svg,
 .docs-viewer-toolbar svg { width: 0.9rem; height: 0.9rem; }
 .docs-viewer-dialog {
-  width: min(96vw, 88rem);
-  height: min(94vh, 62rem);
+  width: min(96vw, 100rem);
+  height: min(96vh, 68rem);
   max-width: none;
   max-height: none;
   padding: 0;
@@ -1163,10 +1168,20 @@ html:has(.docs-shell) {
 .docs-viewer-panel > header > strong { overflow: hidden; font-size: 0.8rem; text-overflow: ellipsis; white-space: nowrap; }
 .docs-viewer-toolbar { display: inline-flex; align-items: center; gap: 0.35rem; }
 .docs-viewer-toolbar > span { min-width: 3rem; color: var(--brand-muted); font: 700 0.62rem/1 ui-monospace, monospace; text-align: center; }
-.docs-viewer-stage { min-width: 0; min-height: 0; padding: 1.5rem; overflow: auto; background: color-mix(in srgb, var(--brand-bg) 92%, var(--brand-surface)); }
-.docs-viewer-content { display: grid; min-width: max-content; min-height: 100%; place-items: center; transform-origin: center; transition: transform 120ms ease; }
+.docs-canvas-shell { position: relative; min-width: 0; min-height: 0; height: 100%; overflow: hidden; background: color-mix(in srgb, var(--brand-bg) 92%, var(--brand-surface)); }
+.docs-canvas-stage { position: absolute; inset: 0; overflow: hidden; outline: none; cursor: grab; touch-action: none; user-select: none; }
+.docs-canvas-stage:active { cursor: grabbing; }
+.docs-canvas-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--brand-violet); }
+.docs-canvas-content { position: absolute; top: 0; left: 0; display: grid; width: max-content; height: max-content; place-items: center; transform-origin: 0 0; will-change: transform; }
+.docs-canvas-toolbar { position: absolute; z-index: 4; right: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.35rem; border: 1px solid color-mix(in srgb, var(--brand-line) 82%, transparent); border-radius: 0.8rem; background: color-mix(in srgb, var(--brand-surface) 90%, transparent); box-shadow: 0 0.8rem 2.4rem rgb(18 14 28 / 14%); backdrop-filter: blur(16px); }
+.docs-canvas-toolbar button { display: grid; width: 2rem; height: 2rem; place-items: center; border: 0; border-radius: 0.5rem; background: transparent; color: var(--brand-muted); cursor: pointer; }
+.docs-canvas-toolbar button:hover,
+.docs-canvas-toolbar button:focus-visible { background: color-mix(in srgb, var(--brand-violet) 10%, transparent); color: var(--brand-violet); }
+.docs-canvas-toolbar svg { width: 0.9rem; height: 0.9rem; }
+.docs-canvas-toolbar output { min-width: 3.2rem; color: var(--brand-muted); font: 700 0.62rem/1 ui-monospace, monospace; text-align: center; }
+.docs-canvas-help { position: absolute; z-index: 3; bottom: 1.15rem; left: 1rem; margin: 0; padding: 0.42rem 0.65rem; border-radius: 999px; background: color-mix(in srgb, var(--brand-surface) 82%, transparent); color: var(--brand-muted); font-size: 0.62rem; backdrop-filter: blur(12px); pointer-events: none; }
 .docs-viewer-svg { display: grid; min-width: min(70rem, 85vw); place-items: center; }
-.docs-viewer-svg svg { display: block; width: 100%; height: auto; max-height: 76vh; }
+.docs-viewer-svg svg { display: block; width: 100%; height: auto; max-height: none; }
 
 .docs-code-status { position: fixed; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .docs-code-tools { position: absolute; top: 0.35rem; right: 3.25rem; display: inline-flex; gap: 0.3rem; }
@@ -1196,7 +1211,8 @@ html:has(.docs-shell) {
   .docs-viewer-panel > header { align-items: flex-start; }
   .docs-viewer-panel > header > strong { padding-top: 0.55rem; }
   .docs-viewer-toolbar { flex-wrap: wrap; justify-content: flex-end; }
-  .docs-viewer-stage { padding: 0.75rem; }
+  .docs-canvas-help { display: none; }
+  .docs-canvas-toolbar { right: 0.65rem; bottom: 0.65rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
