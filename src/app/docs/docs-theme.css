@@ -742,7 +742,6 @@ html:has(.docs-shell) {
   .docs-prompt-content { padding-inline: 1rem; font-size: 0.8rem; }
   .docs-mermaid figcaption,
   .docs-source-mix figcaption { align-items: flex-start; flex-direction: column; }
-  .docs-mermaid figcaption > span:last-child { display: none; }
   .docs-mermaid-canvas { min-height: 14rem; padding: 0.75rem; overflow-x: auto; place-items: center start; }
   .docs-mermaid-canvas svg { width: 100%; min-width: 0; max-height: none; }
   .docs-scenario-tabs { grid-template-columns: 1fr; }
